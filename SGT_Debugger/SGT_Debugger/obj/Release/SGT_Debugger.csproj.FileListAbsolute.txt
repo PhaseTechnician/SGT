@@ -1,0 +1,10 @@
+F:\SGT_Debugger\SGT_Debugger\bin\Release\SGT_Debugger.exe.config
+F:\SGT_Debugger\SGT_Debugger\bin\Release\SGT_Debugger.exe
+F:\SGT_Debugger\SGT_Debugger\bin\Release\SGT_Debugger.pdb
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.csprojAssemblyReference.cache
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.Form1.resources
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.Properties.Resources.resources
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.csproj.GenerateResource.cache
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.csproj.CoreCompileInputs.cache
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.exe
+F:\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.pdb

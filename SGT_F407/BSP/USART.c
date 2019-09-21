@@ -1,0 +1,108 @@
+#include "USART.h"
+
+#define ReceiveBufferSize 1024
+#define SendBufferSize 1024
+
+char receiveBuffer[ReceiveBufferSize]={0};
+uint32_t endIndexOfReceiveBuffer=0;
+uint16_t startIndexOfReceiveBuffer=0;
+
+char sendBuffer[SendBufferSize]={0};
+uint32_t endIndexOfSendBuffer=0;
+uint16_t startIndexOfSendBuffer=0;
+
+void USART1Config(int baud)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
+	
+	GPIO_PinAFConfig(GPIOA,GPIO_PinSource10|GPIO_PinSource9,GPIO_AF_USART1);
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10; 
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	
+	USART_InitTypeDef USART_InitStructure;
+	USART_InitStructure.USART_BaudRate=baud;
+	USART_InitStructure.USART_HardwareFlowControl=USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode=USART_Mode_Rx|USART_Mode_Tx;
+	USART_InitStructure.USART_Parity=USART_Parity_No;
+	USART_InitStructure.USART_StopBits=USART_StopBits_1;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_Init(USART1,&USART_InitStructure);
+	
+	USART_ITConfig(USART1,USART_IT_CTS,ENABLE);//发送完中断
+	USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);//接收中断
+	
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0X00;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0X02;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	USART_Cmd(USART1,ENABLE);
+}
+
+
+void USART1_IRQHandler(void)
+{
+	if(USART_GetITStatus(USART1,USART_IT_RXNE))
+	{
+		receiveBuffer[endIndexOfReceiveBuffer]=USART_ReceiveData(USART1);
+		endIndexOfReceiveBuffer++;
+		if(endIndexOfReceiveBuffer==ReceiveBufferSize)
+		{
+			endIndexOfReceiveBuffer = 0;
+		}
+		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
+	}
+	else if(USART_GetITStatus(USART1,USART_IT_CTS))
+	{
+		if(startIndexOfSendBuffer!=endIndexOfSendBuffer)
+		{
+			USART_SendData(USART1,sendBuffer[startIndexOfSendBuffer]);
+			startIndexOfSendBuffer++;
+			if(startIndexOfSendBuffer==SendBufferSize)
+			{
+				startIndexOfReceiveBuffer=0;
+			}
+		}
+		USART_ClearITPendingBit(USART1,USART_IT_CTS);
+	}
+}
+
+void USART1Send(char* stringPtr)
+{
+	int index=0;
+	while(stringPtr[index]!=0)
+	{
+		sendBuffer[endIndexOfSendBuffer]=stringPtr[index];
+		endIndexOfSendBuffer++;
+		if(endIndexOfSendBuffer==SendBufferSize)
+		{
+			endIndexOfSendBuffer=0;
+		}
+		index++;
+	}
+}
+
+char USART1GetChar()
+{
+	char c = receiveBuffer[startIndexOfReceiveBuffer];
+	startIndexOfReceiveBuffer++;
+	if(startIndexOfReceiveBuffer==ReceiveBufferSize)
+	{
+		startIndexOfReceiveBuffer=0;
+	}
+	return c;
+}
+
+inline bool IsUSART1Receive()
+{
+	return startIndexOfReceiveBuffer!=endIndexOfReceiveBuffer;
+}
