@@ -31,6 +31,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
+#include "BSP.h"
+#include "PIDController.h"
+#include "SequenceController.h"
 
 
 /* Exported types ------------------------------------------------------------*/

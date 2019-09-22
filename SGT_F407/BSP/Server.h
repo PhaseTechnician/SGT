@@ -23,9 +23,10 @@
 void ServerConfig(void);
 //设置一个舵机的角度
 void ServerSetAngle(int angle,int server);
-//获取一个舵机的角度
+
+//获取一个舵机的角度[DISABLE]
 int ServerGetAngle(int server);
-//是否舵机到达上次设定的位置
+//是否舵机到达上次设定的位置[DISABLE]
 bool IsServerArrive(int server);
 
 #endif

@@ -12,7 +12,7 @@ void NVICConfig(void);
  * SYSTICK
  */
 //系统时间计数相关初始化
-void SetSystick(void);
+void SystickConfig(void);
 //更新系统时间步
 void OnStepSystick(void);
 

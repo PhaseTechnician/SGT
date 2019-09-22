@@ -134,22 +134,7 @@ void PendSV_Handler(void)
 {
 }
 
-/**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
-uint32_t systick=0;
-static char circle_count = 0;
-void SysTick_Handler(void)
-{
-	systick++;
-	if(systick%100==0)
-	{
-		USART_SendData(USART1,circle_count);
-		while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET){};
-	}
-}
+
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
@@ -158,24 +143,4 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
-void TIM3_IRQHandler(void)
-{
-	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET)
-	{
-	
-	}
-	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
-}
-
-void TIM4_IRQHandler(void)
-{
-	if(TIM_GetITStatus(TIM4,TIM_IT_Update)==SET)
-	{
-	if((TIM4->CR1>>4 & 0x01)==0) //DIR==0
-            circle_count++;
-        else if((TIM4->CR1>>4 & 0x01)==1)//DIR==1
-            circle_count--;
-	}
-	TIM_ClearITPendingBit(TIM4,TIM_IT_Update);
-}
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -21,17 +21,24 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
 Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
-F:\STM32\SGT_F407\Project\SGT.uvprojx
-Project File Date:  09/21/2019
+F:\SGT\SGT_F407\Project\SGT.uvprojx
+Project File Date:  09/22/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling Others.c...
+compiling LED.c...
+..\BSP\LED.c(47): warning:  #188-D: enumerated type mixed with another type
+  		DIN(value&0x8000);
+..\BSP\LED.c: 1 warning, 0 errors
 compiling main.c...
+compiling stm32f4xx_it.c...
+compiling MPU.c...
+compiling Ultrasonic.c...
+compiling BSP.c...
 linking...
-Program Size: Code=2984 RO-data=424 RW-data=40 ZI-data=3680  
-".\Objects\SGT.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=5016 RO-data=440 RW-data=40 ZI-data=3680  
+".\Objects\SGT.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -45,7 +52,7 @@ Package Vendor: Keil
   E:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

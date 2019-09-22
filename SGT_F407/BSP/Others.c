@@ -6,7 +6,7 @@ inline void NVICConfig(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 }
 
-inline void SetSystick()
+inline void SystickConfig(void)
 {
 	if(SysTick_Config(168000))
 	{

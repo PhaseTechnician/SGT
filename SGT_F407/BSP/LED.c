@@ -16,7 +16,7 @@
 
 #define DIN_High() GPIO_SetBits(GPIOB,GPIO_Pin_0)
 #define DIN_Low()  GPIO_ResetBits(GPIOB,GPIO_Pin_0);
-#define DIN(HL) GPIO_WriteBit(GPIOB,GPIO_Pin_0,HL);
+#define DIN(HL) GPIO_WriteBit(GPIOB,GPIO_Pin_0,(BitAction)(HL));
 #define CS_High() GPIO_SetBits(GPIOB,GPIO_Pin_1)
 #define CS_Low()  GPIO_ResetBits(GPIOB,GPIO_Pin_1);
 #define CLK_High() GPIO_SetBits(GPIOB,GPIO_Pin_2)

@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Library\inc;..\User;..\CMSIS\Include;..\CMSIS;..\BSP</IncludePath>
+              <IncludePath>..\Library\inc;..\User;..\CMSIS\Include;..\CMSIS;..\BSP;..\Control</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -625,6 +625,13 @@
         </Group>
         <Group>
           <GroupName>Doc</GroupName>
+          <Files>
+            <File>
+              <FileName>deleteCode.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\deleteCode.txt</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>BSP</GroupName>
@@ -668,6 +675,26 @@
               <FileName>Ultrasonic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\Ultrasonic.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Control</GroupName>
+          <Files>
+            <File>
+              <FileName>PIDController.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\PIDController.c</FilePath>
+            </File>
+            <File>
+              <FileName>SequenceController.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\SequenceController.c</FilePath>
             </File>
           </Files>
         </Group>
