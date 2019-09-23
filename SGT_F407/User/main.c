@@ -11,3 +11,13 @@ int main()
 	//载入任务程序
 	
 }
+
+void DebugFunction()
+{
+
+}
+
+void TaskFunction()
+{
+
+}

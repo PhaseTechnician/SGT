@@ -45,3 +45,5 @@
 .\objects\main.o: ..\BSP\LED.h
 .\objects\main.o: ..\BSP\MPU.h
 .\objects\main.o: ..\BSP\Ultrasonic.h
+.\objects\main.o: ..\Control\PIDController.h
+.\objects\main.o: ..\Control\SequenceController.h

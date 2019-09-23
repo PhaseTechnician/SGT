@@ -46,3 +46,5 @@
 .\objects\stm32f4xx_it.o: ..\BSP\LED.h
 .\objects\stm32f4xx_it.o: ..\BSP\MPU.h
 .\objects\stm32f4xx_it.o: ..\BSP\Ultrasonic.h
+.\objects\stm32f4xx_it.o: ..\Control\PIDController.h
+.\objects\stm32f4xx_it.o: ..\Control\SequenceController.h
