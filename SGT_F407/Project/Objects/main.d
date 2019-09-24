@@ -1,5 +1,6 @@
 .\objects\main.o: ..\User\main.c
-.\objects\main.o: ..\User\main.h
+.\objects\main.o: ..\BSP\BSP.h
+.\objects\main.o: ..\BSP\USART.h
 .\objects\main.o: ..\CMSIS\stm32f4xx.h
 .\objects\main.o: ..\CMSIS\Include\core_cm4.h
 .\objects\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -35,8 +36,6 @@
 .\objects\main.o: ..\Library\inc\stm32f4xx_dac.h
 .\objects\main.o: ..\Library\inc\stm32f4xx_dcmi.h
 .\objects\main.o: ..\Library\inc\stm32f4xx_fsmc.h
-.\objects\main.o: ..\BSP\BSP.h
-.\objects\main.o: ..\BSP\USART.h
 .\objects\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\main.o: ..\BSP\LineTrack.h
 .\objects\main.o: ..\BSP\Others.h

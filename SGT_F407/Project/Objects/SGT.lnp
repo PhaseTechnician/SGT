@@ -45,6 +45,8 @@
 ".\objects\main.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\system_stm32f4xx.o"
+".\objects\script.o"
+".\objects\pathfinding.o"
 ".\objects\usart.o"
 ".\objects\linetrack.o"
 ".\objects\others.o"
@@ -56,6 +58,7 @@
 ".\objects\bsp.o"
 ".\objects\pidcontroller.o"
 ".\objects\sequencecontroller.o"
+".\objects\locataor .o"
 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\SGT.map" -o .\Objects\SGT.axf

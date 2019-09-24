@@ -1,5 +1,7 @@
 #include "MontorDriver.h"
 
+int encoderCountFrontLeft,encoderCountFrontRight,encoderCountBackLeft,encoderCountBackRight;
+
 void MontorDriverConfig()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOD|RCC_AHB1Periph_GPIOE,ENABLE);
@@ -110,9 +112,58 @@ void MontorDriverConfig()
 }
 void SetMontorSpeed(int speed,int montor)
 {
-
+	switch(montor)
+	{
+		case MONTOR_FRONT_LEFT:
+			TIM_SetCompare1(TIM1,speed);
+			break;
+		case MONTOR_FRONT_RIGHT:
+			TIM_SetCompare2(TIM1,speed);
+			break;
+		case MONTOR_BACK_LEFT:
+			TIM_SetCompare3(TIM1,speed);
+			break;
+		case MONTOR_BACK_RIGHT:
+			TIM_SetCompare4(TIM1,speed);
+			break;
+	}
 }
+
+void SetMontorRotation(bool positive,int montor)
+{
+	switch(montor)
+	{
+		case MONTOR_FRONT_LEFT:
+			GPIO_WriteBit(GPIOD,GPIO_Pin_0,(BitAction)positive);
+			GPIO_WriteBit(GPIOD,GPIO_Pin_1,(BitAction)!positive);
+			break;
+		case MONTOR_FRONT_RIGHT:
+			GPIO_WriteBit(GPIOD,GPIO_Pin_2,(BitAction)positive);
+			GPIO_WriteBit(GPIOD,GPIO_Pin_3,(BitAction)!positive);
+			break;
+		case MONTOR_BACK_LEFT:
+			GPIO_WriteBit(GPIOD,GPIO_Pin_4,(BitAction)positive);
+			GPIO_WriteBit(GPIOD,GPIO_Pin_5,(BitAction)!positive);
+			break;
+		case MONTOR_BACK_RIGHT:
+			GPIO_WriteBit(GPIOD,GPIO_Pin_6,(BitAction)positive);
+			GPIO_WriteBit(GPIOD,GPIO_Pin_7,(BitAction)!positive);
+			break;
+	}
+}
+
 int GetEncoderNum(int montor)
 {
+	switch(montor)
+	{
+		case MONTOR_FRONT_LEFT:
+			return encoderCountFrontLeft;
+		case MONTOR_FRONT_RIGHT:
+			return encoderCountFrontRight;
+		case MONTOR_BACK_LEFT:
+			return encoderCountBackLeft;
+		case MONTOR_BACK_RIGHT:
+			return encoderCountBackRight;
+	}
 	return 0;
 }

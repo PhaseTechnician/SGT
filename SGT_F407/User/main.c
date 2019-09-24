@@ -1,4 +1,10 @@
-#include "main.h"
+#include "BSP.h"
+#include "PIDController.h"
+#include "SequenceController.h"
+#include "Script.h"
+
+void DebugFunction();
+void TaskFunction();
 
 int main()
 {
@@ -14,10 +20,11 @@ int main()
 
 void DebugFunction()
 {
-
+	
 }
 
 void TaskFunction()
 {
-
+	MoveToward(Orientation_X_Positive,3);
+	PeekGoods();
 }

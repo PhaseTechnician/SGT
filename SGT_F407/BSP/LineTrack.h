@@ -4,13 +4,13 @@
 #include "stm32f4xx.h"
 /*
  * 寻迹传感器，作为IO中断存在
- * EXTI 1  PC1              1  2
- * EXTI 2  PC2
- * EXTI 3  PC3             3    4 
- * EXTI 4  PC4
- * EXTI 5  PC5             5    6
- * EXTI 6  PB6    
- * EXTI 7  PB7              7  8 
+ * EXTI 1  PC1              1 + 2
+ * EXTI 2  PC2                x
+ * EXTI 3  PC3             3  x  4 
+ * EXTI 4  PC4             +yyoyy-
+ * EXTI 5  PC5             5  x  6
+ * EXTI 6  PB6                x
+ * EXTI 7  PB7              7 - 8 
  * EXTI 8  PB8
  */
  

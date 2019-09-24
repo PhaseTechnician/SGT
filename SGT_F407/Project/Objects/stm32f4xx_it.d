@@ -35,16 +35,3 @@
 .\objects\stm32f4xx_it.o: ..\Library\inc\stm32f4xx_dac.h
 .\objects\stm32f4xx_it.o: ..\Library\inc\stm32f4xx_dcmi.h
 .\objects\stm32f4xx_it.o: ..\Library\inc\stm32f4xx_fsmc.h
-.\objects\stm32f4xx_it.o: ..\User\main.h
-.\objects\stm32f4xx_it.o: ..\BSP\BSP.h
-.\objects\stm32f4xx_it.o: ..\BSP\USART.h
-.\objects\stm32f4xx_it.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\stm32f4xx_it.o: ..\BSP\LineTrack.h
-.\objects\stm32f4xx_it.o: ..\BSP\Others.h
-.\objects\stm32f4xx_it.o: ..\BSP\MontorDriver.h
-.\objects\stm32f4xx_it.o: ..\BSP\Server.h
-.\objects\stm32f4xx_it.o: ..\BSP\LED.h
-.\objects\stm32f4xx_it.o: ..\BSP\MPU.h
-.\objects\stm32f4xx_it.o: ..\BSP\Ultrasonic.h
-.\objects\stm32f4xx_it.o: ..\Control\PIDController.h
-.\objects\stm32f4xx_it.o: ..\Control\SequenceController.h

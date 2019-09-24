@@ -2,7 +2,7 @@
 #define _MONTORDRIVER_H
 
 #include "stm32f4xx.h"
-
+#include <stdbool.h>
 /*
  * Montor 电机控制器[不配备PID控制器]
  * PWM驱动调速 TIM1 
@@ -26,6 +26,8 @@
 void MontorDriverConfig(void);
 //设置一个电机的速度，将直接反映到PWM占空比之上
 void SetMontorSpeed(int speed,int montor);
+//设置电机转向
+void SetMontorRotation(bool positive,int montor);
 //获取一个电机编码器获得的计数值，对应的时间变化量参考Others.h
 int GetEncoderNum(int montor);
 //获取一个电机的物理线速度，需要物理参数支持【DISABLE】

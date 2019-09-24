@@ -706,6 +706,16 @@
               <FileType>1</FileType>
               <FilePath>..\Control\SequenceController.c</FilePath>
             </File>
+            <File>
+              <FileName>Locataor .c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Locataor .c</FilePath>
+            </File>
+            <File>
+              <FileName>MotionAnalysis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\MotionAnalysis.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

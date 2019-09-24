@@ -11,6 +11,8 @@ void NVICConfig(void);
 /*
  * SYSTICK
  */
+//系统时间间隔
+#define sysInterval 10
 //系统时间计数相关初始化
 void SystickConfig(void);
 //更新系统时间步
