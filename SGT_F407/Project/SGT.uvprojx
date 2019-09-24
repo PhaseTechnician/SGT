@@ -641,11 +641,6 @@
               <FileType>5</FileType>
               <FilePath>..\Doc\deleteCode.txt</FilePath>
             </File>
-            <File>
-              <FileName>USART_circle.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USART_circle.txt</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -677,11 +672,6 @@
               <FilePath>..\BSP\Server.c</FilePath>
             </File>
             <File>
-              <FileName>LED.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\LED.c</FilePath>
-            </File>
-            <File>
               <FileName>MPU.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\MPU.c</FilePath>
@@ -695,6 +685,11 @@
               <FileName>BSP.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\BSP.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD12864.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\LCD12864.c</FilePath>
             </File>
           </Files>
         </Group>

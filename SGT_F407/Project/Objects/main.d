@@ -41,7 +41,7 @@
 .\objects\main.o: ..\BSP\Others.h
 .\objects\main.o: ..\BSP\MontorDriver.h
 .\objects\main.o: ..\BSP\Server.h
-.\objects\main.o: ..\BSP\LED.h
+.\objects\main.o: ..\BSP\LCD12864.h
 .\objects\main.o: ..\BSP\MPU.h
 .\objects\main.o: ..\BSP\Ultrasonic.h
 .\objects\main.o: ..\Control\PIDController.h

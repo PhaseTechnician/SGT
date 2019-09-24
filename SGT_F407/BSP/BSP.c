@@ -5,10 +5,11 @@ void BSPConfig(void)
 	NVICConfig();
 	SystickConfig();
 	USART1Config(9600);
+	LCD12864Config();
 	LineTrackConfig();
 	MontorDriverConfig();
 	ServerConfig();
-	LedConfig();
+
 	MpuConfig();
 	UltrasonicConfig();
 }
