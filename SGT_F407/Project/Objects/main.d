@@ -46,3 +46,6 @@
 .\objects\main.o: ..\BSP\Ultrasonic.h
 .\objects\main.o: ..\Control\PIDController.h
 .\objects\main.o: ..\Control\SequenceController.h
+.\objects\main.o: ..\User\Script.h
+.\objects\main.o: ..\Control\Locataor.h
+.\objects\main.o: ..\Control\MotionAnalysis.h

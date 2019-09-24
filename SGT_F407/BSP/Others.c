@@ -14,6 +14,11 @@ inline void SystickConfig(void)
 	}
 }
 
+void SysTick_Handler(void)
+{
+
+}
+
 void ErrorMessage(char* message)
 {
 	USART1Send(message);

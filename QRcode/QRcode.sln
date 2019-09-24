@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ComputerVision", "ComputerVision\ComputerVision.pyproj", "{DD4E0CB7-3382-436A-BDAA-F2C198EB08BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD4E0CB7-3382-436A-BDAA-F2C198EB08BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4E0CB7-3382-436A-BDAA-F2C198EB08BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC80A713-3370-4D56-959F-4BF9A4EE3519}
+	EndGlobalSection
+EndGlobal

@@ -35,3 +35,4 @@
 .\objects\montordriver.o: ..\Library\inc\stm32f4xx_dac.h
 .\objects\montordriver.o: ..\Library\inc\stm32f4xx_dcmi.h
 .\objects\montordriver.o: ..\Library\inc\stm32f4xx_fsmc.h
+.\objects\montordriver.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

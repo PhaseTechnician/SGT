@@ -1,12 +1,15 @@
 #include "USART.h"
 
-#define MaxLengthOfOrder 10
-#define MaxAmountOfOrder 10
+#define ReceiveBufferSize 1024
+#define SendBufferSize 1024
 
-char orders[MaxAmountOfOrder][MaxLengthOfOrder+1]={0};
-unsigned int startIndex=0;
-unsigned int endIndex=0;
-unsigned int orderInnerIndex = 0;
+char receiveBuffer[ReceiveBufferSize]={0};
+uint32_t endIndexOfReceiveBuffer=0;
+uint16_t startIndexOfReceiveBuffer=0;
+
+char sendBuffer[SendBufferSize]={0};
+uint32_t endIndexOfSendBuffer=0;
+uint16_t startIndexOfSendBuffer=0;
 
 void USART1Config(int baud)
 {
@@ -33,7 +36,7 @@ void USART1Config(int baud)
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_Init(USART1,&USART_InitStructure);
 	
-	//USART_ITConfig(USART1,USART_IT_CTS,ENABLE);//发送完中断
+	USART_ITConfig(USART1,USART_IT_CTS,ENABLE);//发送完中断
 	USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);//接收中断
 	
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -51,61 +54,56 @@ void USART1_IRQHandler(void)
 {
 	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET)
 	{
-	  char c = USART_ReceiveData(USART1);
-		if(c==0)
+		receiveBuffer[endIndexOfReceiveBuffer]=USART_ReceiveData(USART1);
+		endIndexOfReceiveBuffer++;
+		if(endIndexOfReceiveBuffer==ReceiveBufferSize)
 		{
-			orders[endIndex][orderInnerIndex]=0;
-			endIndex++;
-			orderInnerIndex = 0;
-		}
-		else
-		{
-		orders[endIndex][orderInnerIndex]=c;
-			orderInnerIndex++;
-			if(orderInnerIndex==MaxLengthOfOrder)
-			{
-				orders[endIndex][orderInnerIndex]=0;
-				endIndex++;//超过预定的指令长度，指令直接截断
-				orderInnerIndex = 0;
-			}
-		}
-		if(endIndex==MaxAmountOfOrder)
-		{
-			endIndex=0;
+			endIndexOfReceiveBuffer = 0;
 		}
 		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
+	}
+	else if(USART_GetITStatus(USART1,USART_IT_CTS)==SET)
+	{
+		if(startIndexOfSendBuffer!=endIndexOfSendBuffer)
+		{
+			USART_SendData(USART1,sendBuffer[startIndexOfSendBuffer]);
+			startIndexOfSendBuffer++;
+			if(startIndexOfSendBuffer==SendBufferSize)
+			{
+				startIndexOfReceiveBuffer=0;
+			}
+		}
+		USART_ClearITPendingBit(USART1,USART_IT_CTS);
 	}
 }
 
 void USART1Send(char* stringPtr)
 {
-	while(true)
+	int index=0;
+	while(stringPtr[index]!=0)
 	{
-		if(*stringPtr!=0)
+		sendBuffer[endIndexOfSendBuffer]=stringPtr[index];
+		endIndexOfSendBuffer++;
+		if(endIndexOfSendBuffer==SendBufferSize)
 		{
-			while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET);
-			USART_SendData(USART1,*stringPtr);
-			stringPtr++;
+			endIndexOfSendBuffer=0;
 		}
-		else
-		{
-			return;
-		}
+		index++;
 	}
 }
 
-inline bool IsUSART1Receive(void)
+char USART1GetChar()
 {
-	return startIndex != endIndex;
-}
-char* USART1GetOrder(void)
-{
-  char* order = orders[startIndex];
-	startIndex++;
-	if(startIndex==MaxAmountOfOrder)
+	char c = receiveBuffer[startIndexOfReceiveBuffer];
+	startIndexOfReceiveBuffer++;
+	if(startIndexOfReceiveBuffer==ReceiveBufferSize)
 	{
-			startIndex=0;
+		startIndexOfReceiveBuffer=0;
 	}
-	return order;
+	return c;
 }
 
+inline bool IsUSART1Receive()
+{
+	return startIndexOfReceiveBuffer!=endIndexOfReceiveBuffer;
+}

@@ -641,6 +641,11 @@
               <FileType>5</FileType>
               <FilePath>..\Doc\deleteCode.txt</FilePath>
             </File>
+            <File>
+              <FileName>USART_circle.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USART_circle.txt</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
