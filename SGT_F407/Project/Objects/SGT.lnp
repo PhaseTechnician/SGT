@@ -47,6 +47,7 @@
 ".\objects\system_stm32f4xx.o"
 ".\objects\script.o"
 ".\objects\pathfinding.o"
+".\objects\test.o"
 ".\objects\usart.o"
 ".\objects\linetrack.o"
 ".\objects\others.o"

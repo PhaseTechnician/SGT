@@ -631,6 +631,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\PathFinding.c</FilePath>
             </File>
+            <File>
+              <FileName>Test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

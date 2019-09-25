@@ -2,8 +2,8 @@
 #include "PIDController.h"
 #include "SequenceController.h"
 #include "Script.h"
+#include "Test.h"
 
-void DebugFunction(void);
 void TaskFunction(void);
 
 int main(void)
@@ -15,19 +15,8 @@ int main(void)
 		while(1);
 	}
 	//载入任务程序
-	USART1Send("stm32f407 try connected");
-	while(1)
-	{
-		if(IsUSART1Receive())
-		{
-			USART1Send(USART1GetOrder());
-		}
-	}
-}
 
-void DebugFunction(void)
-{
-	
+
 }
 
 void TaskFunction(void)

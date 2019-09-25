@@ -4,7 +4,7 @@ ActionNode *tempArrays = 0;
 bool stateFinish = true;
 int tempTick = 0;
 
-ActionNode ActionNode_END = {0,0};
+ActionNode ActionNode_Empty = {0,0};
 
 void SequenceOnStep(int pastTime)
 {
@@ -46,7 +46,7 @@ void SetSequence(ActionNode actions[])
 	}
 }
 
-inline bool IsFinished(void)
+inline bool IsSequenceFinished(void)
 {
 	return stateFinish;
 }

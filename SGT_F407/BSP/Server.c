@@ -1,7 +1,7 @@
 #include "Server.h"
 int AngleToPluse(int angle)
 {
-	return angle/180*2000+500;// Angle/MaxAngle*PluseRange+MinPluse
+	return angle*2000/180+500;// Angle/MaxAngle*PluseRange+MinPluse
 }
 
 void ServerConfig(void)

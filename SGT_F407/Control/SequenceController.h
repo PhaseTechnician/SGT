@@ -26,13 +26,13 @@ typedef struct ActionNodeStructure
 }ActionNode;
 
 //结束节点
-extern ActionNode ActionNode_END;
+extern ActionNode ActionNode_Empty;
 
 //序列步进，查看是否应该到下一个动作帧，你因该相对频繁的调用它
 void SequenceOnStep(int pastTime);
 //设置当前队列
 void SetSequence(ActionNode actions[]);
 //查看队列是否完成
-bool IsFinished(void);
+bool IsSequenceFinished(void);
 
 #endif

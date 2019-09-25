@@ -49,3 +49,4 @@
 .\objects\main.o: ..\User\Script.h
 .\objects\main.o: ..\Control\Locataor.h
 .\objects\main.o: ..\Control\MotionAnalysis.h
+.\objects\main.o: ..\User\Test.h
