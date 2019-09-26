@@ -110,7 +110,7 @@ void MontorDriverConfig()
 	TIM_EncoderInterfaceConfig(TIM4,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 	TIM_EncoderInterfaceConfig(TIM5,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 }
-void SetMontorSpeed(int speed,int montor)
+void SetMontorAbsSpeed(int speed,int montor)
 {
 	switch(montor)
 	{
@@ -150,6 +150,12 @@ void SetMontorRotation(bool positive,int montor)
 			GPIO_WriteBit(GPIOD,GPIO_Pin_7,(BitAction)!positive);
 			break;
 	}
+}
+
+void SetMontorSpeed(int speed,int montor)
+{
+	SetMontorAbsSpeed(speed>0?speed:-speed,montor);
+	SetMontorRotation(speed>0,montor);
 }
 
 int GetEncoderNum(int montor)

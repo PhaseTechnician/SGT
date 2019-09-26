@@ -19,6 +19,15 @@
 #define SERVER_4 4
 #define SERVER_5 5
 
+typedef struct ServerInstanceStructure//新特性，未测试
+{
+	TIM_TypeDef* TIM;
+	void (*setFunction)(TIM_TypeDef*,uint32_t);
+	unsigned int base;
+	unsigned int PWMRange;
+	unsigned int angleRange;
+}ServerInstance;//新特性，未测试
+
 //初始化舵机相关的驱动
 void ServerConfig(void);
 //设置一个舵机的角度

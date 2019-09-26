@@ -24,10 +24,12 @@
 
 //初始化电机驱动的相关资源
 void MontorDriverConfig(void);
-//设置一个电机的速度，将直接反映到PWM占空比之上
-void SetMontorSpeed(int speed,int montor);
+//设置一个电机绝对速度，将直接反映到PWM占空比之上
+void SetMontorAbsSpeed(int speed,int montor);
 //设置电机转向
 void SetMontorRotation(bool positive,int montor);
+//设置电机速度
+void SetMontorSpeed(int speed,int montor);
 //获取一个电机编码器获得的计数值，对应的时间变化量参考Others.h
 int GetEncoderNum(int montor);
 //获取一个电机的物理线速度，需要物理参数支持【DISABLE】

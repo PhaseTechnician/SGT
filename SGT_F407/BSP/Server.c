@@ -1,4 +1,12 @@
 #include "Server.h"
+
+//–¬Ãÿ–‘£¨Œ¥≤‚ ‘
+const ServerInstance SERVER1 = {TIM8,TIM_SetCompare1,500,2000,180};
+const ServerInstance SERVER2 = {TIM8,TIM_SetCompare2,500,2000,180};
+const ServerInstance SERVER3 = {TIM8,TIM_SetCompare3,500,2000,180};
+const ServerInstance SERVER4 = {TIM8,TIM_SetCompare4,500,2000,180};
+const ServerInstance SERVER5 = {TIM11,TIM_SetCompare1,500,2000,180};
+
 int AngleToPluse(int angle)
 {
 	return angle*2000/180+500;// Angle/MaxAngle*PluseRange+MinPluse
