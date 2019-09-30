@@ -1,16 +1,11 @@
 #include "Server.h"
 
-//新特性，未测试
+//舵机的实例
 const ServerInstance SERVER1 = {TIM8,TIM_SetCompare1,500,2000,180};
 const ServerInstance SERVER2 = {TIM8,TIM_SetCompare2,500,2000,180};
 const ServerInstance SERVER3 = {TIM8,TIM_SetCompare3,500,2000,180};
 const ServerInstance SERVER4 = {TIM8,TIM_SetCompare4,500,2000,180};
 const ServerInstance SERVER5 = {TIM11,TIM_SetCompare1,500,2000,180};
-
-int AngleToPluse(int angle)
-{
-	return angle*2000/180+500;// Angle/MaxAngle*PluseRange+MinPluse
-}
 
 void ServerConfig(void)
 {
@@ -67,24 +62,9 @@ void ServerConfig(void)
 	TIM_Cmd(TIM11,ENABLE);	
 }
 
-void ServerSetAngle(int angle,int server)
+
+
+inline void ServerSetAngle(int angle,const ServerInstance* server)
 {
-	switch(server)
-	{
-		case SERVER_1:
-			TIM_SetCompare1(TIM8,AngleToPluse(angle));
-			break;
-		case SERVER_2:
-			TIM_SetCompare2(TIM8,AngleToPluse(angle));
-			break;
-		case SERVER_3:
-			TIM_SetCompare3(TIM8,AngleToPluse(angle));
-			break;
-		case SERVER_4:
-			TIM_SetCompare4(TIM8,AngleToPluse(angle));
-			break;
-		case SERVER_5:
-			TIM_SetCompare1(TIM11,AngleToPluse(angle));
-			break;
-	}
+	server->setFunction(server->TIM,server->base+server->PWMRange*angle/server->angleRange);
 }

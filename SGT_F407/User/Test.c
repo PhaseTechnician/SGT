@@ -29,19 +29,24 @@ void ServerTest(void)
 {
 	while(1)
 	{
-		ServerSetAngle(0,SERVER_1);
-		ServerSetAngle(0,SERVER_2);
-		ServerSetAngle(0,SERVER_3);
-		ServerSetAngle(0,SERVER_4);
-		ServerSetAngle(0,SERVER_5);
+		ServerSetAngle(0,&SERVER1);
+		ServerSetAngle(0,&SERVER2);
+		ServerSetAngle(0,&SERVER3);
+		ServerSetAngle(0,&SERVER4);
+		ServerSetAngle(0,&SERVER5);
 		DelayS(1);
-		ServerSetAngle(180,SERVER_1);
-		ServerSetAngle(180,SERVER_2);
-		ServerSetAngle(180,SERVER_3);
-		ServerSetAngle(180,SERVER_4);
-		ServerSetAngle(180,SERVER_5);
+		ServerSetAngle(180,&SERVER1);
+		ServerSetAngle(180,&SERVER2);
+		ServerSetAngle(180,&SERVER3);
+		ServerSetAngle(180,&SERVER4);
+		ServerSetAngle(180,&SERVER5);
 		DelayS(1);
 	}
+}
+
+void LCDTest(void)
+{
+	LCD12864Write("hello SGT LCD TEST  ≤‚ ‘’˝≥£");
 }
 
 void SequenceControllerTest(void)

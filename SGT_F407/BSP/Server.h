@@ -12,26 +12,27 @@
  *       PB9
  */
 
-//未命名的舵机组
-#define SERVER_1 1
-#define SERVER_2 2
-#define SERVER_3 3
-#define SERVER_4 4
-#define SERVER_5 5
-
-typedef struct ServerInstanceStructure//新特性，未测试
+typedef struct ServerInstanceStructure
 {
 	TIM_TypeDef* TIM;
 	void (*setFunction)(TIM_TypeDef*,uint32_t);
 	unsigned int base;
 	unsigned int PWMRange;
 	unsigned int angleRange;
-}ServerInstance;//新特性，未测试
+}ServerInstance;
+
+typedef ServerInstance* Server; 
+extern const ServerInstance SERVER1;
+extern const ServerInstance SERVER2;
+extern const ServerInstance SERVER3;
+extern const ServerInstance SERVER4;
+extern const ServerInstance SERVER5;
+
 
 //初始化舵机相关的驱动
 void ServerConfig(void);
 //设置一个舵机的角度
-void ServerSetAngle(int angle,int server);
+void ServerSetAngle(int angle,const ServerInstance* server);
 
 //获取一个舵机的角度[DISABLE]
 //int ServerGetAngle(int server);

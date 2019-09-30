@@ -17,7 +17,7 @@
  * 任务指令--》前进方向--》移动分量
  */
 
-//低四位代表车轮转向【不完善】
+//低四位代表车轮转向【不完善】【可能不用】
 #define LocalOrientation_X_Positive 5;
 #define LocalOrientation_X_Negitive 6;
 #define LocalOrientation_Y_Positive 7;

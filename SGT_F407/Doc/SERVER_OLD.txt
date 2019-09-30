@@ -1,0 +1,21 @@
+void ServerSetAngle(int angle,int server)
+{
+	switch(server)
+	{
+		case SERVER_1:
+			TIM_SetCompare1(TIM8,AngleToPluse(angle));
+			break;
+		case SERVER_2:
+			TIM_SetCompare2(TIM8,AngleToPluse(angle));
+			break;
+		case SERVER_3:
+			TIM_SetCompare3(TIM8,AngleToPluse(angle));
+			break;
+		case SERVER_4:
+			TIM_SetCompare4(TIM8,AngleToPluse(angle));
+			break;
+		case SERVER_5:
+			TIM_SetCompare1(TIM11,AngleToPluse(angle));
+			break;
+	}
+}

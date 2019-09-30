@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>dd4e0cb7-3382-436a-bdaa-f2c198eb08bb</ProjectGuid>
+    <ProjectGuid>d662f2f8-f367-43c6-b66d-60fe993ff17a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ComputerVision.py</StartupFile>
+    <StartupFile>QRcode.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>ComputerVision</Name>
-    <RootNamespace>ComputerVision</RootNamespace>
+    <Name>QRcode</Name>
+    <RootNamespace>QRcode</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ComputerVision.py" />
+    <Compile Include="QRcode.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

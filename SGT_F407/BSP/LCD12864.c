@@ -1,5 +1,5 @@
 #include "LCD12864.h"
-
+void LCDWrite(unsigned char mode,unsigned char data);
 #define LCD_MODE_CMD  0b11111000
 #define LCD_MODE_DATA 0b11111010
 
@@ -32,7 +32,7 @@ void LCD12864Config(void)
 	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
 	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
 	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;//32极限
+	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256;//32极限
 	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;//高位在前
 	SPI_InitStructure.SPI_CRCPolynomial = 2;
 	SPI_Init(SPI2, &SPI_InitStructure);
@@ -40,14 +40,42 @@ void LCD12864Config(void)
 	CS_low();
 	SPI_Cmd(SPI2,ENABLE);
 	
-	LCDWrite(LCD_MODE_CMD,0b00101011);
-	LCDWrite(LCD_MODE_CMD,0b00101011);
-	LCDWrite(LCD_MODE_CMD,0b00101011);
-	LCDWrite(LCD_MODE_DATA,0b00111111);
-	LCDWrite(LCD_MODE_DATA,0b00111111);
-	LCDWrite(LCD_MODE_DATA,0b00111111);
+	DelayS(1);
+	LCDWrite(LCD_MODE_CMD,0X30);
+	Delay(1000);
+	LCDWrite(LCD_MODE_CMD,0X0C);
+	Delay(1000);
+	LCDWrite(LCD_MODE_CMD,0X01);
+	Delay(30000);
+	LCDWrite(LCD_MODE_CMD,0X06);
+	Delay(5000);
 }
 
+void LCD12864Write(char* str)
+{
+	LCDWrite(LCD_MODE_CMD,0X80);
+	for(int i=0;i<64;i++)
+	{
+		if(str[i]==0)
+		{
+			break;
+		}
+		LCDWrite(LCD_MODE_DATA,str[i]);
+	}
+}
+
+void LCD12864WriteAt(char* str,int x,int y)
+{
+	LCDWrite(LCD_MODE_CMD,0X80+x*2+y*16);
+	for(int i=0;i<64-x*2+y*16;i++)
+	{
+		if(str[i]==0)
+		{
+			break;
+		}
+		LCDWrite(LCD_MODE_DATA,str[i]);
+	}
+}
 void LCDWrite(unsigned char mode,unsigned char data)
 {
 	CS_High();

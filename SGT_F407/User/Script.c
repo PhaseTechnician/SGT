@@ -22,12 +22,12 @@ void Stop(void)
 
 inline void Open(void)
 {
-	ServerSetAngle(0,SERVER_5);
+	ServerSetAngle(0,&SERVER5);
 }
 
 inline void Close(void)
 {
-	ServerSetAngle(180,SERVER_5);
+	ServerSetAngle(180,&SERVER5);
 }
 
 void ScanQRcode(void)

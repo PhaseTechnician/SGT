@@ -1481,7 +1481,7 @@ I (..\Library\inc\stm32f4xx_can.h)(0x5821F050)
 I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
-F (..\User\main.c)(0x5D8B53F6)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\User\main.c)(0x5D9228CC)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\BSP\BSP.h)(0x5D8A2195)
 I (..\BSP\USART.h)(0x5D8A1302)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1522,16 +1522,16 @@ I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (..\BSP\LineTrack.h)(0x5D89C9F6)
 I (..\BSP\Others.h)(0x5D8B41BA)
 I (..\BSP\MontorDriver.h)(0x5D8CA296)
-I (..\BSP\Server.h)(0x5D8C73AD)
-I (..\BSP\LCD12864.h)(0x5D8A3A2E)
+I (..\BSP\Server.h)(0x5D91FF0B)
+I (..\BSP\LCD12864.h)(0x5D922956)
 I (..\BSP\MPU.h)(0x5D85DCAF)
 I (..\BSP\Ultrasonic.h)(0x5D85DCAB)
 I (..\Control\PIDController.h)(0x5D8CA448)
 I (..\Control\SequenceController.h)(0x5D8B4ED1)
 I (..\User\Script.h)(0x5D89C91C)
 I (..\Control\Locataor.h)(0x5D89BEB2)
-I (..\Control\MotionAnalysis.h)(0x5D8CA779)
-I (..\User\Test.h)(0x5D8B5389)
+I (..\Control\MotionAnalysis.h)(0x5D8CA9FF)
+I (..\User\Test.h)(0x5D922965)
 F (..\User\stm32f4xx_it.c)(0x5D89C5D3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\stm32f4xx_it.o --omf_browse .\objects\stm32f4xx_it.crf --depend .\objects\stm32f4xx_it.d)
 I (..\User\stm32f4xx_it.h)(0x58221742)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1603,7 +1603,7 @@ I (..\Library\inc\stm32f4xx_can.h)(0x5821F050)
 I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
-F (..\User\Script.c)(0x5D89D058)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\script.o --omf_browse .\objects\script.crf --depend .\objects\script.d)
+F (..\User\Script.c)(0x5D92020D)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\script.o --omf_browse .\objects\script.crf --depend .\objects\script.d)
 I (..\User\Script.h)(0x5D89C91C)
 I (..\BSP\Bsp.h)(0x5D8A2195)
 I (..\BSP\USART.h)(0x5D8A1302)
@@ -1645,17 +1645,17 @@ I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (..\BSP\LineTrack.h)(0x5D89C9F6)
 I (..\BSP\Others.h)(0x5D8B41BA)
 I (..\BSP\MontorDriver.h)(0x5D8CA296)
-I (..\BSP\Server.h)(0x5D8C73AD)
-I (..\BSP\LCD12864.h)(0x5D8A3A2E)
+I (..\BSP\Server.h)(0x5D91FF0B)
+I (..\BSP\LCD12864.h)(0x5D922956)
 I (..\BSP\MPU.h)(0x5D85DCAF)
 I (..\BSP\Ultrasonic.h)(0x5D85DCAB)
 I (..\Control\Locataor.h)(0x5D89BEB2)
-I (..\Control\MotionAnalysis.h)(0x5D8CA779)
+I (..\Control\MotionAnalysis.h)(0x5D8CA9FF)
 I (..\Control\PIDController.h)(0x5D8CA448)
 F (..\User\PathFinding.c)(0x5D88DC60)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\pathfinding.o --omf_browse .\objects\pathfinding.crf --depend .\objects\pathfinding.d)
 I (..\User\PathFinding.h)(0x5D88DC5D)
-F (..\User\Test.c)(0x5D8B53C0)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\test.o --omf_browse .\objects\test.crf --depend .\objects\test.d)
-I (..\User\Test.h)(0x5D8B5389)
+F (..\User\Test.c)(0x5D922979)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\test.o --omf_browse .\objects\test.crf --depend .\objects\test.d)
+I (..\User\Test.h)(0x5D922965)
 I (..\BSP\BSP.h)(0x5D8A2195)
 I (..\BSP\USART.h)(0x5D8A1302)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1696,12 +1696,16 @@ I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (..\BSP\LineTrack.h)(0x5D89C9F6)
 I (..\BSP\Others.h)(0x5D8B41BA)
 I (..\BSP\MontorDriver.h)(0x5D8CA296)
-I (..\BSP\Server.h)(0x5D8C73AD)
-I (..\BSP\LCD12864.h)(0x5D8A3A2E)
+I (..\BSP\Server.h)(0x5D91FF0B)
+I (..\BSP\LCD12864.h)(0x5D922956)
 I (..\BSP\MPU.h)(0x5D85DCAF)
 I (..\BSP\Ultrasonic.h)(0x5D85DCAB)
 I (..\Control\SequenceController.h)(0x5D8B4ED1)
 F (..\Doc\deleteCode.txt)(0x5D8797A4)()
+F (..\Doc\LEDC.txt)(0x5D87929B)()
+F (..\Doc\LEDH.txt)(0x5D879223)()
+F (..\Doc\USART_circle.txt)(0x5D8A0C7D)()
+F (..\Doc\SERVER_OLD.txt)(0x5D8D975D)()
 F (..\BSP\USART.c)(0x5D8A2457)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (..\BSP\USART.h)(0x5D8A1302)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1850,8 +1854,8 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-F (..\BSP\Server.c)(0x5D8C73A3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\server.o --omf_browse .\objects\server.crf --depend .\objects\server.d)
-I (..\BSP\Server.h)(0x5D8C73AD)
+F (..\BSP\Server.c)(0x5D91FF15)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\server.o --omf_browse .\objects\server.crf --depend .\objects\server.d)
+I (..\BSP\Server.h)(0x5D91FF0B)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -2001,12 +2005,12 @@ I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (..\BSP\LineTrack.h)(0x5D89C9F6)
 I (..\BSP\Others.h)(0x5D8B41BA)
 I (..\BSP\MontorDriver.h)(0x5D8CA296)
-I (..\BSP\Server.h)(0x5D8C73AD)
-I (..\BSP\LCD12864.h)(0x5D8A3A2E)
+I (..\BSP\Server.h)(0x5D91FF0B)
+I (..\BSP\LCD12864.h)(0x5D922956)
 I (..\BSP\MPU.h)(0x5D85DCAF)
 I (..\BSP\Ultrasonic.h)(0x5D85DCAB)
-F (..\BSP\LCD12864.c)(0x5D8A3B7D)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\lcd12864.o --omf_browse .\objects\lcd12864.crf --depend .\objects\lcd12864.d)
-I (..\BSP\LCD12864.h)(0x5D8A3A2E)
+F (..\BSP\LCD12864.c)(0x5D9229EF)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\lcd12864.o --omf_browse .\objects\lcd12864.crf --depend .\objects\lcd12864.d)
+I (..\BSP\LCD12864.h)(0x5D922956)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -2041,12 +2045,13 @@ I (..\Library\inc\stm32f4xx_can.h)(0x5821F050)
 I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
+I (..\BSP\Others.h)(0x5D8B41BA)
 F (..\Control\PIDController.c)(0x5D8CA766)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\pidcontroller.o --omf_browse .\objects\pidcontroller.crf --depend .\objects\pidcontroller.d)
 I (..\Control\PIDController.h)(0x5D8CA448)
-F (..\Control\SequenceController.c)(0x5D8B4EC6)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\sequencecontroller.o --omf_browse .\objects\sequencecontroller.crf --depend .\objects\sequencecontroller.d)
+F (..\Control\SequenceController.c)(0x5D920237)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\sequencecontroller.o --omf_browse .\objects\sequencecontroller.crf --depend .\objects\sequencecontroller.d)
 I (..\Control\SequenceController.h)(0x5D8B4ED1)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-I (..\BSP\Server.h)(0x5D8C73AD)
+I (..\BSP\Server.h)(0x5D91FF0B)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -2121,7 +2126,7 @@ I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 F (..\Control\MotionAnalysis.c)(0x5D8CA630)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\motionanalysis.o --omf_browse .\objects\motionanalysis.crf --depend .\objects\motionanalysis.d)
-I (..\Control\MotionAnalysis.h)(0x5D8CA779)
+I (..\Control\MotionAnalysis.h)(0x5D8CA9FF)
 I (..\BSP\MontorDriver.h)(0x5D8CA296)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)

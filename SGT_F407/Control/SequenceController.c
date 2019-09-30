@@ -17,10 +17,10 @@ void SequenceOnStep(int pastTime)
 			if(tempArrays->delayTimes!=0)
 			{
 				tempTick = tempArrays->delayTimes;
-				ServerSetAngle(tempArrays->frame->angle1,SERVER_1);
-				ServerSetAngle(tempArrays->frame->angle2,SERVER_2);
-				ServerSetAngle(tempArrays->frame->angle3,SERVER_3);
-				ServerSetAngle(tempArrays->frame->angle4,SERVER_4);
+				ServerSetAngle(tempArrays->frame->angle1,&SERVER1);
+				ServerSetAngle(tempArrays->frame->angle2,&SERVER2);
+				ServerSetAngle(tempArrays->frame->angle3,&SERVER3);
+				ServerSetAngle(tempArrays->frame->angle4,&SERVER4);
 			}
 			else
 			{

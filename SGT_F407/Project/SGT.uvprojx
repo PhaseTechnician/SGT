@@ -646,6 +646,26 @@
               <FileType>5</FileType>
               <FilePath>..\Doc\deleteCode.txt</FilePath>
             </File>
+            <File>
+              <FileName>LEDC.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\LEDC.txt</FilePath>
+            </File>
+            <File>
+              <FileName>LEDH.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\LEDH.txt</FilePath>
+            </File>
+            <File>
+              <FileName>USART_circle.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\USART_circle.txt</FilePath>
+            </File>
+            <File>
+              <FileName>SERVER_OLD.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\SERVER_OLD.txt</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

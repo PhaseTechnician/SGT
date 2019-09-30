@@ -15,8 +15,7 @@ int main(void)
 		while(1);
 	}
 	//载入任务程序
-
-
+	LCDTest();
 }
 
 void TaskFunction(void)
