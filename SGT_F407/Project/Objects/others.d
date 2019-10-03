@@ -35,5 +35,5 @@
 .\objects\others.o: ..\Library\inc\stm32f4xx_dac.h
 .\objects\others.o: ..\Library\inc\stm32f4xx_dcmi.h
 .\objects\others.o: ..\Library\inc\stm32f4xx_fsmc.h
-.\objects\others.o: ..\BSP\USART.h
 .\objects\others.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\others.o: ..\BSP\USART.h

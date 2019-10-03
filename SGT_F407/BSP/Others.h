@@ -2,6 +2,7 @@
 #define _OTHERS_H
 
 #include "stm32f4xx.h"
+#include <stdbool.h>
 /*
  * NVIC
  */
@@ -36,4 +37,22 @@ void DelayS(unsigned int s);
 //错误信息的处理
 void ErrorMessage(char *message);
 
+/*
+ * 未完成
+ * DelaySync 异步延迟函数，主要提供给状态机使用,需要TIM7支持提供更高的时间精度
+ */
+typedef struct DelaySyncInstanceStructure
+{
+	bool isActive;
+	unsigned int s;
+	unsigned int us;
+}DelaySyncInstance;
+//初始化异步延时时基定时器
+void DelaySyncFunctionConfig(void);
+//获得一个初始化后的实例
+DelaySyncInstance* InitOneDelaySyncInstance(DelaySyncInstance* instance);
+//设置异步延时
+void SetSyncDelay(unsigned int us,DelaySyncInstance* instance);
+//检测是否超时
+bool IsAlarmOut(DelaySyncInstance* instance);
 #endif

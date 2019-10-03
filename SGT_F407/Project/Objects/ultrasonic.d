@@ -35,3 +35,5 @@
 .\objects\ultrasonic.o: ..\Library\inc\stm32f4xx_dac.h
 .\objects\ultrasonic.o: ..\Library\inc\stm32f4xx_dcmi.h
 .\objects\ultrasonic.o: ..\Library\inc\stm32f4xx_fsmc.h
+.\objects\ultrasonic.o: ..\BSP\Others.h
+.\objects\ultrasonic.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

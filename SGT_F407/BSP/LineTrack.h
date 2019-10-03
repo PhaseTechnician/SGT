@@ -6,7 +6,7 @@
  * 寻迹传感器，作为IO中断存在
  * EXTI 1  PC1              1 + 2
  * EXTI 2  PC2                x
- * EXTI 3  PC3             3  x  4 
+ * EXTI 3  PA3            3  x  4 
  * EXTI 4  PC4             +yyoyy-
  * EXTI 5  PC5             5  x  6
  * EXTI 6  PB6                x

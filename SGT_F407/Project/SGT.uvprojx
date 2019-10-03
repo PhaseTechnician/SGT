@@ -672,6 +672,16 @@
           <GroupName>BSP</GroupName>
           <Files>
             <File>
+              <FileName>BSP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP.c</FilePath>
+            </File>
+            <File>
+              <FileName>Others.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Others.c</FilePath>
+            </File>
+            <File>
               <FileName>USART.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\USART.c</FilePath>
@@ -682,14 +692,14 @@
               <FilePath>..\BSP\LineTrack.c</FilePath>
             </File>
             <File>
-              <FileName>Others.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\Others.c</FilePath>
-            </File>
-            <File>
               <FileName>MontorDriver.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\MontorDriver.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD12864.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\LCD12864.c</FilePath>
             </File>
             <File>
               <FileName>Server.c</FileName>
@@ -705,16 +715,6 @@
               <FileName>Ultrasonic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\Ultrasonic.c</FilePath>
-            </File>
-            <File>
-              <FileName>BSP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\BSP.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCD12864.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\LCD12864.c</FilePath>
             </File>
           </Files>
         </Group>

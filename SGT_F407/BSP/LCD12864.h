@@ -13,7 +13,7 @@
  * NSS   PB12 RS Soft
  * SCK   PB13 E
  * MISO  PB14 empty 
- * MOSI  PB15 RW
+ * MOSI  PC3 RW
  */
 
 //≈‰÷√LCD12864 ‘⁄SPI2…œ

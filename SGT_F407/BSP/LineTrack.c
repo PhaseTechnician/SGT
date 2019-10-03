@@ -5,22 +5,28 @@ unsigned char LineTrackResult;
 void LineTrackConfig(void)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOC,ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOC,ENABLE);
 	
-	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC,EXTI_PinSource1|EXTI_PinSource2|EXTI_PinSource3|EXTI_PinSource4|EXTI_PinSource5);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA,EXTI_PinSource3);
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB,EXTI_PinSource6|EXTI_PinSource7|EXTI_PinSource8);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC,EXTI_PinSource1|EXTI_PinSource2|EXTI_PinSource4|EXTI_PinSource5);
 	
 	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉 
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
   GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_4|GPIO_Pin_5;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉 
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
 	
 	NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn;
@@ -83,7 +89,7 @@ void EXTI2_IRQHandler(void)
 }
 void EXTI3_IRQHandler(void)
 {
-	if(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_3))
+	if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_3))
 	{
 		LineTrackResult &= 0b11111011;
 	}

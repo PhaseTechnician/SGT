@@ -49,6 +49,48 @@ void LCDTest(void)
 	LCD12864Write("hello SGT LCD TEST  测试正常");
 }
 
+void UltrasonicTest(void)
+{
+	while(1)
+	{
+		StartOnceDetecte(&ULT1);
+		int distance1 = GetCM(GetDistance(&ULT1));
+		/*
+		StartOnceDetecte(&ULT2);
+		int distance2 = GetCM(GetDistance(&ULT2));
+		StartOnceDetecte(&ULT3);
+		int distance3 = GetCM(GetDistance(&ULT3));
+		StartOnceDetecte(&ULT4);
+		int distance4 = GetCM(GetDistance(&ULT4));*/
+		char str[6] = {0};
+		str[0] = distance1/100+'0';
+		str[1] = distance1%100/10+'0';
+		str[2] = distance1%10+'0';
+		str[3] = '\r';
+		str[4] = '\n';
+		USART1Send(str);/*
+		str[0] = distance2/100+'0';
+		str[1] = distance2%100/10+'0';
+		str[2] = distance2%10+'0';
+		str[3] = '\r';
+		str[4] = '\n';
+		USART1Send(str);
+		str[0] = distance3/100+'0';
+		str[1] = distance3%100/10+'0';
+		str[2] = distance3%10+'0';
+		str[3] = '\r';
+		str[4] = '\n';
+		USART1Send(str);
+		str[0] = distance4/100+'0';
+		str[1] = distance4%100/10+'0';
+		str[2] = distance4%10+'0';
+		str[3] = '\r';
+		str[4] = '\n';
+		USART1Send(str);*/
+		DelayS(1);
+	}
+}
+
 void SequenceControllerTest(void)
 {
 	//准备关键帧

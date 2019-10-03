@@ -15,7 +15,8 @@ int main(void)
 		while(1);
 	}
 	//载入任务程序
-	LCDTest();
+	USART1Send("finish init");
+	UltrasonicTest();
 }
 
 void TaskFunction(void)
