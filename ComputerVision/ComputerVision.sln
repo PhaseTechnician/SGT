@@ -7,6 +7,10 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "QRcode", "QRcode\QRcode.pyp
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ColorBlock", "ColorBlock\ColorBlock.pyproj", "{3C693706-FC3C-4EDA-9DD9-DA9CD8A70646}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TragetDetect", "TragetDetect\TragetDetect.pyproj", "{6D007052-0207-4DC4-98FB-8AAE95CE4334}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Combination", "Combination\Combination.pyproj", "{3ADF0564-65AA-4131-B134-23A6355A8E2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +21,10 @@ Global
 		{D662F2F8-F367-43C6-B66D-60FE993FF17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C693706-FC3C-4EDA-9DD9-DA9CD8A70646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C693706-FC3C-4EDA-9DD9-DA9CD8A70646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D007052-0207-4DC4-98FB-8AAE95CE4334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D007052-0207-4DC4-98FB-8AAE95CE4334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ADF0564-65AA-4131-B134-23A6355A8E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ADF0564-65AA-4131-B134-23A6355A8E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
