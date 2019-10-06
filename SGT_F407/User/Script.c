@@ -21,10 +21,10 @@ void MoveToward(unsigned char orientation,int tileCount)
 
 void Stop(void)
 {
-	SetMontorSpeed(0,MONTOR_FRONT_RIGHT);
-	SetMontorSpeed(0,MONTOR_FRONT_LEFT);
-	SetMontorSpeed(0,MONTOR_BACK_RIGHT);
-	SetMontorSpeed(0,MONTOR_BACK_LEFT);
+	SetMontorSpeed(0,&MONTOR_FRONT_RIGHT);
+	SetMontorSpeed(0,&MONTOR_FRONT_LEFT);
+	SetMontorSpeed(0,&MONTOR_BACK_RIGHT);
+	SetMontorSpeed(0,&MONTOR_BACK_LEFT);
 }
 
 inline void Open(void)

@@ -10,6 +10,8 @@ void USARTTest(void);//PASS
 void ServerTest(void);//PASS
 void LCDTest(void);//partPass
 void MPUTest(void);
+void MontorDriverOutputTest(void);
+void MontorEncoderTest(void);
 void UltrasonicTest(void);//one compent pass
 /*Control function*/
 void SequenceControllerTest(void);//pass

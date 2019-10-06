@@ -1,6 +1,9 @@
 #include "MontorDriver.h"
 
-int encoderCountFrontLeft,encoderCountFrontRight,encoderCountBackLeft,encoderCountBackRight;
+const MontorInstance MONTOR_FRONT_LEFT  = {TIM2,GPIO_Pin_0,GPIO_Pin_1,TIM_SetCompare1};
+const MontorInstance MONTOR_FRONT_RIGHT = {TIM3,GPIO_Pin_2,GPIO_Pin_3,TIM_SetCompare1};
+const MontorInstance MONTOR_BACK_LEFT   = {TIM4,GPIO_Pin_4,GPIO_Pin_5,TIM_SetCompare1};
+const MontorInstance MONTOR_BACK_RIGHT  = {TIM5,GPIO_Pin_6,GPIO_Pin_7,TIM_SetCompare1};
 
 void MontorDriverConfig()
 {
@@ -69,9 +72,12 @@ void MontorDriverConfig()
 	TIM_OCInitTypeDef OutputCatch_InitStructure;
 	OutputCatch_InitStructure.TIM_OCMode = TIM_OCMode_PWM1;
 	OutputCatch_InitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	OutputCatch_InitStructure.TIM_Pulse = 1500;
+	OutputCatch_InitStructure.TIM_OutputNState = TIM_OutputNState_Disable;
+	OutputCatch_InitStructure.TIM_Pulse = 0;
 	OutputCatch_InitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+	OutputCatch_InitStructure.TIM_OCNPolarity = TIM_OCNPolarity_High;
 	OutputCatch_InitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;
+	OutputCatch_InitStructure.TIM_OCNIdleState = TIM_OCNIdleState_Reset;
 	TIM_OC1Init(TIM1,&OutputCatch_InitStructure);
 	TIM_OC2Init(TIM1,&OutputCatch_InitStructure);
 	TIM_OC3Init(TIM1,&OutputCatch_InitStructure);
@@ -83,13 +89,13 @@ void MontorDriverConfig()
 	TIM_ARRPreloadConfig(TIM1,ENABLE);
 	TIM_CtrlPWMOutputs(TIM1,ENABLE);
 	
-	TIM_Cmd(TIM8,ENABLE);
+	TIM_Cmd(TIM1,ENABLE);
 	
 	//TIM2 TIM3 TIM4 TIM5 Encoder
-	TimeBase_InitStructure.TIM_Period = 1040;
+	TimeBase_InitStructure.TIM_Period = 60000;
 	TimeBase_InitStructure.TIM_Prescaler = 0x00;
 	TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV2;
 	TIM_TimeBaseInit(TIM2,&TimeBase_InitStructure);
 	TIM_TimeBaseInit(TIM3,&TimeBase_InitStructure);
 	TIM_TimeBaseInit(TIM4,&TimeBase_InitStructure);
@@ -97,21 +103,27 @@ void MontorDriverConfig()
 	
 	TIM_ICInitTypeDef TIMIC_InintStructure;
 	TIM_ICStructInit(&TIMIC_InintStructure);
+	TIMIC_InintStructure.TIM_Channel = TIM_Channel_1|TIM_Channel_2;
 	TIMIC_InintStructure.TIM_ICFilter = 10;
 	TIM_ICInit(TIM2,&TIMIC_InintStructure);
 	TIM_ICInit(TIM3,&TIMIC_InintStructure);
 	TIM_ICInit(TIM4,&TIMIC_InintStructure);
 	TIM_ICInit(TIM5,&TIMIC_InintStructure);
 	
-	//²»ÍêÉÆ
+	TIM_Cmd(TIM2,ENABLE);
+	TIM_Cmd(TIM3,ENABLE);
+	TIM_Cmd(TIM4,ENABLE);
+	TIM_Cmd(TIM5,ENABLE);
 	
 	TIM_EncoderInterfaceConfig(TIM2,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 	TIM_EncoderInterfaceConfig(TIM3,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 	TIM_EncoderInterfaceConfig(TIM4,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 	TIM_EncoderInterfaceConfig(TIM5,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 }
-void SetMontorAbsSpeed(int speed,int montor)
+void SetMontorAbsSpeed(unsigned int speed,const MontorInstance* montor)
 {
+	montor->setFunction(TIM1,speed);
+	/*
 	switch(montor)
 	{
 		case MONTOR_FRONT_LEFT:
@@ -126,11 +138,14 @@ void SetMontorAbsSpeed(int speed,int montor)
 		case MONTOR_BACK_RIGHT:
 			TIM_SetCompare4(TIM1,speed);
 			break;
-	}
+	}*/
 }
 
-void SetMontorRotation(bool positive,int montor)
+void SetMontorRotation(bool positive,const MontorInstance* montor)
 {
+	GPIO_WriteBit(GPIOD,montor->PINA,(BitAction)positive);
+	GPIO_WriteBit(GPIOD,montor->PINB,(BitAction)!positive);
+	/*
 	switch(montor)
 	{
 		case MONTOR_FRONT_LEFT:
@@ -150,26 +165,36 @@ void SetMontorRotation(bool positive,int montor)
 			GPIO_WriteBit(GPIOD,GPIO_Pin_7,(BitAction)!positive);
 			break;
 	}
+	*/
 }
 
-void SetMontorSpeed(int speed,int montor)
+void SetMontorSpeed(int speed,const MontorInstance* montor)
 {
 	SetMontorAbsSpeed(speed>0?speed:-speed,montor);
 	SetMontorRotation(speed>0,montor);
 }
 
-int GetEncoderNum(int montor)
+int GetEncoderNum(const MontorInstance* montor)
 {
+	/*
 	switch(montor)
 	{
 		case MONTOR_FRONT_LEFT:
-			return encoderCountFrontLeft;
+			return TIM_GetCounter(TIM2);
 		case MONTOR_FRONT_RIGHT:
-			return encoderCountFrontRight;
+			return TIM_GetCounter(TIM3);
 		case MONTOR_BACK_LEFT:
-			return encoderCountBackLeft;
+			return TIM_GetCounter(TIM4);
 		case MONTOR_BACK_RIGHT:
-			return encoderCountBackRight;
-	}
-	return 0;
+			return TIM_GetCounter(TIM5);
+	}*/
+	return TIM_GetCounter(montor->TIM);
+}
+
+void ResetEncoderNum(void)
+{
+	TIM_SetCounter(TIM2,0);
+	TIM_SetCounter(TIM3,0);
+	TIM_SetCounter(TIM4,0);
+	TIM_SetCounter(TIM5,0);
 }

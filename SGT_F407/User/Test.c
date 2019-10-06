@@ -49,6 +49,68 @@ void LCDTest(void)
 	LCD12864Write("hello SGT LCD TEST  ≤‚ ‘’˝≥£");
 }
 
+void MontorDriverOutputTest()
+{
+	SetMontorRotation(true,&MONTOR_FRONT_LEFT);
+	SetMontorRotation(true,&MONTOR_FRONT_RIGHT);
+	SetMontorRotation(true,&MONTOR_BACK_LEFT);
+	SetMontorRotation(true,&MONTOR_BACK_RIGHT);
+	while(1)
+	{
+		for(int i=2000;i<20000;i++)
+		{
+			SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
+			SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
+			SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
+			SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
+			Delay(2000);
+		}
+		for(int i=20000;i>2000;i--)
+		{
+			SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
+			SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
+			SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
+			SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
+			Delay(2000);
+		}
+	}
+}
+
+void MontorEncoderTest()
+{
+	int kp=0;
+	SetMontorRotation(true,&MONTOR_FRONT_LEFT);
+	SetMontorRotation(true,&MONTOR_FRONT_RIGHT);
+	SetMontorRotation(true,&MONTOR_BACK_LEFT);
+	SetMontorRotation(true,&MONTOR_BACK_RIGHT);
+	while(1)
+	{
+		for(int i=2000;i<20000;i+=10)
+		{
+			SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
+			SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
+			SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
+			SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
+			Delay(20000);
+			if(kp==50)
+			{
+				char str[7] ={0,0,0,0,0,'\n',0};
+				unsigned int count = GetEncoderNum(&MONTOR_FRONT_LEFT);
+				str[4]=count%10+'0';
+				str[3]=count%100/10+'0';
+				str[2]=count%1000/100+'0';
+				str[1]=count%10000/1000+'0';
+				str[0]=count/10000+'0';
+				USART1Send(str);
+				kp=0;
+				ResetEncoderNum();
+			}
+			kp++;
+		}
+		DelayS(1);
+	}
+}
+
 void UltrasonicTest(void)
 {
 	while(1)

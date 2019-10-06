@@ -94,6 +94,16 @@ void USART1Send(char* stringPtr)
 	}
 }
 
+void USART1SendLength(char* stringPtr,int num)
+{
+	for(int i=0;i<num;i++)
+	{
+		while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET);
+		USART_SendData(USART1,*stringPtr);
+		stringPtr++;
+	}
+}
+
 inline bool IsUSART1Receive(void)
 {
 	return startIndex != endIndex;

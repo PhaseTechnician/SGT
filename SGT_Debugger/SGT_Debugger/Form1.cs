@@ -135,28 +135,57 @@ namespace SGT_Debugger
                 Display.Series[2].Points.Clear();
                 firstStart = false;
             }
-            byte[] buf = new byte[COMPort.BytesToRead];
-            COMPort.Read(buf, 0, buf.Length);
-            foreach (Byte mes in buf)
+            if(NumMode.Checked==false)
             {
-                countByte++;
-                value = value << 8 | mes;
-                if (countByte == length)
+                byte[] buf = new byte[COMPort.BytesToRead];
+                COMPort.Read(buf, 0, buf.Length);
+                foreach (Byte mes in buf)
                 {
-                    //Display.Series[seriousCount].Points.AddY(value);
-                    this.Invoke(new Action(() =>
+                    countByte++;
+                    value = value << 8 | mes;
+                    if (countByte == length)
                     {
-                        Display.Series[seriousCount].Points.AddY(value);
-                    }));
-                    value = 0;
-                    seriousCount++;
-                    countByte = 0;
-                }
-                if (seriousCount == seriousnum)
-                {
-                    seriousCount = 0;
+                        //Display.Series[seriousCount].Points.AddY(value);
+                        this.Invoke(new Action(() =>
+                        {
+                            Display.Series[seriousCount].Points.AddY(value);
+                        }));
+                        value = 0;
+                        seriousCount++;
+                        countByte = 0;
+                    }
+                    if (seriousCount == seriousnum)
+                    {
+                        seriousCount = 0;
+                    }
                 }
             }
+            else
+            {
+                byte[] buf = new byte[COMPort.BytesToRead];
+                COMPort.Read(buf, 0, buf.Length);
+                foreach (Byte mes in buf)
+                {
+                    countByte++;
+                    value = value * 10 + (mes-'0');
+                    if (countByte == length)
+                    {
+                        //Display.Series[seriousCount].Points.AddY(value);
+                        this.Invoke(new Action(() =>
+                        {
+                            Display.Series[seriousCount].Points.AddY(value);
+                        }));
+                        value = 0;
+                        seriousCount++;
+                        countByte = 0;
+                    }
+                    if (seriousCount == seriousnum)
+                    {
+                        seriousCount = 0;
+                    }
+                }
+            }
+            
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
@@ -164,5 +193,9 @@ namespace SGT_Debugger
             length = trackBar2.Value;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

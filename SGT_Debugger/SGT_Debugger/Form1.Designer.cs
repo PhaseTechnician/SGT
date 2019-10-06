@@ -49,6 +49,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.NumMode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.Display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -205,11 +206,22 @@
             this.trackBar2.Value = 1;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
+            // NumMode
+            // 
+            this.NumMode.AutoSize = true;
+            this.NumMode.Location = new System.Drawing.Point(9, 12);
+            this.NumMode.Name = "NumMode";
+            this.NumMode.Size = new System.Drawing.Size(78, 16);
+            this.NumMode.TabIndex = 13;
+            this.NumMode.Text = "/1000%100";
+            this.NumMode.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 412);
+            this.Controls.Add(this.NumMode);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.button1);
@@ -226,6 +238,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "SGT_Debugger";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
@@ -250,6 +263,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.CheckBox NumMode;
     }
 }
 

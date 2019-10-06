@@ -25,10 +25,10 @@ void MontionAnalysisConfig()
 void SetOrientation(unsigned char LocalOrientation)
 {
 	orientation = LocalOrientation;
-	SetMontorRotation(LocalOrientation&0b00001000,MONTOR_FRONT_LEFT);
-	SetMontorRotation(LocalOrientation&0b00000100,MONTOR_FRONT_RIGHT);
-	SetMontorRotation(LocalOrientation&0b00000010,MONTOR_BACK_LEFT);
-	SetMontorRotation(LocalOrientation&0b00000001,MONTOR_BACK_RIGHT);
+	SetMontorRotation(LocalOrientation&0b00001000,&MONTOR_FRONT_LEFT);
+	SetMontorRotation(LocalOrientation&0b00000100,&MONTOR_FRONT_RIGHT);
+	SetMontorRotation(LocalOrientation&0b00000010,&MONTOR_BACK_LEFT);
+	SetMontorRotation(LocalOrientation&0b00000001,&MONTOR_BACK_RIGHT);
 }
 
 inline void SetSpeed(unsigned int LineSpeed)
@@ -39,10 +39,10 @@ inline void SetSpeed(unsigned int LineSpeed)
 void MotionAnalysisOnStep(void)
 {
 	//basic
-	SetMontorSpeed(speed,MONTOR_FRONT_LEFT);
-	SetMontorSpeed(speed,MONTOR_FRONT_RIGHT);
-	SetMontorSpeed(speed,MONTOR_BACK_LEFT);
-	SetMontorSpeed(speed,MONTOR_BACK_RIGHT);
+	SetMontorSpeed(speed,&MONTOR_FRONT_LEFT);
+	SetMontorSpeed(speed,&MONTOR_FRONT_RIGHT);
+	SetMontorSpeed(speed,&MONTOR_BACK_LEFT);
+	SetMontorSpeed(speed,&MONTOR_BACK_RIGHT);
 	//high level
 	/*
 	int speed[4]={0};
@@ -53,15 +53,15 @@ void MotionAnalysisOnStep(void)
 	//。。。
 	
 	//调用PID控制器计算速度值
-	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),GetMontorSpeed(MONTOR_FRONT_LEFT));
-	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),GetMontorSpeed(MONTOR_FRONT_RIGHT));
-	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),GetMontorSpeed(MONTOR_BACK_LEFT));
-	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),GetMontorSpeed(MONTOR_BACK_RIGHT));
+	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),GetMontorSpeed(&MONTOR_FRONT_LEFT));
+	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),GetMontorSpeed(&MONTOR_FRONT_RIGHT));
+	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),GetMontorSpeed(&MONTOR_BACK_LEFT));
+	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),GetMontorSpeed(&MONTOR_BACK_RIGHT));
 	//设置电机速度
-	SetMontorSpeed(speed[0],MONTOR_FRONT_LEFT);
-	SetMontorSpeed(speed[1],MONTOR_FRONT_RIGHT);
-	SetMontorSpeed(speed[2],MONTOR_BACK_LEFT);
-	SetMontorSpeed(speed[3],MONTOR_BACK_RIGHT);
+	SetMontorSpeed(speed[0],&MONTOR_FRONT_LEFT);
+	SetMontorSpeed(speed[1],&MONTOR_FRONT_RIGHT);
+	SetMontorSpeed(speed[2],&MONTOR_BACK_LEFT);
+	SetMontorSpeed(speed[3],&MONTOR_BACK_RIGHT);
 	*/
 }
 

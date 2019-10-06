@@ -15,11 +15,11 @@ int main(void)
 		while(1);
 	}
 	//载入任务程序
-	USART1Send("finish init");
-	UltrasonicTest();
+	//USART1Send("finish init");
+	//MontorDriverOutputTest();
+	MontorEncoderTest();
 }
 
 void TaskFunction(void)
 {
-	MoveToward(Orientation_X_Positive,3);
 }

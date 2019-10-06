@@ -17,22 +17,37 @@
  *  CH2 PB3  PA7  PD13 PA1
  */
 
-#define MONTOR_FRONT_LEFT    0b00
-#define MONTOR_FRONT_RIGHT   0b01
-#define MONTOR_BACK_LEFT     0b10
-#define MONTOR_BACK_RIGHT    0b11
+//#define MONTOR_FRONT_LEFT    0b00
+//#define MONTOR_FRONT_RIGHT   0b01
+//#define MONTOR_BACK_LEFT     0b10
+//#define MONTOR_BACK_RIGHT    0b11
+
+typedef struct MontorInstanceStructure
+{
+	TIM_TypeDef* TIM;
+	uint16_t PINA;
+	uint16_t PINB;
+	void (*setFunction)(TIM_TypeDef* TIM,uint32_t value);
+}MontorInstance;
+
+extern const MontorInstance MONTOR_FRONT_LEFT;
+extern const MontorInstance MONTOR_FRONT_RIGHT;
+extern const MontorInstance MONTOR_BACK_LEFT;
+extern const MontorInstance MONTOR_BACK_RIGHT;
 
 //初始化电机驱动的相关资源
 void MontorDriverConfig(void);
 //设置一个电机绝对速度，将直接反映到PWM占空比之上
-void SetMontorAbsSpeed(int speed,int montor);
+void SetMontorAbsSpeed(unsigned int speed,const MontorInstance* montor);
 //设置电机转向
-void SetMontorRotation(bool positive,int montor);
+void SetMontorRotation(bool positive,const MontorInstance* montor);
 //设置电机速度
-void SetMontorSpeed(int speed,int montor);
+void SetMontorSpeed(int speed,const MontorInstance* montor);
 //获取一个电机编码器获得的计数值，对应的时间变化量参考Others.h
-int GetEncoderNum(int montor);
+int GetEncoderNum(const MontorInstance* montor);
+//重置全部的电机编码器计数值
+void ResetEncoderNum(void);
 //获取一个电机的物理线速度，需要物理参数支持【DISABLE】
-int GetMontorSpeed(int montor);
+int GetMontorSpeed(const MontorInstance* montor);
 
 #endif

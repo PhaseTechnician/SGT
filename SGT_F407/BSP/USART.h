@@ -14,6 +14,8 @@
 void USART1Config(int baud);
 //串口1发送数据，这不会立刻发送而是填入环形缓冲
 void USART1Send(char* stringPtr);
+//串口1发送数据，这不会立刻发送而是填入环形缓冲
+void USART1SendLength(char* stringPtr,int num);
 //是否在缓冲有新的指令
 bool IsUSART1Receive(void);
 //串口1接收数据，从缓冲读取一个指令
