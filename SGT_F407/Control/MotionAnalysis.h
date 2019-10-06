@@ -17,27 +17,26 @@
  * 任务指令--》前进方向--》移动分量
  */
 
-//低四位代表车轮转向【不完善】【可能不用】
-#define LocalOrientation_X_Positive 5;
-#define LocalOrientation_X_Negitive 6;
-#define LocalOrientation_Y_Positive 7;
-#define LocalOrientation_Y_Negitive 8;
-#define LocalOrientation_XY_1 1;
-#define LocalOrientation_XY_2 2;  
-#define LocalOrientation_XY_3 3;
-#define LocalOrientation_XY_4 4;
-
 //轮操作掩码 高四位正向使能 第四位反向使能
-#define WHEEL_MASK_Clock          0b10100101
+#define WHEEL_MASK_CLOCK          0b10100101
 #define WHEEL_MASK_ANTICLOCK      0b01011010
 #define WHEEL_MASK_FORWARD        0b11110000
 #define WHEEL_MASK_BACKWARD       0b00001111
 #define WHEEL_MASK_LEFT           0b01101001
-#define WHEEL_MASK_Right          0b10010110
+#define WHEEL_MASK_RIGHT          0b10010110
 #define WHEEL_MASK_LEFT_FORWARD   0b01100000
 #define WHEEL_MASK_RIGHT_FORWARD  0b10010000
 #define WHEEL_MASK_LEFT_BACKWARD  0b00001001
 #define WHEEL_MASK_RIGHT_BACKWARD 0b00000110
+#define WHEEL_MASK_EMPTY          0b00000000
+
+extern int MoveSpeedFactor;
+extern int RotateSpeedFactor;
+extern int TranslateSpeedFactor;
+extern unsigned char MoveMask;
+extern unsigned char TranslateMask;
+extern unsigned char RotateMask;
+
 //初始化设置
 void MontionAnalysisConfig(void);
 //设置运行方向 

@@ -2,13 +2,20 @@
 
 Position position={0,0};
 
-void MoveToward(int orientation, float tileCount)
+void MoveToward(unsigned char orientation,int tileCount)
 {
-	NewO8LocataorTask(orientation,tileCount);
-	while(GetRemainCount()==0)
+	switch(orientation)
 	{
-		//控制车辆移动
-		//SetOrientation(LocalOrientation_X_Positive);
+		case WHEEL_MASK_CLOCK:
+			break;//... 设置TRACKER
+	}
+	while(true)
+	{
+		MotionAnalysisOnStep();
+		if(LocataorCountFalling>5)
+		{
+			break;
+		}
 	}
 }
 

@@ -9,14 +9,14 @@
  * 格点内定位请使用基于陀螺仪的浮点定位器
  */
 
-//每一个系统周期内维护8个寻线模块状态，根据方向和记录更新运行状态
+extern int LocataorCountRising;
+extern int LocataorCountFalling;
 
-//创建一个新的正交定位任务
-void NewO8LocataorTask(unsigned char monitor, int num);
-//创建一个新的对角定位任务
-void NewOxLocataorTask(unsigned char monitor, int count1,int count2);
-//逻辑内核函数
-void LocataorOnStep(void);
-//获取当前剩余的格点数 为0表明本次行走完成ln
-int GetRemainCount(void);
+//设置定位器的回调和掩码
+void LocatorConfig(unsigned char mask);
+//触发回调
+void LocatorCallBackFunction(unsigned char trigerPin,bool isRising);
+//关闭定位功能
+void LocatorModeDisable(void);
+
 #endif

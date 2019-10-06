@@ -1,46 +1,98 @@
 #include "Locataor.h"
 
-//上一次的扫描结果
-unsigned char lastResult=0b00000000;
-//监视掩码,需要监视的位置1
-unsigned char monitorMask=0b00000000;
+int LocataorCountRising = 0;
+int LocataorCountFalling = 0;
 
-//双边掩码
-#define MonitorMask_Full_X 0b00111100
-#define MonitorMask_Full_Y 0b11000011
-#define MonitorMask_Full_XY 0b11111111
-//单边掩码
-#define MonitorMask_Part_X 0b00111100
-#define MonitorMask_Part_Y 0b11000011
-#define MonitorMask_Full_XY 0b11111111
-
-//计数器
-int count;
-//状态 - out2  |on2|  in0  |on1|  out1 +
-int state;
-#define State_Out_1 1
-#define State_On_1  2
-#define State_In_0  3
-#define State_On_2  4
-#define State_Out_2 5
-
-void NewO8LocataorTask(unsigned char monitor, int num)
+inline void LocatorConfig(unsigned char mask)
 {
-	lastResult = LineTrackResult;
-	count = num;
+	SetTrackParam(mask,LocatorCallBackFunction);
 }
 
-void LocataorOnStep(void)
+void LocatorCallBackFunction(unsigned char trigerPin,bool isRising)
 {
-	//查看是否存在变化
-	if((lastResult^LineTrackResult)&monitorMask)
+	//单一管计数模式
+	if(isRising)
 	{
-		
+		LocataorCountRising++;
 	}
-	lastResult = LineTrackResult;
+	else
+	{
+		LocataorCountFalling--;
+	}
 }
 
-inline int GetRemainCount(void)
+inline void LocatorModeDisable(void)
 {
-	return count;
+	SetTrackParam(0X00,LocatorCallBackFunction);
 }
+
+
+
+/* 对管模式的判断
+
+#define BIT_CONTANT(mask,pin) (mask&pin)
+
+#define CPMaskXP 0b00000011
+#define CPMaskYP 0b00010100
+#define CPMaskXN 0b11000000
+#define CPMaskYN 0b00101000
+
+#define HighMask 0b00010111
+#define LowMask  0b11101000
+
+#define AnotherPinInCP(pin,CP) (CP&(!pin))
+unsigned char getMask(unsigned char pin);
+#define CPMask(pin) getMask(pin)
+#define IsHigh(pin) (HighMask&pin)
+#define IsLow(pin) (LowMask&pin)
+unsigned char TrigPinMemory = 0;
+
+unsigned char getMask(unsigned char pin)
+{
+	if(BIT_CONTANT(CPMaskXP,pin))
+		return CPMaskXP;
+	else if(BIT_CONTANT(CPMaskXN,pin))
+		return CPMaskXN;
+	else if(BIT_CONTANT(CPMaskYP,pin))
+		return CPMaskYP;
+	else
+		return CPMaskYN;
+}
+
+	if(isRising)
+		return;//暂时不处理上升沿
+	if(BIT_CONTANT(XMask,trigerPin))
+	{
+		TrigPinMemory |= trigerPin;
+		unsigned char CPmask = CPMask(trigerPin);
+		if(BIT_CONTANT(TrigPinMemory,AnotherPinInCP(trigerPin,CPmask)))//对应组内的另一个引脚已经被触发
+		{
+			if(IsHigh(trigerPin))
+			{
+				XCoordinate--;
+			}
+			else
+			{
+				XCoordinate++;
+			}
+			TrigPinMemory &= (!CPmask);
+		}
+	}
+	else
+	{
+		TrigPinMemory |= trigerPin;
+		unsigned char CPmask = CPMask(trigerPin);
+		if(BIT_CONTANT(TrigPinMemory,AnotherPinInCP(trigerPin,CPmask)))//对应组内的另一个引脚已经被触发
+		{
+			if(IsHigh(trigerPin))
+			{
+				YCoordinate--;
+			}
+			else
+			{
+				YCoordinate++;
+			}
+			TrigPinMemory &= (!CPmask);
+		}
+	}
+*/

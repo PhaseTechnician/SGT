@@ -741,6 +741,11 @@
               <FileType>1</FileType>
               <FilePath>..\Control\MotionAnalysis.c</FilePath>
             </File>
+            <File>
+              <FileName>Tracker.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Tracker.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

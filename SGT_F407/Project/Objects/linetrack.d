@@ -35,3 +35,4 @@
 .\objects\linetrack.o: ..\Library\inc\stm32f4xx_dac.h
 .\objects\linetrack.o: ..\Library\inc\stm32f4xx_dcmi.h
 .\objects\linetrack.o: ..\Library\inc\stm32f4xx_fsmc.h
+.\objects\linetrack.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

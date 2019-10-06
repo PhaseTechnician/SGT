@@ -22,5 +22,4 @@ int main(void)
 void TaskFunction(void)
 {
 	MoveToward(Orientation_X_Positive,3);
-	PeekGoods();
 }

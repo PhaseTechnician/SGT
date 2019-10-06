@@ -22,16 +22,30 @@ Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
 F:\SGT\SGT_F407\Project\SGT.uvprojx
-Project File Date:  10/02/2019
+Project File Date:  10/06/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling Test.c...
 compiling main.c...
+compiling Script.c...
+..\User\Script.c(7): warning:  #223-D: function "NewO8LocataorTask" declared implicitly
+  	NewO8LocataorTask(orientation,tileCount);
+..\User\Script.c(8): warning:  #223-D: function "GetRemainCount" declared implicitly
+  	while(GetRemainCount()==0)
+..\User\Script.c: 2 warnings, 0 errors
+compiling Test.c...
+compiling BSP.c...
+compiling Locataor .c...
+compiling LineTrack.c...
+compiling Tracker.c...
 linking...
-Program Size: Code=7728 RO-data=440 RW-data=80 ZI-data=1744  
-".\Objects\SGT.axf" - 0 Error(s), 0 Warning(s).
+.\Objects\SGT.axf: Error: L6218E: Undefined symbol GetRemainCount (referred from script.o).
+.\Objects\SGT.axf: Error: L6218E: Undefined symbol NewO8LocataorTask (referred from script.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 2 error messages.
+".\Objects\SGT.axf" - 2 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -45,7 +59,8 @@ Package Vendor: Keil
   E:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Target not created.
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

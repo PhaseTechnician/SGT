@@ -3,6 +3,7 @@
 
 #include "Bsp.h"
 #include "Locataor.h"
+#include "Tracker.h"
 #include "MotionAnalysis.h"
 
 /*
@@ -14,21 +15,11 @@ typedef struct PositionStructure
 	int x,y;
 }Position;
 
-//预定义的格点移动方向
-#define Orientation_X_Positive 0
-#define	Orientation_X_Negative 1
-#define	Orientation_Y_Positive 2
-#define	Orientation_Y_Negative 3
-#define	Orientation_1_Quadrant 4
-#define	Orientation_2_Quadrant 5
-#define	Orientation_3_Quadrant 6
-#define	Orientation_4_Quadrant 7
-
 /*底盘驱动类*/
 //带有寻路算法的移动命令
 //void MoveTo(Position);
 //向着 orientation 移动 tileCount 个网格点 不会旋转朝向
-void MoveToward(int orientation, float tileCount);
+void MoveToward(unsigned char orientation, int tileCount);
 //向着 orientation 移动 tileCount 个网格点 最终旋转朝向
 //void MoveTowardR(int orientation, float tileCount);
 //朝向 orientation
@@ -48,11 +39,11 @@ void Close(void);
 
 /*串口外部API类*/
 //扫描二维码
-void ScanQRcode(void);
+//void ScanQRcode(void);
 //扫视物块
-void PeekGoods(void);
+//void PeekGoods(void);
 //定位靶点
-void GetSport(void);
+//void GetSport(void);
 
 /*组合行为*/
 //获取物块
