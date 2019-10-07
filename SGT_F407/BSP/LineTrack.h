@@ -54,6 +54,17 @@ void SetTrackParam(unsigned char mask,void (*CallBack)(unsigned char trigerPin,b
 #define YMask 0b00111100
 #define XMask 0b11000011
 
+#define CPMaskXP 0b00000011
+#define CPMaskYP 0b00010100
+#define CPMaskXN 0b11000000
+#define CPMaskYN 0b00101000
+
+#define HighMask 0b00010111
+#define LowMask  0b11101000
+
+#define MASK_CONTANT_BIT(mask,pin) (mask&pin)
+
+#define LINE_TRACK_RESUT(pin) (LineTrackResult&pin)
 //统计置1的位数
 int Get1BitCount(unsigned char OBvalue);
 #endif

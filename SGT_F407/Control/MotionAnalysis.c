@@ -14,7 +14,7 @@ PIDInstance WheelPIDInstance[4];
 
 void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor);
 
-void MontionAnalysisConfig()
+void MontionAnalysisConfig()//当前的PID控制器参数导致其无作用
 {
 	InitOnePIDInstance(WheelPIDInstance+0,0,0,0,0);
 	InitOnePIDInstance(WheelPIDInstance+1,0,0,0,0);
@@ -44,7 +44,7 @@ void MotionAnalysisOnStep(void)
 	SetMontorSpeed(speed,&MONTOR_BACK_LEFT);
 	SetMontorSpeed(speed,&MONTOR_BACK_RIGHT);
 	//high level
-	/*
+	
 	int speed[4]={0};
 	ApplyMaskWithFactor(speed,MoveMask,MoveSpeedFactor);
 	ApplyMaskWithFactor(speed,TranslateMask,TranslateSpeedFactor);
@@ -52,17 +52,19 @@ void MotionAnalysisOnStep(void)
 	//范围矫正 结果不应该大于电机的最大设定值 限制Movespeedfactor的大小
 	//。。。
 	
+	/*
 	//调用PID控制器计算速度值
 	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),GetMontorSpeed(&MONTOR_FRONT_LEFT));
 	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),GetMontorSpeed(&MONTOR_FRONT_RIGHT));
 	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),GetMontorSpeed(&MONTOR_BACK_LEFT));
 	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),GetMontorSpeed(&MONTOR_BACK_RIGHT));
+	*/
 	//设置电机速度
 	SetMontorSpeed(speed[0],&MONTOR_FRONT_LEFT);
 	SetMontorSpeed(speed[1],&MONTOR_FRONT_RIGHT);
 	SetMontorSpeed(speed[2],&MONTOR_BACK_LEFT);
 	SetMontorSpeed(speed[3],&MONTOR_BACK_RIGHT);
-	*/
+	
 }
 
 void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor)

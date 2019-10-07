@@ -10,7 +10,7 @@
  */
 
 //设置巡线器的回调和掩码
-void TrackerConfig(unsigned char mask);
+void TrackerConfig(unsigned char XYmask);
 //触发回调
 void TrackCallBackFunction(unsigned char trigerPin,bool isRising);
 //关闭巡线功能

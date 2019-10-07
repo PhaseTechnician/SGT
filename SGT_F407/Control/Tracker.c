@@ -43,20 +43,22 @@ void TrackCallBackFunction(unsigned char trigerPin,bool isRising)
 				TranslateMask = WHEEL_MASK_BACKWARD;
 				return;
 			}
+			//这里缺乏认真的思考
+			TranslateMask = WHEEL_MASK_EMPTY;
 		}
-		switch(trigerPin)
+		switch(trigerPin)//1PIN或者2PIN
 		{
 			case PIN1:
 			case PIN4:
 			case PIN5:
 			case PIN8:
-				TranslateMask = WHEEL_MASK_ANTICLOCK;
+				RotateMask = WHEEL_MASK_ANTICLOCK;
 				break;
 			case PIN2:
 			case PIN3:
 			case PIN6:
 			case PIN7:
-				TranslateMask = WHEEL_MASK_CLOCK;
+				RotateMask = WHEEL_MASK_CLOCK;
 				break;
 		}
 	}

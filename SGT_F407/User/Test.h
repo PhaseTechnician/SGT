@@ -9,9 +9,9 @@ void DelayAndSYStickTest(void);//pass
 void USARTTest(void);//PASS
 void ServerTest(void);//PASS
 void LCDTest(void);//partPass
-void MPUTest(void);
-void MontorDriverOutputTest(void);
-void MontorEncoderTest(void);
+void MPUTest(void);//partPass
+void MontorDriverOutputTest(void);//pass
+void MontorEncoderTest(void);//pass
 void UltrasonicTest(void);//one compent pass
 /*Control function*/
 void SequenceControllerTest(void);//pass

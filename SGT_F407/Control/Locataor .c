@@ -1,23 +1,30 @@
 #include "Locataor.h"
 
-int LocataorCountRising = 0;
-int LocataorCountFalling = 0;
+int HighPinCount = 0;
+int LowPinCount  = 0;
 
 inline void LocatorConfig(unsigned char mask)
 {
 	SetTrackParam(mask,LocatorCallBackFunction);
+	LocataorReset();
 }
 
 void LocatorCallBackFunction(unsigned char trigerPin,bool isRising)
 {
-	//单一管计数模式
-	if(isRising)
+	if(!isRising)//下降沿
 	{
-		LocataorCountRising++;
+		if(MASK_CONTANT_BIT(HighMask,trigerPin))
+		{
+			HighPinCount++;
+		}
+		else
+		{
+			LowPinCount++;
+		}
 	}
-	else
+	else//上升沿
 	{
-		LocataorCountFalling--;
+		
 	}
 }
 
@@ -26,19 +33,23 @@ inline void LocatorModeDisable(void)
 	SetTrackParam(0X00,LocatorCallBackFunction);
 }
 
+void LocataorReset(void)
+{
+	HighPinCount = 0;
+	LowPinCount = 0;
+}
 
+inline unsigned char GetLowPinInCp(unsigned char CPMask)
+{
+	return CPMask&LowMask;
+}
+
+inline unsigned char GetHighPinInCp(unsigned char CPMask)
+{
+	return CPMask&HighMask;
+}
 
 /* 对管模式的判断
-
-#define BIT_CONTANT(mask,pin) (mask&pin)
-
-#define CPMaskXP 0b00000011
-#define CPMaskYP 0b00010100
-#define CPMaskXN 0b11000000
-#define CPMaskYN 0b00101000
-
-#define HighMask 0b00010111
-#define LowMask  0b11101000
 
 #define AnotherPinInCP(pin,CP) (CP&(!pin))
 unsigned char getMask(unsigned char pin);

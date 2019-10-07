@@ -1,21 +1,61 @@
 #include "Script.h"
 
 Position position={0,0};
-
+unsigned char LOWPIN;
+unsigned char HIGHPIN;
 void MoveToward(unsigned char orientation,int tileCount)
 {
+	//主速度方向和大小的设置
+	MoveMask = orientation;
+	MoveSpeedFactor = 10;
+	//根据情况设置巡线器//和定位器
 	switch(orientation)
 	{
-		case WHEEL_MASK_CLOCK:
+		case WHEEL_MASK_FORWARD:
+		case WHEEL_MASK_BACKWARD:
+			TrackerConfig(XMask);
+			LocatorConfig(CPMaskYP);
+			LOWPIN = GetLowPinInCp(CPMaskYP);
+			HIGHPIN = GetHighPinInCp(CPMaskYP);
 			break;//... 设置TRACKER
+		case WHEEL_MASK_LEFT:
+		case WHEEL_MASK_RIGHT:
+			TrackerConfig(YMask);
+			LocatorConfig(CPMaskXP);
+			LOWPIN = GetLowPinInCp(CPMaskXP);
+			HIGHPIN = GetHighPinInCp(CPMaskXP);
+			break;
 	}
+	Delay(20000);
+	LocataorReset();
+	
 	while(true)
 	{
-		MotionAnalysisOnStep();
-		if(LocataorCountFalling>5)
+		if(HighPinCount==tileCount)
 		{
-			break;
+			if(LowPinCount!=HighPinCount)
+			{
+				//退车
+				MoveMask = !orientation;
+				while(!LINE_TRACK_RESUT(LOWPIN));
+			}
 		}
+	}
+	//累加到位置坐标
+	switch(orientation)
+	{
+		case WHEEL_MASK_FORWARD:
+			position.x += tileCount;
+			break;
+		case WHEEL_MASK_BACKWARD:
+			position.x -= tileCount;
+			break;
+		case WHEEL_MASK_LEFT:
+			position.y += tileCount;
+			break;
+		case WHEEL_MASK_RIGHT:
+			position.y -= tileCount;
+			break;
 	}
 }
 
