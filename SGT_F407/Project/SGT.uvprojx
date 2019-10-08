@@ -697,11 +697,6 @@
               <FilePath>..\BSP\MontorDriver.c</FilePath>
             </File>
             <File>
-              <FileName>LCD12864.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\LCD12864.c</FilePath>
-            </File>
-            <File>
               <FileName>Server.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\Server.c</FilePath>
@@ -715,6 +710,16 @@
               <FileName>Ultrasonic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\Ultrasonic.c</FilePath>
+            </File>
+            <File>
+              <FileName>LEDMX7219.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\LEDMX7219.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD12864.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\LCD12864.c</FilePath>
             </File>
           </Files>
         </Group>

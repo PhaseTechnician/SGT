@@ -15,7 +15,10 @@ int main(void)
 	//载入任务程序
 	//USART1Send("finish init");
 	//MontorDriverOutputTest();
-	MontorEncoderTest();
+	//MontorEncoderTest();
+	//LCDTest();
+	LCD12864NumDraw(123,321);
+	while(1);
 }
 
 void TaskFunction(void)

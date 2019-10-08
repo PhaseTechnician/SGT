@@ -39,6 +39,7 @@ void MoveToward(unsigned char orientation,int tileCount)
 				MoveMask = !orientation;
 				while(!LINE_TRACK_RESUT(LOWPIN));
 			}
+			break;
 		}
 	}
 	//累加到位置坐标

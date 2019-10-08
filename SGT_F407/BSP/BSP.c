@@ -7,11 +7,12 @@ void BSPConfig(void)
 	DelayFunctionConfig();
 	USART1Config(9600);
 	LCD12864Config();
+	//LEDMX7219Config();
 	LineTrackConfig();
 	MontorDriverConfig();
 	ServerConfig();
 	MpuConfig();
-	UltrasonicConfig();
+	//UltrasonicConfig();
 }
 
 bool BSPTest(void)
