@@ -18,7 +18,7 @@ void USARTTest(void)
 	USART1Send("stm32f407 try connected");
 	while(1)
 	{
-		if(IsUSART1Receive())
+		if(USART1IsReceive())
 		{
 			USART1Send(USART1GetOrder());
 		}

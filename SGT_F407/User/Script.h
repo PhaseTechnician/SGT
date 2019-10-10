@@ -5,10 +5,12 @@
 #include "Locataor.h"
 #include "Tracker.h"
 #include "MotionAnalysis.h"
+#include "SequenceController.h"
 
 /*
  * 这里包含了高度封装的脚本函数以供完成任务调用
- * 这些函数完全是阻塞的，意味着他们必须一个一个的执行，但是他们都会在运行的过程中进行底层系统的维护
+ * 这些函数完全是阻塞的，意味着他们必须一个一个的执行
+ * 系统维护循环需要设置和自定义
  */
 typedef struct PositionStructure
 {
@@ -28,20 +30,20 @@ void MoveToward(unsigned char orientation, int tileCount);
 void Stop(void);
 
 /*舵机控制类*/
-//设置机械臂姿态的关键帧
-//void SetKey(int Angle1,int Angle2);
-//等待动作完成
-//void Wait();
+//启动机械臂的动作
+void StartMotion(ActionNode actions[]);
+//等待动作完成,超时跳过
+void WaitMotion(unsigned int waitTimeMs);
 //打开机械爪[需要持续一段时间后]
 void Open(void);
 //闭合机械爪[需要持续一段时间后]
 void Close(void);
 
 /*串口外部API类*/
-//扫描二维码
-//void ScanQRcode(void);
-//扫视物块
-//void PeekGoods(void);
+//扫描二维码,获得扫描的结果，以六个字符表示，多次尝试上端无响应后将会返回false
+bool ScanQRcode(char* Result6char,int times);
+//扫视物块,由于运行中扫略，这个函数可能不一定获得最为确切的结果,在超过等待时间后，放弃等待返回false
+bool PeekGoods(char* Result3Char,int waitTimes);
 //定位靶点
 //void GetSport(void);
 

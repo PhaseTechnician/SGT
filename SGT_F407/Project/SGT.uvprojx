@@ -712,11 +712,6 @@
               <FilePath>..\BSP\Ultrasonic.c</FilePath>
             </File>
             <File>
-              <FileName>LEDMX7219.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\LEDMX7219.c</FilePath>
-            </File>
-            <File>
               <FileName>LCD12864.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\LCD12864.c</FilePath>

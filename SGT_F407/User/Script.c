@@ -68,6 +68,17 @@ void Stop(void)
 	SetMontorSpeed(0,&MONTOR_BACK_LEFT);
 }
 
+inline void StartMotion(ActionNode actions[])
+{
+	SetSequence(actions);
+}
+
+void WaitMotion(unsigned int waitTimeMs)
+{
+	unsigned int startTime = GetTotalTimeMs();
+	while(!IsSequenceFinished()&&(startTime>GetTotalTimeMs()-waitTimeMs));
+}
+
 inline void Open(void)
 {
 	ServerSetAngle(0,&SERVER5);
@@ -78,17 +89,59 @@ inline void Close(void)
 	ServerSetAngle(180,&SERVER5);
 }
 
-void ScanQRcode(void)
+bool ScanQRcode(char* Result6char,int times)
 {
-	USART1Send("QR");
+	unsigned int timeCount = 0;
+	unsigned int SendOrderTime = 0;
+	USART1ClearReceive();
+	while(true)
+	{
+		USART1Send("QR");
+		SendOrderTime = GetPartTimeMs();
+		while(!USART1IsReceive()&&(GetPartTimeMs()<SendOrderTime+500));//µÈ´ýµÄºÁÃëÊý
+		if(USART1IsReceive())
+		{
+			char* temp = USART1GetOrder();
+			for(int i=0;i<6;i++)
+			{
+				Result6char[i] = temp[i];
+			}
+			return true;
+		}
+		else
+		{
+			timeCount++;
+		}
+		if(timeCount>=times)
+		{
+			return false;
+		}
+	}
 }
 
-void PeekGoods(void)
+bool PeekGoods(char* Result3Char,int waitTimes)
 {
+	USART1ClearReceive();
 	USART1Send("PE");
+	unsigned int SendOrderTime = GetTotalTimeMs();
+	while(!USART1IsReceive()&&(GetPartTimeMs()<SendOrderTime+waitTimes));
+	if(USART1IsReceive())
+	{
+		char* resultOrder = USART1GetOrder();
+		for(int i=0;i<3;i++)
+		{
+			Result3Char[i] = resultOrder[i];
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void GetSport(void)
 {
+	USART1ClearReceive();
 	USART1Send("SP");
 }

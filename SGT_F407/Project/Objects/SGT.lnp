@@ -56,7 +56,6 @@
 ".\objects\server.o"
 ".\objects\mpu.o"
 ".\objects\ultrasonic.o"
-".\objects\ledmx7219.o"
 ".\objects\lcd12864.o"
 ".\objects\pidcontroller.o"
 ".\objects\sequencecontroller.o"
