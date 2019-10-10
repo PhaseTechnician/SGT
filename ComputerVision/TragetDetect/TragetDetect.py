@@ -24,4 +24,3 @@ if cap.isOpened() is True:
         cv2.imshow("mask",mask)
         cv2.imshow("res",frame)
         cv2.waitKey(30);
-        

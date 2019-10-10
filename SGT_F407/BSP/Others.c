@@ -1,6 +1,11 @@
 #include "Others.h"
 #include "USART.h"
 
+void (*systemFunction)(void);
+bool enableSystemFunctionCycle = false;
+int maxCycleNum=1;//最大循环计数
+int cycleNumCount;//调用循环次数
+
 inline void NVICConfig(void)
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -36,9 +41,32 @@ inline unsigned int GetTotalTimeMs(void)
 	return SystickCount*10+SysTick->VAL/168000;
 }
 
+void SetSystemFunctionCycle(void (*function)(void),int cycleCount)
+{
+	systemFunction = function;
+	maxCycleNum = cycleCount;
+}
+
+void EnableSystermFunctionCycle(bool enable)
+{
+	enableSystemFunctionCycle = enable;
+}
+
 void SysTick_Handler(void)
 {
 	SystickCount++;
+	if(enableSystemFunctionCycle)
+	{
+		if(cycleNumCount >= maxCycleNum)
+		{
+			systemFunction();
+			cycleNumCount = 0;
+		}
+		else 
+		{
+			cycleNumCount++;
+		}
+	}
 }
 
 void DelayFunctionConfig(void)
@@ -93,5 +121,4 @@ void ErrorMessage(char* message)
 	USART1Send(message);
 	while(true);
 }
-
 

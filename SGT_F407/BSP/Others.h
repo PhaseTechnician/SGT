@@ -20,6 +20,10 @@ unsigned int GetPartTimeMs(void);
 unsigned int GetPartTimeUs(void);
 //获取用对应单位表示的全部时间
 unsigned int GetTotalTimeMs(void);
+//设置系统维护函数的调用设置 计数值的单位是10ms
+void SetSystemFunctionCycle(void (*function)(void),int cycleCount);
+//设置是否启用系统维护函数的周期性调用
+void EnableSystemFunctionCycle(bool enable);
 /*
  * 提供高精度的时序函数
  * TIM6
@@ -38,7 +42,7 @@ void DelayS(unsigned int s);
 void ErrorMessage(char *message);
 
 /*
- * 未完成
+ * 未完成 [disable]
  * DelaySync 异步延迟函数，主要提供给状态机使用,需要TIM7支持提供更高的时间精度
  */
 typedef struct DelaySyncInstanceStructure

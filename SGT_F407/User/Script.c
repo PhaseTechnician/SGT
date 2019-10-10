@@ -26,7 +26,7 @@ void MoveToward(unsigned char orientation,int tileCount)
 			HIGHPIN = GetHighPinInCp(CPMaskXP);
 			break;
 	}
-	Delay(20000);
+	Delay(20000);//使得传感器避免初始时间之内的不确定情况
 	LocataorReset();
 	
 	while(true)
