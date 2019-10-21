@@ -18,3 +18,4 @@ F:\SGT\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.csproj.GenerateResourc
 F:\SGT\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.csproj.CoreCompileInputs.cache
 F:\SGT\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.exe
 F:\SGT\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.pdb
+F:\SGT\SGT_Debugger\SGT_Debugger\obj\Release\SGT_Debugger.Form2.resources
