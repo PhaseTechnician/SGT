@@ -5,6 +5,7 @@
  * PID 控制器
  * 主要用于电机系统的速度控制
  * 通过结构体来实现控制器的多实例使用
+ * 【考虑添加】边界限制，避免出现过调时导致的溢出问题
  */
  
 typedef struct PIDInstanceStructure
@@ -14,7 +15,7 @@ typedef struct PIDInstanceStructure
 	int presentError;
 	int lastError;
 	int presentOutput;
-	unsigned int lastOutput;
+	int lastOutput;
 	float KP,KI,KD;
 }PIDInstance;
  

@@ -12,19 +12,24 @@ int main(void)
 	{
 		while(1);
 	}
+	//ServerTest();
 	//载入任务程序
-	//USART1Send("finish init");
-	//MontorDriverOutputTest();
-	//MontorEncoderTest();
-	//LCDTest();
+	USART1Send("finish init");
+	DelayS(1);
 	LCD12864NumDraw(123,321);
+	ServerTest('C');
+	//MontorDriverOutputTest('C');
+	//MontorEncoderTest('M',&MONTOR_BACK_RIGHT);
+	//PIDTest(&MONTOR_BACK_RIGHT);
+	//MotionAnalysisTest('P');
 	while(1);
 }
 ActionNode nodes;
 #define PEEK_MOTION &nodes
 
-char orders[6] = {0};
+char commands[6] = {0};
 char goodsPosition[3] = {0};
+
 
 void TaskFunction(void)
 {
@@ -37,7 +42,7 @@ void TaskFunction(void)
 	MoveToward(WHEEL_MASK_RIGHT,1);
 	if(PeekGoods(goodsPosition,20000))
 	{
-		while(!ScanQRcode(orders,10));//扫描二维码,也许可以抖一抖
+		while(!ScanQRcode(commands,10));//扫描二维码,也许可以抖一抖
 		MoveToward(WHEEL_MASK_LEFT,1);//回到色块位置,抓取
 	}
 	else //没有成功获得信息，只能在之后依次尝试

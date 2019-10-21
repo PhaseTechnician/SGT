@@ -1,9 +1,9 @@
 #include "MontorDriver.h"
 
 const MontorInstance MONTOR_FRONT_LEFT  = {TIM2,GPIO_Pin_0,GPIO_Pin_1,TIM_SetCompare1};
-const MontorInstance MONTOR_FRONT_RIGHT = {TIM3,GPIO_Pin_2,GPIO_Pin_3,TIM_SetCompare1};
-const MontorInstance MONTOR_BACK_LEFT   = {TIM4,GPIO_Pin_4,GPIO_Pin_5,TIM_SetCompare1};
-const MontorInstance MONTOR_BACK_RIGHT  = {TIM5,GPIO_Pin_6,GPIO_Pin_7,TIM_SetCompare1};
+const MontorInstance MONTOR_FRONT_RIGHT = {TIM3,GPIO_Pin_2,GPIO_Pin_3,TIM_SetCompare2};
+const MontorInstance MONTOR_BACK_LEFT   = {TIM4,GPIO_Pin_4,GPIO_Pin_5,TIM_SetCompare3};
+const MontorInstance MONTOR_BACK_RIGHT  = {TIM5,GPIO_Pin_6,GPIO_Pin_7,TIM_SetCompare4};
 
 void MontorDriverConfig()
 {
@@ -18,7 +18,7 @@ void MontorDriverConfig()
 	GPIO_PinAFConfig(GPIOA,GPIO_PinSource5,GPIO_AF_TIM2);
 	GPIO_PinAFConfig(GPIOB,GPIO_PinSource3,GPIO_AF_TIM2);
 	GPIO_PinAFConfig(GPIOA,GPIO_PinSource6,GPIO_AF_TIM3);
-	GPIO_PinAFConfig(GPIOA,GPIO_PinSource7,GPIO_AF_TIM3);
+	GPIO_PinAFConfig(GPIOB,GPIO_PinSource5,GPIO_AF_TIM3);
 	GPIO_PinAFConfig(GPIOD,GPIO_PinSource12,GPIO_AF_TIM4);
 	GPIO_PinAFConfig(GPIOD,GPIO_PinSource13,GPIO_AF_TIM4);
 	GPIO_PinAFConfig(GPIOA,GPIO_PinSource0,GPIO_AF_TIM5);
@@ -41,16 +41,12 @@ void MontorDriverConfig()
 	
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_6;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3|GPIO_Pin_5;
 	GPIO_Init(GPIOB,&GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
 	GPIO_Init(GPIOD,&GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
@@ -92,7 +88,7 @@ void MontorDriverConfig()
 	TIM_Cmd(TIM1,ENABLE);
 	
 	//TIM2 TIM3 TIM4 TIM5 Encoder
-	TimeBase_InitStructure.TIM_Period = 60000;
+	TimeBase_InitStructure.TIM_Period = 65530;
 	TimeBase_InitStructure.TIM_Prescaler = 0x00;
 	TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV2;
@@ -119,53 +115,19 @@ void MontorDriverConfig()
 	TIM_EncoderInterfaceConfig(TIM3,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 	TIM_EncoderInterfaceConfig(TIM4,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
 	TIM_EncoderInterfaceConfig(TIM5,TIM_EncoderMode_TI12,TIM_ICPolarity_Rising,TIM_ICPolarity_BothEdge);
+	
+	ResetEncoderNum();
 }
-void SetMontorAbsSpeed(unsigned int speed,const MontorInstance* montor)
+
+inline void SetMontorAbsSpeed(unsigned int speed,const MontorInstance* montor)
 {
-	montor->setFunction(TIM1,speed);
-	/*
-	switch(montor)
-	{
-		case MONTOR_FRONT_LEFT:
-			TIM_SetCompare1(TIM1,speed);
-			break;
-		case MONTOR_FRONT_RIGHT:
-			TIM_SetCompare2(TIM1,speed);
-			break;
-		case MONTOR_BACK_LEFT:
-			TIM_SetCompare3(TIM1,speed);
-			break;
-		case MONTOR_BACK_RIGHT:
-			TIM_SetCompare4(TIM1,speed);
-			break;
-	}*/
+	montor->setFunction(TIM1,speed);//应该在这里添加一个比例系数
 }
 
 void SetMontorRotation(bool positive,const MontorInstance* montor)
 {
 	GPIO_WriteBit(GPIOD,montor->PINA,(BitAction)positive);
 	GPIO_WriteBit(GPIOD,montor->PINB,(BitAction)!positive);
-	/*
-	switch(montor)
-	{
-		case MONTOR_FRONT_LEFT:
-			GPIO_WriteBit(GPIOD,GPIO_Pin_0,(BitAction)positive);
-			GPIO_WriteBit(GPIOD,GPIO_Pin_1,(BitAction)!positive);
-			break;
-		case MONTOR_FRONT_RIGHT:
-			GPIO_WriteBit(GPIOD,GPIO_Pin_2,(BitAction)positive);
-			GPIO_WriteBit(GPIOD,GPIO_Pin_3,(BitAction)!positive);
-			break;
-		case MONTOR_BACK_LEFT:
-			GPIO_WriteBit(GPIOD,GPIO_Pin_4,(BitAction)positive);
-			GPIO_WriteBit(GPIOD,GPIO_Pin_5,(BitAction)!positive);
-			break;
-		case MONTOR_BACK_RIGHT:
-			GPIO_WriteBit(GPIOD,GPIO_Pin_6,(BitAction)positive);
-			GPIO_WriteBit(GPIOD,GPIO_Pin_7,(BitAction)!positive);
-			break;
-	}
-	*/
 }
 
 void SetMontorSpeed(int speed,const MontorInstance* montor)
@@ -176,19 +138,20 @@ void SetMontorSpeed(int speed,const MontorInstance* montor)
 
 int GetEncoderNum(const MontorInstance* montor)
 {
-	/*
-	switch(montor)
-	{
-		case MONTOR_FRONT_LEFT:
-			return TIM_GetCounter(TIM2);
-		case MONTOR_FRONT_RIGHT:
-			return TIM_GetCounter(TIM3);
-		case MONTOR_BACK_LEFT:
-			return TIM_GetCounter(TIM4);
-		case MONTOR_BACK_RIGHT:
-			return TIM_GetCounter(TIM5);
-	}*/
-	return TIM_GetCounter(montor->TIM);
+	int count = TIM_GetCounter(montor->TIM);
+	if(count<3270)
+		return TIM_GetCounter(montor->TIM);
+	else
+	  return 65530-TIM_GetCounter(montor->TIM);
+}
+
+int GetMontorSpeed(const MontorInstance* montor)
+{
+	int count = TIM_GetCounter(montor->TIM);
+	if(count<3270)
+		return TIM_GetCounter(montor->TIM)*MONTOR_ENCODER2SPEED_FACTOR;
+	else
+	  return (TIM_GetCounter(montor->TIM)-65530)*MONTOR_ENCODER2SPEED_FACTOR;
 }
 
 void ResetEncoderNum(void)

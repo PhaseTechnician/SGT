@@ -43,7 +43,7 @@ void USART1Config(int baud)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
-	USART_Cmd(USART1,ENABLE);
+	USART_Cmd(USART1,ENABLE);                                                                                                                                                                                                                                                                                                                                                                                 
 }
 
 
@@ -52,7 +52,7 @@ void USART1_IRQHandler(void)
 	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET)
 	{
 	  char c = USART_ReceiveData(USART1);
-		if(c==0)
+		if(c==' ')//指令分割字符[单字符指令模式]
 		{
 			orders[endIndex][orderInnerIndex]=0;
 			endIndex++;
@@ -75,6 +75,12 @@ void USART1_IRQHandler(void)
 		}
 		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
 	}
+}
+
+void USART1SendChar(char c)
+{
+	while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET);
+	USART_SendData(USART1,c);
 }
 
 void USART1Send(char* stringPtr)
@@ -104,6 +110,31 @@ void USART1SendLength(char* stringPtr,int num)
 	}
 }
 
+void USART1SendNumInt(int num)
+{
+  int count = num; 
+	if(num<0)
+	{
+		USART1SendChar('-');
+		count =-num;
+	}
+	char str[7] ={0,0,0,0,0,0,0};
+	str[6]=count%10+'0';
+	str[5]=count%100/10+'0';
+	str[4]=count%1000/100+'0';
+	str[3]=count%10000/1000+'0';
+	str[2]=count%100000/10000+'0';
+	str[1]=count%1000000/100000+'0';
+	str[0]=count/10000000+'0';
+	int i=0;
+	for(i=0;i<7;i++)
+	{
+		if(str[i]!='0')
+		break;
+	}
+	USART1SendLength(str+i,7-i);
+}
+
 inline bool USART1IsReceive(void)
 {
 	return startIndex != endIndex;
@@ -121,6 +152,6 @@ char* USART1GetOrder(void)
 
 void USART1ClearReceive(void)
 {
-	unsigned int startIndex=0;
-	unsigned int endIndex=0;
+	startIndex=0;
+	endIndex=0;
 }

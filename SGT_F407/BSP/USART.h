@@ -12,10 +12,14 @@
 
 //串口1的初始化设置
 void USART1Config(int baud);
-//串口1发送数据，这不会立刻发送而是填入环形缓冲
+//串口1发送字符
+void USART1SendChar(char c);
+//串口1发送数据
 void USART1Send(char* stringPtr);
-//串口1发送数据，这不会立刻发送而是填入环形缓冲
+//串口1发送定长数据
 void USART1SendLength(char* stringPtr,int num);
+//串口一发送一个数字
+void USART1SendNumInt(int num);
 //是否在缓冲有新的指令
 bool USART1IsReceive(void);
 //串口1接收数据，从缓冲读取一个指令,你因该尽快使用，否则会被覆盖

@@ -9,8 +9,8 @@
  * 触发IO 
  * PE3 PE4 PE5 PE6
  * 回馈IC
- * TIM12CH1 TIM12CH2 TIM13CH1 TIM14CH1
- * PB14     PB15     PA6      PA7
+ * TIM12CH1 TIM12CH2 TIM13CH1 TIM14CH1【】
+ * PB14     PB15     PA6      PA7【】
  * 基于单一定时器的捕获进行测量，多个传感器循环测量，限制测量频率
  */
 

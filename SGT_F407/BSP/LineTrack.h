@@ -8,13 +8,13 @@
  * 如果想要以触发的形式使用，请提前设置好两个回调，再使能
  * EXTI 1  PC1              1 + 2
  * EXTI 2  PC2                x
- * EXTI 3  PA3             3  x  4 
+ * EXTI 3  PC3             3  x  4 
  * EXTI 4  PC4             +yyoyy-
  * EXTI 5  PC5             5  x  6
  * EXTI 6  PB6                x
  * EXTI 7  PB7              7 - 8 
  * EXTI 8  PB8
- * 相邻的一组传感器称为一个CP
+ * 相邻的一组传感器称为一个CP,用对应位置1的MASK表示
  */
  
 //各位置代表寻迹模块读取的结果，你不应该修改它

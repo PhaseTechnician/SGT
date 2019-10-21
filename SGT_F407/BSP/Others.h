@@ -33,6 +33,8 @@ void EnableSystemFunctionCycle(bool enable);
 void DelayFunctionConfig(void);
 //程序阻塞一段时间 
 void Delay(int16_t us);
+//程序阻塞一段时间 
+void DelayMs(unsigned int ms);
 //较长时间的阻塞
 void DelayS(unsigned int s);
 /*

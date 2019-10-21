@@ -49,5 +49,5 @@
 .\objects\main.o: ..\Control\Tracker.h
 .\objects\main.o: ..\Control\MotionAnalysis.h
 .\objects\main.o: ..\Control\PIDController.h
-.\objects\main.o: ..\User\Test.h
 .\objects\main.o: ..\Control\SequenceController.h
+.\objects\main.o: ..\User\Test.h

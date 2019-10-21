@@ -4,7 +4,6 @@
 #include "stm32f4xx.h"
 #include "Others.h"
 
-//显示大小和换行目前存在问题
 /*
  * LCD16824 显示器
  * 将用来显示足够大的数字，来符合比赛要求

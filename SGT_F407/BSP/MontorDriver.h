@@ -14,13 +14,13 @@
  * 输入捕获测量编码器 
  *  ■■■ TIM2 TIM3 TIM4 TIM5 
  *  CH1 PA5  PA6  PD12 PA0
- *  CH2 PB3  PA7  PD13 PA1
+ *  CH2 PB3  PB5  PD13 PA1
  */
 
-//#define MONTOR_FRONT_LEFT    0b00
-//#define MONTOR_FRONT_RIGHT   0b01
-//#define MONTOR_BACK_LEFT     0b10
-//#define MONTOR_BACK_RIGHT    0b11
+
+//特别注意编码计数器的误判在较长的时间之后
+
+#define MONTOR_ENCODER2SPEED_FACTOR 66
 
 typedef struct MontorInstanceStructure
 {

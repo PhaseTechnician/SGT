@@ -25,89 +25,224 @@ void USARTTest(void)
 	}
 }
 
-void ServerTest(void)
+void ServerTest(char mode)
 {
-	while(1)
+	if(mode=='N')
 	{
-		ServerSetAngle(0,&SERVER1);
-		ServerSetAngle(0,&SERVER2);
-		ServerSetAngle(0,&SERVER3);
-		ServerSetAngle(0,&SERVER4);
-		ServerSetAngle(0,&SERVER5);
-		DelayS(1);
-		ServerSetAngle(180,&SERVER1);
-		ServerSetAngle(180,&SERVER2);
-		ServerSetAngle(180,&SERVER3);
-		ServerSetAngle(180,&SERVER4);
-		ServerSetAngle(180,&SERVER5);
-		DelayS(1);
+		while(1)
+		{
+			ServerSetAngle(0,&SERVER1);
+			ServerSetAngle(0,&SERVER2);
+			ServerSetAngle(0,&SERVER3);
+			ServerSetAngle(0,&SERVER4);
+			ServerSetAngle(0,&SERVER5);
+			DelayS(1);
+			ServerSetAngle(180,&SERVER1);
+			ServerSetAngle(180,&SERVER2);
+			ServerSetAngle(180,&SERVER3);
+			ServerSetAngle(180,&SERVER4);
+			ServerSetAngle(180,&SERVER5);
+			DelayS(1);
+			break;
+		}
+	}
+	else if(mode=='0')
+	{
+		ServerSetAngle(90,&SERVER1);
+		ServerSetAngle(90,&SERVER2);
+		ServerSetAngle(90,&SERVER3);
+		ServerSetAngle(90,&SERVER4);
+		ServerSetAngle(90,&SERVER5);
+	}
+	else if(mode=='C')
+	{
+		while(1)
+		{
+			if(USART1IsReceive())
+			{
+				char *c = USART1GetOrder();
+				if(c[0]=='1')
+				{
+					ServerSetAngle((c[1]-'0')*100+(c[2]-'0')*10+(c[3]-'0'),&SERVER1);
+					USART1Send("SERVER1\r\n");
+				}
+				else if(c[0]=='2')
+				{
+					ServerSetAngle((c[1]-'0')*100+(c[2]-'0')*10+(c[3]-'0'),&SERVER2);
+					USART1Send("SERVER2\r\n");
+				}
+				else if(c[0]=='3')
+				{
+					ServerSetAngle((c[1]-'0')*100+(c[2]-'0')*10+(c[3]-'0'),&SERVER3);
+					USART1Send("SERVER3\r\n");
+				}
+				else if(c[0]=='4')
+				{
+					ServerSetAngle((c[1]-'0')*100+(c[2]-'0')*10+(c[3]-'0'),&SERVER4);
+					USART1Send("SERVER4\r\n");
+				}
+				else if(c[0]=='5')
+				{
+					ServerSetAngle((c[1]-'0')*100+(c[2]-'0')*10+(c[3]-'0'),&SERVER5);
+					USART1Send("SERVER5\r\n");
+				}
+			}
+		}
 	}
 }
 
 void LCDTest(void)
-{
+{ 
 	LCD12864Write("hello SGT LCD TEST  ≤‚ ‘’˝≥£");
 }
 
-void MontorDriverOutputTest()
+void LineTrackTest(void)
 {
-	SetMontorRotation(true,&MONTOR_FRONT_LEFT);
-	SetMontorRotation(true,&MONTOR_FRONT_RIGHT);
-	SetMontorRotation(true,&MONTOR_BACK_LEFT);
-	SetMontorRotation(true,&MONTOR_BACK_RIGHT);
 	while(1)
 	{
-		for(int i=2000;i<20000;i++)
+		DelayS(1);
+		char state[9]={0};
+		state[0] = LT1+'0';
+		state[1] = LT2+'0';
+		state[2] = LT3+'0';
+		state[3] = LT4+'0';
+		state[4] = LT5+'0';
+		state[5] = LT6+'0';
+		state[6] = LT7+'0';
+		state[7] = LT8+'0';
+		USART1Send(state);
+	}
+}
+
+void MontorDriverOutputTest(char c)
+{
+	if(c=='N')
+	{
+		SetMontorRotation(true,&MONTOR_FRONT_LEFT);
+		SetMontorRotation(true,&MONTOR_FRONT_RIGHT);
+		SetMontorRotation(true,&MONTOR_BACK_LEFT);
+		SetMontorRotation(true,&MONTOR_BACK_RIGHT);
+		while(1)
 		{
-			SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
-			SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
-			SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
-			SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
-			Delay(2000);
+			for(int i=2000;i<20000;i++)
+			{
+				SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
+				SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
+				SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
+				SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
+				Delay(2000);
+			}
+			for(int i=20000;i>2000;i--)
+			{
+				SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
+				SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
+				SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
+				SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
+				Delay(2000);
+			}
 		}
-		for(int i=20000;i>2000;i--)
+	}
+	else if(c=='C')
+	{
+		while(1)
 		{
-			SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
-			SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
-			SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
-			SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
-			Delay(2000);
+			if(USART1IsReceive())
+			{
+				char c = *USART1GetOrder();
+				switch(c)
+				{
+					case 'Q':
+						SetMontorSpeed(0,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(0,&MONTOR_BACK_RIGHT);
+						break;
+					case 'W':
+						SetMontorSpeed(20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'E':
+						SetMontorSpeed(20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(0,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(0,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'A':
+						SetMontorSpeed(-20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'S':
+						SetMontorSpeed(0,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(0,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(0,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(0,&MONTOR_BACK_RIGHT);
+						break;
+					case 'D':
+						SetMontorSpeed(20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'Z':
+						SetMontorSpeed(-20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(0,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(0,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'X':
+						SetMontorSpeed(-20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'C':
+						SetMontorSpeed(0,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(0,&MONTOR_BACK_RIGHT);
+						break;
+					case 'O':
+						SetMontorSpeed(-20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(20000,&MONTOR_BACK_RIGHT);
+						break;
+					case 'P':
+						SetMontorSpeed(20000,&MONTOR_FRONT_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_FRONT_RIGHT);
+						SetMontorSpeed(20000,&MONTOR_BACK_LEFT);
+						SetMontorSpeed(-20000,&MONTOR_BACK_RIGHT);
+						break;
+				}
+			}
 		}
 	}
 }
 
-void MontorEncoderTest()
+void MontorEncoderTest(char c,const MontorInstance* instance)
 {
-	int kp=0;
-	SetMontorRotation(true,&MONTOR_FRONT_LEFT);
-	SetMontorRotation(true,&MONTOR_FRONT_RIGHT);
-	SetMontorRotation(true,&MONTOR_BACK_LEFT);
-	SetMontorRotation(true,&MONTOR_BACK_RIGHT);
-	while(1)
-	{
-		for(int i=2000;i<20000;i+=10)
+	if(c=='A'){
+	
+	}else if(c=='M'){
+		SetMontorRotation(true,instance);
+		SetMontorAbsSpeed(20000,instance);
+		while(1)
 		{
-			SetMontorAbsSpeed(i,&MONTOR_FRONT_LEFT);
-			SetMontorAbsSpeed(i,&MONTOR_FRONT_RIGHT);
-			SetMontorAbsSpeed(i,&MONTOR_BACK_LEFT);
-			SetMontorAbsSpeed(i,&MONTOR_BACK_RIGHT);
-			Delay(20000);
-			if(kp==50)
-			{
-				char str[7] ={0,0,0,0,0,'\n',0};
-				unsigned int count = GetEncoderNum(&MONTOR_FRONT_LEFT);
-				str[4]=count%10+'0';
-				str[3]=count%100/10+'0';
-				str[2]=count%1000/100+'0';
-				str[1]=count%10000/1000+'0';
-				str[0]=count/10000+'0';
-				USART1Send(str);
-				kp=0;
-				ResetEncoderNum();
-			}
-			kp++;
+			unsigned int count = GetEncoderNum(instance);
+			USART1SendNumInt(count);
+			ResetEncoderNum();
+			
+			for(int i=0;i<10;i++)
+			Delay(10000);
 		}
-		DelayS(1);
+	}
+	else
+	{
+	
 	}
 }
 
@@ -183,5 +318,62 @@ void SequenceControllerTest(void)
 		SequenceOnStep(diff);
 		Delay(10000);
 		diff = GetTotalTimeMs() - ms;
+	}
+}
+
+void PIDTest(const MontorInstance* montor)
+{
+	int speed=0; 
+	//0.2 FL -0.1R
+	PIDInstance instance={15000,0,0,0,0,0,0.1,0,0};
+	SetMontorRotation(true,montor);
+	while(1)
+	{
+		unsigned int count = GetEncoderNum(montor);
+		speed=FinishOnePIDStep(&instance,count*66);
+		
+		USART1SendNumInt(count*66);
+		USART1SendChar('-');
+		USART1SendNumInt(speed);
+		USART1SendChar('\n');
+		
+		SetMontorAbsSpeed(speed,montor);
+		ResetEncoderNum();
+		
+		DelayMs(100);
+	}
+}
+
+void MotionAnalysisTest(char c)
+{
+	if(c=='B')
+	{
+		while(1)
+		{
+			MotionAnalysisDirectSet(20000,WHEEL_MASK_FORWARD);
+			DelayS(1);
+			MotionAnalysisDirectSet(20000,WHEEL_MASK_BACKWARD);
+			DelayS(1);
+		}
+	}
+	else if(c=='P')
+	{
+		
+		while(1)
+		{
+			for(int i=0;i<20;i++)
+			{
+				MoveMask=WHEEL_MASK_FORWARD;
+				MotionAnalysisOnStep();
+				DelayMs(100);
+			}
+			/*
+			for(int i=0;i<20;i++)
+			{
+				MoveMask=WHEEL_MASK_BACKWARD;
+				MotionAnalysisOnStep();
+				DelayMs(100);
+			}*/
+		}
 	}
 }

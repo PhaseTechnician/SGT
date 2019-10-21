@@ -1,50 +1,43 @@
 #include "MotionAnalysis.h"
-unsigned char orientation;
-unsigned int speed;
 
-//新版本综合运动控制系统
-int MoveSpeedFactor;
-int RotateSpeedFactor;
-int TranslateSpeedFactor;
-unsigned char MoveMask;
-unsigned char TranslateMask;
-unsigned char RotateMask;
+int MoveSpeedFactor=15000;
+int RotateSpeedFactor=200;
+int TranslateSpeedFactor=200;
+unsigned char MoveMask=WHEEL_MASK_EMPTY;
+unsigned char TranslateMask=WHEEL_MASK_EMPTY;
+unsigned char RotateMask=WHEEL_MASK_EMPTY;
 
 PIDInstance WheelPIDInstance[4];
 
 void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor);
 
-void MontionAnalysisConfig()//当前的PID控制器参数导致其无作用
+void MontionAnalysisConfig()
 {
-	InitOnePIDInstance(WheelPIDInstance+0,0,0,0,0);
-	InitOnePIDInstance(WheelPIDInstance+1,0,0,0,0);
-	InitOnePIDInstance(WheelPIDInstance+2,0,0,0,0);
-	InitOnePIDInstance(WheelPIDInstance+3,0,0,0,0);
+	InitOnePIDInstance(WheelPIDInstance+0,0,0.1,0,0);
+	InitOnePIDInstance(WheelPIDInstance+1,0,0.1,0,0);
+	InitOnePIDInstance(WheelPIDInstance+2,0,0.1,0,0);
+	InitOnePIDInstance(WheelPIDInstance+3,0,0.1,0,0);
 }
 
-void SetOrientation(unsigned char LocalOrientation)
+void MotionAnalysisDirectSet(int speed,unsigned char WHEEL_MASK)
 {
-	orientation = LocalOrientation;
-	SetMontorRotation(LocalOrientation&0b00001000,&MONTOR_FRONT_LEFT);
-	SetMontorRotation(LocalOrientation&0b00000100,&MONTOR_FRONT_RIGHT);
-	SetMontorRotation(LocalOrientation&0b00000010,&MONTOR_BACK_LEFT);
-	SetMontorRotation(LocalOrientation&0b00000001,&MONTOR_BACK_RIGHT);
-}
-
-inline void SetSpeed(unsigned int LineSpeed)
-{
-	speed = LineSpeed;
+	int	rotation[4]={0};
+	rotation[0]= ((WHEEL_MASK & 0x80?1:0) - (WHEEL_MASK & 0x08?1:0));
+	WHEEL_MASK<<=1;
+	rotation[1]= ((WHEEL_MASK & 0x80?1:0) - (WHEEL_MASK & 0x08?1:0));
+	WHEEL_MASK<<=1; 
+	rotation[2]= ((WHEEL_MASK & 0x80?1:0) - (WHEEL_MASK & 0x08?1:0));
+	WHEEL_MASK<<=1;
+	rotation[3]= ((WHEEL_MASK & 0x80?1:0) - (WHEEL_MASK & 0x08?1:0));
+	WHEEL_MASK<<=1;
+	SetMontorSpeed(rotation[0]*speed,&MONTOR_FRONT_LEFT);
+	SetMontorSpeed(rotation[1]*speed,&MONTOR_FRONT_RIGHT);
+	SetMontorSpeed(rotation[2]*speed,&MONTOR_BACK_LEFT);
+	SetMontorSpeed(rotation[3]*speed,&MONTOR_BACK_RIGHT);
 }
 
 void MotionAnalysisOnStep(void)
 {
-	//basic
-	SetMontorSpeed(speed,&MONTOR_FRONT_LEFT);
-	SetMontorSpeed(speed,&MONTOR_FRONT_RIGHT);
-	SetMontorSpeed(speed,&MONTOR_BACK_LEFT);
-	SetMontorSpeed(speed,&MONTOR_BACK_RIGHT);
-	//high level
-	
 	int speed[4]={0};
 	ApplyMaskWithFactor(speed,MoveMask,MoveSpeedFactor);
 	ApplyMaskWithFactor(speed,TranslateMask,TranslateSpeedFactor);
@@ -52,30 +45,33 @@ void MotionAnalysisOnStep(void)
 	//范围矫正 结果不应该大于电机的最大设定值 限制Movespeedfactor的大小
 	//。。。
 	
-	/*
 	//调用PID控制器计算速度值
+	WheelPIDInstance[0].goal=speed[0];
+	WheelPIDInstance[1].goal=speed[1];
+	WheelPIDInstance[2].goal=speed[2];
+	WheelPIDInstance[3].goal=speed[3];
+	
 	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),GetMontorSpeed(&MONTOR_FRONT_LEFT));
 	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),GetMontorSpeed(&MONTOR_FRONT_RIGHT));
 	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),GetMontorSpeed(&MONTOR_BACK_LEFT));
 	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),GetMontorSpeed(&MONTOR_BACK_RIGHT));
-	*/
+
 	//设置电机速度
 	SetMontorSpeed(speed[0],&MONTOR_FRONT_LEFT);
 	SetMontorSpeed(speed[1],&MONTOR_FRONT_RIGHT);
 	SetMontorSpeed(speed[2],&MONTOR_BACK_LEFT);
 	SetMontorSpeed(speed[3],&MONTOR_BACK_RIGHT);
-	
 }
 
 void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor)
 {
-	*(speed+0) += Factor * (mask & 0x80 - mask & 0x08);
+	*(speed+0) += Factor * ((mask & 0x80?1:0) - (mask & 0x08?1:0));
 	mask<<=1;
-	*(speed+1) += Factor * (mask & 0x80 - mask & 0x08);
+	*(speed+1) += Factor * ((mask & 0x80?1:0) - (mask & 0x08?1:0));
 	mask<<=1;
-	*(speed+2) += Factor * (mask & 0x80 - mask & 0x08);
+	*(speed+2) += Factor * ((mask & 0x80?1:0) - (mask & 0x08?1:0));
 	mask<<=1;
-	*(speed+3) += Factor * (mask & 0x80 - mask & 0x08); 
+	*(speed+3) += Factor * ((mask & 0x80?1:0) - (mask & 0x08?1:0));
 }
 
 

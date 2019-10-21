@@ -1,7 +1,9 @@
 #include "BSP.h"
+#include "MotionAnalysis.h"
 
 void BSPConfig(void)
 {
+	//驱动级初始化
 	NVICConfig();
 	SystickConfig();
 	DelayFunctionConfig();
@@ -13,6 +15,8 @@ void BSPConfig(void)
 	ServerConfig();
 	MpuConfig();
 	//UltrasonicConfig();
+	//控制级初始化
+	MontionAnalysisConfig();
 }
 
 bool BSPTest(void)

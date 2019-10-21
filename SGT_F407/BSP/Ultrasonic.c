@@ -17,9 +17,9 @@ void UltrasonicConfig(void)
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOE,ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12|RCC_APB1Periph_TIM13|RCC_APB1Periph_TIM14,ENABLE);
 	
-	GPIO_PinAFConfig(GPIOB,GPIO_PinSource14,GPIO_AF_TIM12);
-	GPIO_PinAFConfig(GPIOB,GPIO_PinSource15,GPIO_AF_TIM12);
-	GPIO_PinAFConfig(GPIOA,GPIO_PinSource6,GPIO_AF_TIM13);
+	//GPIO_PinAFConfig(GPIOB,GPIO_PinSource14,GPIO_AF_TIM12);
+	//GPIO_PinAFConfig(GPIOB,GPIO_PinSource15,GPIO_AF_TIM12);
+	//GPIO_PinAFConfig(GPIOA,GPIO_PinSource6,GPIO_AF_TIM13);
 	GPIO_PinAFConfig(GPIOA,GPIO_PinSource7,GPIO_AF_TIM14);
 	
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -35,8 +35,8 @@ void UltrasonicConfig(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
-	GPIO_Init(GPIOB,&GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7;
+	//GPIO_Init(GPIOB,&GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = /*GPIO_Pin_6|*/GPIO_Pin_7;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
 	
 	
@@ -46,7 +46,7 @@ void UltrasonicConfig(void)
 	TimeBase_InitStructure.TIM_Period = 40000-1; //20 ms 自动退出计时
 	TimeBase_InitStructure.TIM_RepetitionCounter = 0;
 	TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-	TIM_TimeBaseInit(TIM13,&TimeBase_InitStructure);
+	TIM_TimeBaseInit(TIM14,&TimeBase_InitStructure);
 	
 	TIM_ICInitTypeDef TimeIC_InitStructure;
 	TimeIC_InitStructure.TIM_Channel = TIM_Channel_1|TIM_Channel_2;
@@ -56,12 +56,12 @@ void UltrasonicConfig(void)
 	TimeIC_InitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
 	//TIM_ICInit(TIM12,&TimeIC_InitStructure);
 	TimeIC_InitStructure.TIM_Channel = TIM_Channel_1;
-	TIM_ICInit(TIM13,&TimeIC_InitStructure);
-	//TIM_ICInit(TIM14,&TimeIC_InitStructure);
+	//TIM_ICInit(TIM13,&TimeIC_InitStructure);
+	TIM_ICInit(TIM14,&TimeIC_InitStructure);
 	
 	//TIM_ITConfig(TIM12,TIM_IT_Update|TIM_IT_CC1|TIM_IT_CC2,ENABLE);
-	TIM_ITConfig(TIM13,TIM_IT_Update|TIM_IT_CC1,ENABLE);
-	//TIM_ITConfig(TIM14,TIM_IT_Update|TIM_IT_CC1,ENABLE);
+	//TIM_ITConfig(TIM13,TIM_IT_Update|TIM_IT_CC1,ENABLE);
+	TIM_ITConfig(TIM14,TIM_IT_Update|TIM_IT_CC1,ENABLE);
 	
 	NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = TIM8_BRK_TIM12_IRQn;

@@ -17,7 +17,7 @@
  * 任务指令--》前进方向--》移动分量
  */
 
-//轮操作掩码 高四位正向使能 第四位反向使能
+//轮操作掩码 高四位正向使能 低四位反向使能
 #define WHEEL_MASK_CLOCK          0b10100101
 #define WHEEL_MASK_ANTICLOCK      0b01011010
 #define WHEEL_MASK_FORWARD        0b11110000
@@ -30,6 +30,9 @@
 #define WHEEL_MASK_RIGHT_BACKWARD 0b00000110
 #define WHEEL_MASK_EMPTY          0b00000000
 
+//注意无论如何，三项之和不得超过最大电机速度
+//同时，需要留出一定的范围为PID控制提供操作余量
+
 extern int MoveSpeedFactor;
 extern int RotateSpeedFactor;
 extern int TranslateSpeedFactor;
@@ -39,13 +42,9 @@ extern unsigned char RotateMask;
 
 //初始化设置
 void MontionAnalysisConfig(void);
-//设置运行方向 
-void SetOrientation(unsigned char LocalOrientation);
-//设置运行速度
-void SetSpeed(unsigned int LineSpeed);
-//逻辑内核函数[不完善]
+//设置底盘的速度和方向,不经自动维护直接赋值
+void MotionAnalysisDirectSet(int speed,unsigned char WHEEL_MASK);
+//逻辑内核函数[不完善]【考虑以100ms间隔调用】【太小的间隔导致编码器不能积累足够多的数值进行平均，太长的间隔影响逻辑的运行】
 void MotionAnalysisOnStep(void);
-//获取当前的世界坐标方向
-//get()
 
 #endif

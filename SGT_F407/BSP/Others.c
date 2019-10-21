@@ -92,6 +92,7 @@ void DelayFunctionConfig(void)
 }
 
 bool ClockDelayOpen = false;
+
 void Delay(int16_t us)
 {
   ClockDelayOpen=true;
@@ -99,6 +100,12 @@ void Delay(int16_t us)
 	TIM_Cmd(TIM6,ENABLE);
 	while(ClockDelayOpen);
 	TIM_Cmd(TIM6,DISABLE);
+}
+
+void DelayMs(unsigned int ms)
+{
+	for(int i=0;i<ms;i++)
+	Delay(1000);
 }
 
 void DelayS(unsigned int s)
