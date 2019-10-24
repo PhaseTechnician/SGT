@@ -30,6 +30,8 @@ void MoveToward(unsigned char orientation, int tileCount);
 void Stop(void);
 
 /*舵机控制类*/
+//初始化舵机的位置
+void InitStartMotion(void);
 //启动机械臂的动作
 void StartMotion(ActionNode actions[]);
 //等待动作完成,超时跳过
@@ -40,8 +42,15 @@ void Open(void);
 void Close(void);
 
 /*串口外部API类*/
+//测试通讯频道 期待的回复 "<PI>"
+bool TryConnectedPi(int waitTimes);
 //扫描二维码,获得扫描的结果，以六个字符表示，多次尝试上端无响应后将会返回false
 bool ScanQRcode(char* Result6char,int times);
+//判断当前的颜色是否正确 期待的回复 "<yes>" "<no>"
+#define COLOR_RED "<WR>"
+#define COLOR_GREEN "<WG>"
+#define COLOR_BLUE "<WB>"
+bool IsColor(int waitTimes,const char* color);
 //扫视物块,由于运行中扫略，这个函数可能不一定获得最为确切的结果,在超过等待时间后，放弃等待返回false
 bool PeekGoods(char* Result3Char,int waitTimes);
 //定位靶点

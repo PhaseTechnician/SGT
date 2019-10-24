@@ -28,6 +28,7 @@ def whetherHaveColorBlock(frame,lowRage,highRage):
             return True
             #cv2.drawContours(frame, contours, index, (255,255,255), 3)
         index=index+1
+    return False
 
 def PeekGoods():
     cap = cv2.VideoCapture(0)
@@ -52,8 +53,6 @@ def PeekGoods():
             cv2.waitKey(30);
         cap.close()
         return resultList
-    else
+    else:
         print("NO CAP OPEN")
         return "000"
-
-PeekGoods()

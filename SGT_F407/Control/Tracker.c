@@ -1,22 +1,18 @@
 #include "Tracker.h"
 
 int PinCount = 0;
-
+unsigned char XYmask=0x00;
 inline void TrackerConfig(unsigned char mask)
 {
 	SetTrackParam(mask,TrackCallBackFunction);
-	PinCount = Get1BitCount(LineTrackResult&mask);
+	XYmask=mask;
 }
 
 void TrackCallBackFunction(unsigned char trigerPin,bool isRising)
 {
-	if(isRising)
+	if(!isRising)
 	{
-		PinCount--;
-	}
-	else
-	{
-		PinCount++;
+		PinCount = Get1BitCount(LineTrackResult&XYmask);
 		if(PinCount==0)
 		{
 			TranslateMask = WHEEL_MASK_EMPTY;

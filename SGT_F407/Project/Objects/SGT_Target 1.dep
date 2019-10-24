@@ -1481,7 +1481,7 @@ I (..\Library\inc\stm32f4xx_can.h)(0x5821F050)
 I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
-F (..\User\main.c)(0x5DAD9B00)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\User\main.c)(0x5DAF1245)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\BSP\BSP.h)(0x5D9C85B9)
 I (..\BSP\USART.h)(0x5DA84EF1)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1519,7 +1519,7 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\BSP\Others.h)(0x5DA96210)
 I (..\BSP\MontorDriver.h)(0x5DA959F5)
 I (..\BSP\Server.h)(0x5D91FF0B)
@@ -1528,11 +1528,11 @@ I (..\BSP\MPU.h)(0x5D9467DC)
 I (..\BSP\Ultrasonic.h)(0x5DA861A8)
 I (..\User\Script.h)(0x5D9F399F)
 I (..\Control\Locataor.h)(0x5D9DD2C2)
-I (..\Control\Tracker.h)(0x5D9AC7B6)
+I (..\Control\Tracker.h)(0x5DAEFE2A)
 I (..\Control\MotionAnalysis.h)(0x5DA960C2)
 I (..\Control\PIDController.h)(0x5DA95AD7)
 I (..\Control\SequenceController.h)(0x5D8B4ED1)
-I (..\User\Test.h)(0x5DAD9A26)
+I (..\User\Test.h)(0x5DAF1250)
 F (..\User\stm32f4xx_it.c)(0x5D89C5D3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\stm32f4xx_it.o --omf_browse .\objects\stm32f4xx_it.crf --depend .\objects\stm32f4xx_it.d)
 I (..\User\stm32f4xx_it.h)(0x58221742)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1643,7 +1643,7 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\BSP\Others.h)(0x5DA96210)
 I (..\BSP\MontorDriver.h)(0x5DA959F5)
 I (..\BSP\Server.h)(0x5D91FF0B)
@@ -1651,14 +1651,14 @@ I (..\BSP\LCD12864.h)(0x5DA2A6A1)
 I (..\BSP\MPU.h)(0x5D9467DC)
 I (..\BSP\Ultrasonic.h)(0x5DA861A8)
 I (..\Control\Locataor.h)(0x5D9DD2C2)
-I (..\Control\Tracker.h)(0x5D9AC7B6)
+I (..\Control\Tracker.h)(0x5DAEFE2A)
 I (..\Control\MotionAnalysis.h)(0x5DA960C2)
 I (..\Control\PIDController.h)(0x5DA95AD7)
 I (..\Control\SequenceController.h)(0x5D8B4ED1)
 F (..\User\PathFinding.c)(0x5D88DC60)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\pathfinding.o --omf_browse .\objects\pathfinding.crf --depend .\objects\pathfinding.d)
 I (..\User\PathFinding.h)(0x5D88DC5D)
-F (..\User\Test.c)(0x5DADA123)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\test.o --omf_browse .\objects\test.crf --depend .\objects\test.d)
-I (..\User\Test.h)(0x5DAD9A26)
+F (..\User\Test.c)(0x5DAF136B)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\test.o --omf_browse .\objects\test.crf --depend .\objects\test.d)
+I (..\User\Test.h)(0x5DAF1250)
 I (..\BSP\BSP.h)(0x5D9C85B9)
 I (..\BSP\USART.h)(0x5DA84EF1)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -1696,7 +1696,7 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\BSP\Others.h)(0x5DA96210)
 I (..\BSP\MontorDriver.h)(0x5DA959F5)
 I (..\BSP\Server.h)(0x5D91FF0B)
@@ -1706,6 +1706,7 @@ I (..\BSP\Ultrasonic.h)(0x5DA861A8)
 I (..\Control\SequenceController.h)(0x5D8B4ED1)
 I (..\Control\PIDController.h)(0x5DA95AD7)
 I (..\Control\MotionAnalysis.h)(0x5DA960C2)
+I (..\Control\Tracker.h)(0x5DAEFE2A)
 F (..\Doc\deleteCode.txt)(0x5D8797A4)()
 F (..\Doc\LEDC.txt)(0x5D87929B)()
 F (..\Doc\LEDH.txt)(0x5D879223)()
@@ -1749,7 +1750,7 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\BSP\Others.h)(0x5DA96210)
 I (..\BSP\MontorDriver.h)(0x5DA959F5)
 I (..\BSP\Server.h)(0x5D91FF0B)
@@ -1758,7 +1759,7 @@ I (..\BSP\MPU.h)(0x5D9467DC)
 I (..\BSP\Ultrasonic.h)(0x5DA861A8)
 I (..\Control\MotionAnalysis.h)(0x5DA960C2)
 I (..\Control\PIDController.h)(0x5DA95AD7)
-F (..\BSP\Others.c)(0x5DA96248)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\others.o --omf_browse .\objects\others.crf --depend .\objects\others.d)
+F (..\BSP\Others.c)(0x5DAF12E7)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\others.o --omf_browse .\objects\others.crf --depend .\objects\others.d)
 I (..\BSP\Others.h)(0x5DA96210)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
@@ -1796,7 +1797,7 @@ I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (..\BSP\USART.h)(0x5DA84EF1)
-F (..\BSP\USART.c)(0x5DADA5C3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
+F (..\BSP\USART.c)(0x5DADBF55)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (..\BSP\USART.h)(0x5DA84EF1)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
@@ -1833,8 +1834,8 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-F (..\BSP\LineTrack.c)(0x5DAAFCB1)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\linetrack.o --omf_browse .\objects\linetrack.crf --depend .\objects\linetrack.d)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+F (..\BSP\LineTrack.c)(0x5DAF0DE6)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\linetrack.o --omf_browse .\objects\linetrack.crf --depend .\objects\linetrack.d)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -2138,7 +2139,7 @@ I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (..\BSP\Others.h)(0x5DA96210)
 F (..\Control\Locataor .c)(0x5D9F3812)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ".\objects\locataor .o" --omf_browse ".\objects\locataor .crf" --depend ".\objects\locataor .d")
 I (..\Control\Locataor.h)(0x5D9DD2C2)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -2174,7 +2175,7 @@ I (..\Library\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-F (..\Control\MotionAnalysis.c)(0x5DA96810)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\motionanalysis.o --omf_browse .\objects\motionanalysis.crf --depend .\objects\motionanalysis.d)
+F (..\Control\MotionAnalysis.c)(0x5DAF1376)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\motionanalysis.o --omf_browse .\objects\motionanalysis.crf --depend .\objects\motionanalysis.d)
 I (..\Control\MotionAnalysis.h)(0x5DA960C2)
 I (..\BSP\MontorDriver.h)(0x5DA959F5)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
@@ -2213,9 +2214,9 @@ I (..\Library\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\Library\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (E:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (..\Control\PIDController.h)(0x5DA95AD7)
-F (..\Control\Tracker.c)(0x5D9AC659)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\tracker.o --omf_browse .\objects\tracker.crf --depend .\objects\tracker.d)
-I (..\Control\Tracker.h)(0x5D9AC7B6)
-I (..\BSP\LineTrack.h)(0x5DAAFC61)
+F (..\Control\Tracker.c)(0x5DAF0EA5)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\Library\inc -I ..\User -I ..\CMSIS\Include -I ..\CMSIS -I ..\BSP -I ..\Control-I.\RTE\_Target_1-IE:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\tracker.o --omf_browse .\objects\tracker.crf --depend .\objects\tracker.d)
+I (..\Control\Tracker.h)(0x5DAEFE2A)
+I (..\BSP\LineTrack.h)(0x5DAF046D)
 I (..\CMSIS\stm32f4xx.h)(0x5D7AF97F)
 I (..\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (E:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)

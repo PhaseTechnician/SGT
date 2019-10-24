@@ -68,6 +68,15 @@ void Stop(void)
 	SetMontorSpeed(0,&MONTOR_BACK_LEFT);
 }
 
+void InitStartMotion(void)
+{
+	ServerSetAngle(0,&SERVER1);
+	ServerSetAngle(0,&SERVER2);
+	ServerSetAngle(0,&SERVER3);	
+	ServerSetAngle(0,&SERVER4);
+	ServerSetAngle(0,&SERVER5);
+}
+
 inline void StartMotion(ActionNode actions[])
 {
 	SetSequence(actions);
@@ -89,6 +98,26 @@ inline void Close(void)
 	ServerSetAngle(180,&SERVER5);
 }
 
+bool TryConnectedPi(int waitTimes)
+{
+	USART1ClearReceive();
+	USART1Send("<PI>");
+	unsigned int SendOrderTime = GetTotalTimeMs();
+	while(!USART1IsReceive()&&(GetPartTimeMs()<SendOrderTime+waitTimes));
+	if(USART1IsReceive())
+	{
+		char* resultOrder = USART1GetOrder();
+		if(resultOrder[1]=='P'&&resultOrder[2]=='I')
+			return true;
+		else
+			return false;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool ScanQRcode(char* Result6char,int times)
 {
 	unsigned int timeCount = 0;
@@ -96,7 +125,7 @@ bool ScanQRcode(char* Result6char,int times)
 	USART1ClearReceive();
 	while(true)
 	{
-		USART1Send("QR");
+		USART1Send("<QR>");
 		SendOrderTime = GetPartTimeMs();
 		while(!USART1IsReceive()&&(GetPartTimeMs()<SendOrderTime+500));//µÈ´ýµÄºÁÃëÊý
 		if(USART1IsReceive())
@@ -116,6 +145,26 @@ bool ScanQRcode(char* Result6char,int times)
 		{
 			return false;
 		}
+	}
+}
+
+bool IsColor(int waitTimes,const char* color)
+{
+	USART1ClearReceive();
+	USART1Send((char*)color);
+	unsigned int SendOrderTime = GetTotalTimeMs();
+	while(!USART1IsReceive()&&(GetPartTimeMs()<SendOrderTime+waitTimes));
+	if(USART1IsReceive())
+	{
+		char* resultOrder = USART1GetOrder();
+		if(resultOrder[1]=='y')
+			return true;
+		else
+			return false;
+	}
+	else
+	{
+		return false;
 	}
 }
 

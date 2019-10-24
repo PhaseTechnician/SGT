@@ -47,7 +47,7 @@ void SetSystemFunctionCycle(void (*function)(void),int cycleCount)
 	maxCycleNum = cycleCount;
 }
 
-void EnableSystermFunctionCycle(bool enable)
+void EnableSystemFunctionCycle(bool enable)
 {
 	enableSystemFunctionCycle = enable;
 }

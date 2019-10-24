@@ -11,6 +11,17 @@ BlueLow = numpy.array({0,0,0},numpy.uint8)
 BlueHigh = numpy.array({0,0,0},numpy.uint8)
 
 
+def dealOrder(char1,char2):
+    if order[0] == 'S':
+        COM.write("123321")
+    elif order[0] == 'T':
+        COM.write("OK")
+    #elif order[0] == 'P':
+
+    #elif order[0] == 'A':
+
+    #elif order[0] == 'C':
+
 
 #函数运行区域
 #COM = serial.Serial('COM',9600)
@@ -18,20 +29,9 @@ COM = serial.Serial('/dev/ttyUSB0',9600)
 COM.open()
 if COM.isOpen():
     while True:
-        if COM.isWaiting() > 2:
-            order = COM.read(2);
-            if order[0] == 'S':
-                #scan
-                COM.write()
-            elif order[0] == 'P':
-                #peek
-                COM.write()
-            elif order[0] == 'A':
-                #adjust
-                COM.write()
-            elif order[0] == 'C':
-                #catch
-                COM.write()
+        if COM.isWaiting()>4:
+            if COM.read(1) is '<':
+                order=COM.read(2)
 else:
     print("ERROR OPEN COM FAILED\R\N");
 

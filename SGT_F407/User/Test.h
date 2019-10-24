@@ -5,6 +5,7 @@
 #include "SequenceController.h"
 #include "PIDController.h"
 #include "MotionAnalysis.h"
+#include "Tracker.h"
 
 /*BSP function*/
 void DelayAndSYStickTest(void);//pass
@@ -25,4 +26,5 @@ void SequenceControllerTest(void);//pass
 void PIDTest(const MontorInstance* instance);
 //B 基本应用mask进行运动控制/ P 引入PID调节机制
 void MotionAnalysisTest(char c);
+void SystermCallBackTest(void);
 #endif

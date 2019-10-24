@@ -26,16 +26,14 @@ unsigned char GetLineTrackResult(void);
 void LineTrackConfig(void);
 //打开或者关闭寻迹模块的中断响应,如果错误，多半是没有设置回调
 bool LineTrackEnable(bool enable);
-//触发引脚信息的分发[不向外部开放]
-//void DistributeMassage(unsigned char trigerPin,bool isRising);
+//触发引脚信息的分发
+void DistributeMassage(unsigned char trigerPin,bool isRising);
 //设置定位参数
 void SetAnchorParam(unsigned char mask,void (*CallBack)(unsigned char trigerPin,bool isrising));
 //设置跟踪参数
 void SetTrackParam(unsigned char mask,void (*CallBack)(unsigned char trigerPin,bool isrising));
 //直接读取
 unsigned char directReadLineTrackResult(void);
-//判断是否出现电位变化
-void CriticalDigitalLevelChange(void);
 //通过位操作来获取对应的传感器模块
 #define LT1 (LineTrackResult&0b00000001?1:0)
 #define LT2 (LineTrackResult&0b00000010?1:0)

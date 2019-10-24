@@ -43,7 +43,6 @@ void ServerTest(char mode)
 			ServerSetAngle(180,&SERVER4);
 			ServerSetAngle(180,&SERVER5);
 			DelayS(1);
-			break;
 		}
 	}
 	else if(mode=='0')
@@ -97,10 +96,15 @@ void LCDTest(void)
 }
 
 void LineTrackTest(void)
-{
+{/*
+	if(LineTrackEnable(true))
+	{
+		USART1Send("init LT Finish");
+	}*/
 	while(1)
 	{
-		DelayS(1);
+		DelayMs(100);
+		LineTrackResult=directReadLineTrackResult();
 		char state[9]={0};
 		state[0] = LT1+'0';
 		state[1] = LT2+'0';
@@ -110,7 +114,8 @@ void LineTrackTest(void)
 		state[5] = LT6+'0';
 		state[6] = LT7+'0';
 		state[7] = LT8+'0';
-		USART1Send(state);
+		state[8]= '\n';
+		USART1SendLength(state,9);
 	}
 }
 
@@ -358,22 +363,52 @@ void MotionAnalysisTest(char c)
 	}
 	else if(c=='P')
 	{
-		
 		while(1)
 		{
-			for(int i=0;i<20;i++)
+			MoveMask=WHEEL_MASK_FORWARD;
+			USART1SendNumInt(GetMontorSpeed(&MONTOR_FRONT_LEFT));
+			MotionAnalysisOnStep();
+			DelayMs(100);
+		}
+	}
+	else if(c=='T')
+	{
+		MoveSpeedFactor=0;
+		TrackerConfig(XMask);
+		if(LineTrackEnable(true))
+		{
+			LCD12864NumDraw(000,000);
+		}
+		while(1)
+		{
+			CriticalDigitalLevelChange();
+			//MotionAnalysisOnStep();
+			DelayMs(100);
+			switch(RotateMask)
 			{
-				MoveMask=WHEEL_MASK_FORWARD;
-				MotionAnalysisOnStep();
-				DelayMs(100);
+				case WHEEL_MASK_ANTICLOCK:
+					USART1SendChar('A');break;
+				case WHEEL_MASK_CLOCK:
+					USART1SendChar('C');break;
+				case WHEEL_MASK_LEFT:
+					USART1SendChar('R');break;
+				case WHEEL_MASK_RIGHT:
+					USART1SendChar('L');break;
 			}
-			/*
-			for(int i=0;i<20;i++)
-			{
-				MoveMask=WHEEL_MASK_BACKWARD;
-				MotionAnalysisOnStep();
-				DelayMs(100);
-			}*/
+			
 		}
 	}
 }
+
+void SystermCallBack(void)
+{
+	MotionAnalysisOnStep();
+}
+
+void SystermCallBackTest(void)
+{
+	MoveMask=WHEEL_MASK_FORWARD;
+	SetSystemFunctionCycle(SystermCallBack,10);
+	EnableSystemFunctionCycle(true);
+}
+
