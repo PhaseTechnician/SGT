@@ -1,8 +1,9 @@
 #include "MotionAnalysis.h"
-
-int MoveSpeedFactor=15000;
-int RotateSpeedFactor=2000;
-int TranslateSpeedFactor=2000;
+#include "USART.h"
+//当前不得大于320
+int MoveSpeedFactor=0;
+int RotateSpeedFactor=0;
+int TranslateSpeedFactor=0;
 unsigned char MoveMask=WHEEL_MASK_EMPTY;
 unsigned char TranslateMask=WHEEL_MASK_EMPTY;
 unsigned char RotateMask=WHEEL_MASK_EMPTY;
@@ -13,10 +14,10 @@ void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor);
 
 void MontionAnalysisConfig()
 {
-	InitOnePIDInstance(WheelPIDInstance+0,0,0.01,0.1,0);
-	InitOnePIDInstance(WheelPIDInstance+1,0,0.01,0.1,0);
-	InitOnePIDInstance(WheelPIDInstance+2,0,0.01,0.1,0);
-	InitOnePIDInstance(WheelPIDInstance+3,0,0.01,0.1,0);
+	InitOnePIDInstance(WheelPIDInstance+0,0,0.5,0,0);
+	InitOnePIDInstance(WheelPIDInstance+1,0,0.5,0,0);
+	InitOnePIDInstance(WheelPIDInstance+2,0,0.5,0,0);
+	InitOnePIDInstance(WheelPIDInstance+3,0,0.5,0,0);	
 }
 
 void MotionAnalysisDirectSet(int speed,unsigned char WHEEL_MASK)
@@ -36,6 +37,13 @@ void MotionAnalysisDirectSet(int speed,unsigned char WHEEL_MASK)
 	SetMontorSpeed(rotation[3]*speed,&MONTOR_BACK_RIGHT);
 }
 
+/*
+141M1
+242M2
+338M3
+343M4
+*/
+
 void MotionAnalysisOnStep(void)
 {
 	int speed[4]={0};
@@ -51,16 +59,25 @@ void MotionAnalysisOnStep(void)
 	WheelPIDInstance[2].goal=speed[2];
 	WheelPIDInstance[3].goal=speed[3];
 	
-	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),GetMontorSpeed(&MONTOR_FRONT_LEFT));
-	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),GetMontorSpeed(&MONTOR_FRONT_RIGHT));
-	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),GetMontorSpeed(&MONTOR_BACK_LEFT));
-	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),GetMontorSpeed(&MONTOR_BACK_RIGHT));
+	int feedBack1=GetMontorSpeed(&MONTOR_FRONT_LEFT);
+	int feedBack2=GetMontorSpeed(&MONTOR_FRONT_RIGHT);
+	int feedBack3=GetMontorSpeed(&MONTOR_BACK_LEFT);
+	int feedBack4=GetMontorSpeed(&MONTOR_BACK_RIGHT);
+	
+	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),feedBack1);
+	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),feedBack2);
+	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),feedBack3);
+	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),feedBack4);
 
 	for(int i=0;i<4;i++)
 	{
-		if((speed[i]>0?speed[i]:-speed[i])>20000)
+		if(speed[i]>20000)
 		{
-			speed[i]=speed[i]>0?20000:-20000;
+			speed[i]=20000;
+		}
+		else if(speed[i]<-20000)
+		{
+			speed[i]=-20000;
 		}
 	}
 	//设置电机速度
@@ -70,6 +87,16 @@ void MotionAnalysisOnStep(void)
 	SetMontorSpeed(speed[3],&MONTOR_BACK_RIGHT);
 	
 	ResetEncoderNum();
+	
+	
+	USART1SendNumInt(-feedBack1);
+	USART1Send("M1\n");
+	USART1SendNumInt(feedBack2);
+	USART1Send("M2\n");
+	USART1SendNumInt(feedBack3);
+	USART1Send("M3\n");
+	USART1SendNumInt(-feedBack4);
+	USART1Send("M4\n");
 }
 
 void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor)

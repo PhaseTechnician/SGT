@@ -231,18 +231,23 @@ void MontorDriverOutputTest(char c)
 void MontorEncoderTest(char c,const MontorInstance* instance)
 {
 	if(c=='A'){
-	
-	}else if(c=='M'){
-		SetMontorRotation(true,instance);
-		SetMontorAbsSpeed(20000,instance);
 		while(1)
 		{
-			unsigned int count = GetEncoderNum(instance);
+			int count = GetEncoderNum(instance);
 			USART1SendNumInt(count);
+			USART1SendChar('\n');
+			DelayS(1);
+		}
+	}else if(c=='M'){
+		SetMontorRotation(true,instance);
+		SetMontorAbsSpeed(18000,instance);
+		while(1)
+		{
+			int count = GetEncoderNum(instance);
+			USART1SendNumInt(count);
+			USART1SendChar('\n');
 			ResetEncoderNum();
-			
-			for(int i=0;i<10;i++)
-			Delay(10000);
+			DelayMs(100);
 		}
 	}
 	else
@@ -330,14 +335,14 @@ void PIDTest(const MontorInstance* montor)
 {
 	int speed=0; 
 	//0.2 FL -0.1R
-	PIDInstance instance={15000,0,0,0,0,0,0.1,0,0};
+	PIDInstance instance={300,0,0,0,0,0,1,0,0};
 	SetMontorRotation(true,montor);
 	while(1)
 	{
 		unsigned int count = GetEncoderNum(montor);
-		speed=FinishOnePIDStep(&instance,count*66);
+		speed=FinishOnePIDStep(&instance,count);
 		
-		USART1SendNumInt(count*66);
+		USART1SendNumInt(count);
 		USART1SendChar('-');
 		USART1SendNumInt(speed);
 		USART1SendChar('\n');
@@ -355,18 +360,22 @@ void MotionAnalysisTest(char c)
 	{
 		while(1)
 		{
-			MotionAnalysisDirectSet(20000,WHEEL_MASK_FORWARD);
+			MotionAnalysisDirectSet(300,WHEEL_MASK_FORWARD);
 			DelayS(1);
-			MotionAnalysisDirectSet(20000,WHEEL_MASK_BACKWARD);
+			MotionAnalysisDirectSet(300,WHEEL_MASK_BACKWARD);
 			DelayS(1);
 		}
 	}
 	else if(c=='P')
 	{
+		MoveMask=WHEEL_MASK_LEFT;
+		MoveSpeedFactor=3000;
+		RotateMask=WHEEL_MASK_CLOCK;
+		RotateSpeedFactor=200;
+		TranslateMask=WHEEL_MASK_FORWARD;
+		TranslateSpeedFactor=0;
 		while(1)
 		{
-			MoveMask=WHEEL_MASK_FORWARD;
-			USART1SendNumInt(GetMontorSpeed(&MONTOR_FRONT_LEFT));
 			MotionAnalysisOnStep();
 			DelayMs(100);
 		}
@@ -396,6 +405,38 @@ void MotionAnalysisTest(char c)
 					USART1SendChar('L');break;
 			}
 			
+		}
+	}
+	else if(c=='C')
+	{
+		MoveMask=WHEEL_MASK_LEFT;
+		//MotionAnalysisDirectSet(0,WHEEL_MASK_EMPTY);
+		SetSystemFunctionCycle(MotionAnalysisOnStep,10);
+		EnableSystemFunctionCycle(true);
+		while(1)
+		{
+			if(USART1IsReceive())
+			{
+				char c = *USART1GetOrder();
+				switch(c)
+				{
+					case 'W':
+						MoveMask=WHEEL_MASK_FORWARD;
+						break;
+					case 'X':
+						MoveMask=WHEEL_MASK_BACKWARD;
+						break;
+					case 'A':
+						MoveMask=WHEEL_MASK_LEFT;
+						break;
+					case 'D':
+						MoveMask=WHEEL_MASK_RIGHT;
+						break;
+					case 'S':
+						MoveMask=WHEEL_MASK_EMPTY;
+						break;
+				}
+			}
 		}
 	}
 }

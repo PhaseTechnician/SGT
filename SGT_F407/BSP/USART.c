@@ -1,6 +1,6 @@
 #include "USART.h"
 
-#define MaxLengthOfOrder 10
+#define MaxLengthOfOrder 1
 #define MaxAmountOfOrder 10
 
 char orders[MaxAmountOfOrder][MaxLengthOfOrder+1]={0};

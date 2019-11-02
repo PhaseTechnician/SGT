@@ -12,21 +12,20 @@
  *   M1A M1B M2A M2B M3A M3B M4A M4B
  *   PD0 PD1 PD2 PD3 PD4 PD5 PD6 PD7
  * 输入捕获测量编码器 
- *  ■■■ TIM2 TIM3 TIM4 TIM5 
- *  CH1 PA5  PA6  PD12 PA0
- *  CH2 PB3  PB5  PD13 PA1
+ *  ■■■ TIM9 TIM3 TIM4 TIM5 
+ *  CH1 PA2  PA6  PD12 PA0
+ *  CH2 PA3  PB5  PD13 PA1
  */
 
 
 //特别注意编码计数器的误判在较长的时间之后
-
-#define MONTOR_ENCODER2SPEED_FACTOR 66
 
 typedef struct MontorInstanceStructure
 {
 	TIM_TypeDef* TIM;
 	uint16_t PINA;
 	uint16_t PINB;
+	int EncoderFactor;
 	void (*setFunction)(TIM_TypeDef* TIM,uint32_t value);
 }MontorInstance;
 

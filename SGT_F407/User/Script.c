@@ -74,7 +74,7 @@ void InitStartMotion(void)
 	ServerSetAngle(0,&SERVER2);
 	ServerSetAngle(0,&SERVER3);	
 	ServerSetAngle(0,&SERVER4);
-	ServerSetAngle(0,&SERVER5);
+	ServerSetAngle(21,&SERVER5);
 }
 
 inline void StartMotion(ActionNode actions[])
@@ -90,12 +90,12 @@ void WaitMotion(unsigned int waitTimeMs)
 
 inline void Open(void)
 {
-	ServerSetAngle(0,&SERVER5);
+	ServerSetAngle(78,&SERVER5);
 }
 
 inline void Close(void)
 {
-	ServerSetAngle(180,&SERVER5);
+	ServerSetAngle(21,&SERVER5);
 }
 
 bool TryConnectedPi(int waitTimes)
