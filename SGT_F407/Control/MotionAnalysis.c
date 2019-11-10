@@ -14,10 +14,11 @@ void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor);
 
 void MontionAnalysisConfig()
 {
-	InitOnePIDInstance(WheelPIDInstance+0,0,0.5,0,0);
-	InitOnePIDInstance(WheelPIDInstance+1,0,0.5,0,0);
-	InitOnePIDInstance(WheelPIDInstance+2,0,0.5,0,0);
-	InitOnePIDInstance(WheelPIDInstance+3,0,0.5,0,0);	
+  int k=3;
+	InitOnePIDInstance(WheelPIDInstance+0,0,k,0,0);
+	InitOnePIDInstance(WheelPIDInstance+1,0,k,0,0);
+	InitOnePIDInstance(WheelPIDInstance+2,0,k,0,0);
+	InitOnePIDInstance(WheelPIDInstance+3,0,k,0,0);	
 }
 
 void MotionAnalysisDirectSet(int speed,unsigned char WHEEL_MASK)
@@ -36,13 +37,6 @@ void MotionAnalysisDirectSet(int speed,unsigned char WHEEL_MASK)
 	SetMontorSpeed(rotation[2]*speed,&MONTOR_BACK_LEFT);
 	SetMontorSpeed(rotation[3]*speed,&MONTOR_BACK_RIGHT);
 }
-
-/*
-141M1
-242M2
-338M3
-343M4
-*/
 
 void MotionAnalysisOnStep(void)
 {
@@ -63,12 +57,12 @@ void MotionAnalysisOnStep(void)
 	int feedBack2=GetMontorSpeed(&MONTOR_FRONT_RIGHT);
 	int feedBack3=GetMontorSpeed(&MONTOR_BACK_LEFT);
 	int feedBack4=GetMontorSpeed(&MONTOR_BACK_RIGHT);
-	
+	/*
 	speed[0] = FinishOnePIDStep((WheelPIDInstance+0),feedBack1);
 	speed[1] = FinishOnePIDStep((WheelPIDInstance+1),feedBack2);
 	speed[2] = FinishOnePIDStep((WheelPIDInstance+2),feedBack3);
 	speed[3] = FinishOnePIDStep((WheelPIDInstance+3),feedBack4);
-
+	*/
 	for(int i=0;i<4;i++)
 	{
 		if(speed[i]>20000)
@@ -88,7 +82,18 @@ void MotionAnalysisOnStep(void)
 	
 	ResetEncoderNum();
 	
+	/*
+	USART1SendNumInt(speed[0]);
+	USART1Send("M1\n");
+	USART1SendNumInt(speed[1]);
+	USART1Send("M2\n");
+	USART1SendNumInt(speed[2]);
+	USART1Send("M3\n");
+	USART1SendNumInt(speed[3]);
+	USART1Send("M4\n");
+	*/
 	
+	/*
 	USART1SendNumInt(-feedBack1);
 	USART1Send("M1\n");
 	USART1SendNumInt(feedBack2);
@@ -96,7 +101,7 @@ void MotionAnalysisOnStep(void)
 	USART1SendNumInt(feedBack3);
 	USART1Send("M3\n");
 	USART1SendNumInt(-feedBack4);
-	USART1Send("M4\n");
+	USART1Send("M4\n");*/
 }
 
 void ApplyMaskWithFactor(int *speed,unsigned char mask,int Factor)

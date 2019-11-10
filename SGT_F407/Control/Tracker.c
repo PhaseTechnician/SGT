@@ -10,7 +10,7 @@ inline void TrackerConfig(unsigned char mask)
 
 void TrackCallBackFunction(unsigned char trigerPin,bool isRising)
 {
-	if(!isRising)
+	if(isRising)
 	{
 		PinCount = Get1BitCount(LineTrackResult&XYmask);
 		if(PinCount==0)

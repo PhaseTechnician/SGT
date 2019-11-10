@@ -7,7 +7,7 @@ void MoveToward(unsigned char orientation,int tileCount)
 {
 	//主速度方向和大小的设置
 	MoveMask = orientation;
-	MoveSpeedFactor = 10;
+	MoveSpeedFactor = 6000;
 	//根据情况设置巡线器//和定位器
 	switch(orientation)
 	{
@@ -26,7 +26,7 @@ void MoveToward(unsigned char orientation,int tileCount)
 			HIGHPIN = GetHighPinInCp(CPMaskXP);
 			break;
 	}
-	Delay(20000);//使得传感器避免初始时间之内的不确定情况
+	DelayMs(20);//使得传感器避免初始时间之内的不确定情况
 	LocataorReset();
 	
 	while(true)
@@ -70,10 +70,10 @@ void Stop(void)
 
 void InitStartMotion(void)
 {
-	ServerSetAngle(0,&SERVER1);
-	ServerSetAngle(0,&SERVER2);
-	ServerSetAngle(0,&SERVER3);	
-	ServerSetAngle(0,&SERVER4);
+	ServerSetAngle(127,&SERVER1);
+	ServerSetAngle(101,&SERVER2);
+	ServerSetAngle(175,&SERVER3);	
+	ServerSetAngle(180,&SERVER4);
 	ServerSetAngle(21,&SERVER5);
 }
 
@@ -90,12 +90,12 @@ void WaitMotion(unsigned int waitTimeMs)
 
 inline void Open(void)
 {
-	ServerSetAngle(78,&SERVER5);
+	ServerSetAngle(116,&SERVER1);
 }
 
 inline void Close(void)
 {
-	ServerSetAngle(21,&SERVER5);
+	ServerSetAngle(50,&SERVER1);
 }
 
 bool TryConnectedPi(int waitTimes)

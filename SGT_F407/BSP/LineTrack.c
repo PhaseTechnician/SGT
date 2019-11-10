@@ -1,4 +1,6 @@
 #include "LineTrack.h"
+#include "MotionAnalysis.h"
+#include "USART.h"
 
 unsigned char LineTrackResultLast=0xff;
 unsigned char LineTrackResult=0xff;
@@ -83,8 +85,31 @@ unsigned char directReadLineTrackResult()
 
 void CriticalDigitalLevelChange(void)
 {
-	LineTrackResultLast = LineTrackResult;
+	//LineTrackResultLast = LineTrackResult;
 	LineTrackResult = ~directReadLineTrackResult();//决定是否反码
+	bool LT1OFF=LineTrackResult&0X01;
+	bool LT2OFF=LineTrackResult&0X02;
+	if(LT1OFF&&!LT2OFF)
+	{
+		USART1SendChar('A');
+		RotateMask=WHEEL_MASK_CLOCK;
+		RotateSpeedFactor=1170;
+		TranslateMask=WHEEL_MASK_RIGHT;
+	}
+	else if((!LT1OFF)&&LT2OFF)
+	{
+		USART1SendChar('D');
+		RotateMask=WHEEL_MASK_ANTICLOCK;
+		RotateSpeedFactor=1080;
+		TranslateMask=WHEEL_MASK_LEFT;
+	}
+	else
+	{
+		USART1SendChar('S');
+		RotateMask=WHEEL_MASK_EMPTY;
+		TranslateMask=WHEEL_MASK_EMPTY;
+	}
+	/*
 	unsigned char changePin = LineTrackResult^LineTrackResultLast;
 	if(changePin&&enableLineTrackChangeSend)
 	{
@@ -96,4 +121,5 @@ void CriticalDigitalLevelChange(void)
 			}
 		}
 	}
+	*/
 }

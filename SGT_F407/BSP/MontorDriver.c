@@ -1,9 +1,9 @@
 #include "MontorDriver.h"
 
-const MontorInstance MONTOR_FRONT_LEFT  = {TIM2,GPIO_Pin_0,GPIO_Pin_1,670,TIM_SetCompare1};
-const MontorInstance MONTOR_FRONT_RIGHT = {TIM3,GPIO_Pin_2,GPIO_Pin_3,780,TIM_SetCompare2};
-const MontorInstance MONTOR_BACK_LEFT   = {TIM4,GPIO_Pin_4,GPIO_Pin_5,600,TIM_SetCompare3};
-const MontorInstance MONTOR_BACK_RIGHT  = {TIM5,GPIO_Pin_6,GPIO_Pin_7,770,TIM_SetCompare4};
+const MontorInstance MONTOR_FRONT_LEFT  = {TIM2,GPIO_Pin_0,GPIO_Pin_1,1201,TIM_SetCompare1};
+const MontorInstance MONTOR_FRONT_RIGHT = {TIM3,GPIO_Pin_2,GPIO_Pin_3,1621,TIM_SetCompare2};
+const MontorInstance MONTOR_BACK_LEFT   = {TIM4,GPIO_Pin_4,GPIO_Pin_5,1231,TIM_SetCompare3};
+const MontorInstance MONTOR_BACK_RIGHT  = {TIM5,GPIO_Pin_6,GPIO_Pin_7,1542,TIM_SetCompare4};
 
 void MontorDriverConfig()
 {
@@ -145,7 +145,7 @@ int GetEncoderNum(const MontorInstance* montor)
 	if(count<3270)
 		return count;
 	else
-	  return 65530-count;
+	  return -65530+count;
 }
 
 int GetMontorSpeed(const MontorInstance* montor)

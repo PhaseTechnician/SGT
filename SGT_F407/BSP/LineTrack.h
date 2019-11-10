@@ -45,6 +45,7 @@ void CriticalDigitalLevelChange(void);
 #define LT6 (LineTrackResult&0b00100000?1:0)
 #define LT7 (LineTrackResult&0b01000000?1:0)
 #define LT8 (LineTrackResult&0b10000000?1:0)
+#define BIT_AT(OD,N) (OD&(0x01<<(N-1))?1:0)
 
 #define PIN1 0x01
 #define PIN2 0x02

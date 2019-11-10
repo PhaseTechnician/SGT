@@ -334,12 +334,12 @@ void SequenceControllerTest(void)
 void PIDTest(const MontorInstance* montor)
 {
 	int speed=0; 
-	//0.2 FL -0.1R
-	PIDInstance instance={300,0,0,0,0,0,1,0,0};
+	//600
+	PIDInstance instance={0000,0,0,0,0,0,8,0,0};
 	SetMontorRotation(true,montor);
 	while(1)
 	{
-		unsigned int count = GetEncoderNum(montor);
+		unsigned int count = GetMontorSpeed(montor);
 		speed=FinishOnePIDStep(&instance,count);
 		
 		USART1SendNumInt(count);
@@ -369,10 +369,10 @@ void MotionAnalysisTest(char c)
 	else if(c=='P')
 	{
 		MoveMask=WHEEL_MASK_LEFT;
-		MoveSpeedFactor=3000;
-		RotateMask=WHEEL_MASK_CLOCK;
-		RotateSpeedFactor=200;
-		TranslateMask=WHEEL_MASK_FORWARD;
+		MoveSpeedFactor=7000;
+		RotateMask=WHEEL_MASK_EMPTY;
+		RotateSpeedFactor=0;
+		TranslateMask=WHEEL_MASK_EMPTY;
 		TranslateSpeedFactor=0;
 		while(1)
 		{
@@ -382,17 +382,28 @@ void MotionAnalysisTest(char c)
 	}
 	else if(c=='T')
 	{
-		MoveSpeedFactor=0;
-		TrackerConfig(XMask);
-		if(LineTrackEnable(true))
-		{
-			LCD12864NumDraw(000,000);
-		}
+		MoveSpeedFactor=4000;
+		MoveMask=WHEEL_MASK_FORWARD;
+		RotateSpeedFactor=1300;
+		TranslateSpeedFactor=1000;
+		//TrackerConfig(XMask);
+		//if(LineTrackEnable(true))
+		//{
+		//	LCD12864NumDraw(000,000);
+		//}
+		int k=0;
+		DelayS(1);
 		while(1)
 		{
-			CriticalDigitalLevelChange();
-			//MotionAnalysisOnStep();
+			k++;
+			if(k>6)
+			{
+				CriticalDigitalLevelChange();
+				k=0;
+			}
+			MotionAnalysisOnStep();
 			DelayMs(100);
+			/*
 			switch(RotateMask)
 			{
 				case WHEEL_MASK_ANTICLOCK:
@@ -403,7 +414,7 @@ void MotionAnalysisTest(char c)
 					USART1SendChar('R');break;
 				case WHEEL_MASK_RIGHT:
 					USART1SendChar('L');break;
-			}
+			}*/
 			
 		}
 	}
