@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3</IncludePath>
+              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -592,6 +592,65 @@
               <FilePath>..\FreeRTOS\portable\MemMang\heap_4.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>BoardSupport</GroupName>
+          <Files>
+            <File>
+              <FileName>LED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\LED.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\BSP.c</FilePath>
+            </File>
+            <File>
+              <FileName>Serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\Serial.c</FilePath>
+            </File>
+            <File>
+              <FileName>Encoder_TIM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\Encoder_TIM.c</FilePath>
+            </File>
+            <File>
+              <FileName>MontorDriver_L298.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\MontorDriver_L298.c</FilePath>
+            </File>
+            <File>
+              <FileName>Delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\Delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU9250.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\MPU9250.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application</GroupName>
+        </Group>
+        <Group>
+          <GroupName>USB</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Doc</GroupName>
+          <Files>
+            <File>
+              <FileName>CodeRegulation.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\CodeRegulation.md</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Arithmetic</GroupName>
         </Group>
       </Groups>
     </Target>
