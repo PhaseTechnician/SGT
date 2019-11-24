@@ -1,5 +1,5 @@
-#ifndef _MONTORDRIVER_L298N_H
-#define _MONTORDRIVER_L298N_H
+#ifndef _MONTORDRIVER_3PIN_H
+#define _MONTORDRIVER_3PIN_H
 
 #include "stm32f10x.h"
 #include <stdbool.h>

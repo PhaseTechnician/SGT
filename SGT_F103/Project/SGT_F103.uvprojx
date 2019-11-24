@@ -637,9 +637,6 @@
           <GroupName>Application</GroupName>
         </Group>
         <Group>
-          <GroupName>USB</GroupName>
-        </Group>
-        <Group>
           <GroupName>Doc</GroupName>
           <Files>
             <File>
@@ -647,10 +644,27 @@
               <FileType>5</FileType>
               <FilePath>..\Doc\CodeRegulation.md</FilePath>
             </File>
+            <File>
+              <FileName>CommunicationProtocol.md</FileName>
+              <FileType>9</FileType>
+              <FilePath>..\Doc\CommunicationProtocol.md</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Arithmetic</GroupName>
+          <Files>
+            <File>
+              <FileName>PIDController.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\PIDController.c</FilePath>
+            </File>
+            <File>
+              <FileName>Hash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\Hash.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

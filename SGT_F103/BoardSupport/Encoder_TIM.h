@@ -8,10 +8,10 @@
  */
 
 //设置编码器
-void BSP_Encoder_Config();
+void BSP_Encoder_Config(void);
 //获取编码值
-int BSP_Encoder_GetCode();
+int BSP_Encoder_GetCode(void);
 //重置编码器
-void BSP_Encoder_Reset();
+void BSP_Encoder_Reset(void);
 
 #endif
