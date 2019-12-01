@@ -1,7 +1,7 @@
 #include "MPU9250.h"
 
-#define NSS_Low()  GPIO_ResetBits(GPIOC,GPIO_Pin_13)
-#define NSS_High() GPIO_SetBits(GPIOC,GPIO_Pin_13)
+#define NSS_Low()  GPIO_ResetBits(GPIOA,GPIO_Pin_4)
+#define NSS_High() GPIO_SetBits(GPIOA,GPIO_Pin_4)
 
 #define ADDR_Write(addr) (addr&0x7f)
 #define ADDR_Read(addr)  (addr|0x80)
@@ -76,7 +76,7 @@
 #define EXT_SENS_DATA_03    0x4c  //MPU9250 IIC外挂器件读取返回寄存器03
 
 
-void MpuConfig(void)
+void BSP_MPU_Config(void)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1,ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
@@ -107,22 +107,75 @@ void MpuConfig(void)
 	
 	NSS_High();
 	SPI_Cmd(SPI1,ENABLE);
-	
-	//MPUWrite(PWR_MGMT_1,0X00);//内部晶振，接触休眠
-	//MPUWrite(CONFIG,0x07);
 }
 
-inline bool CheckMPUOnline(void)
+void BSP_MPU_RegesterConfig(void)
+{
+	/*IIC
+	MPUWrite(INT_PIN_CFG ,0x30);// INT Pin / Bypass Enable Configuration  
+	MPUWrite(I2C_MST_CTRL,0x4d);//I2C MAster mode and Speed 400 kHz
+	MPUWrite(USER_CTRL ,0x20); // I2C_MST _EN 
+	MPUWrite(I2C_MST_DELAY_CTRL ,0x01);//延时使能I2C_SLV0 _DLY_ enable  
+	MPUWrite(I2C_SLV0_CTRL ,0x81); //enable IIC and EXT_SENS_DATA==1 Byte*/
+
+	MPUWrite(CONFIG, 0x07);      //低通滤波频率，典型值：0x07(3600Hz)此寄存器内决定Internal_Sample_Rate==8K
+	MPUWrite(SMPLRT_DIV, 0x07);  //陀螺仪采样率，典型值：0x07(1kHz) (SAMPLE_RATE= Internal_Sample_Rate / (1 + SMPLRT_DIV) )
+	MPUWrite(GYRO_CONFIG, 0x08); //陀螺仪自检及测量范围，典型值：0x18(不自检，2000deg/s)
+	MPUWrite(ACCEL_CONFIG_2, 0x08);//加速计高通滤波频率 典型值 ：0x08  （1.13kHz） 
+	MPUWrite(ACCEL_CONFIG, 0x08);//加速计自检、测量范围及高通滤波频率，典型值：0x00/+-2g. 0x08/+-4g. 0x10/+-8g. 0x18(不自检，16G)
+}
+
+inline void BSP_MPU_WakeUp(void)
+{
+	MPUWrite(PWR_MGMT_1,0X80);
+}
+
+inline bool BSP_MPU_CheckOnLine(void)
 {
 	return MPURead(WHO_AM_I)==0x71;
 }
 
+inline int16_t BSP_MPU_ReadACCX(void)
+{
+	return MPURead(ACCEL_XOUT_H)<<8|MPURead(ACCEL_XOUT_L); 
+}
+
+inline int16_t BSP_MPU_ReadACCY(void)
+{
+	return MPURead(ACCEL_YOUT_H)<<8|MPURead(ACCEL_YOUT_L); 
+}
+
+inline int16_t BSP_MPU_ReadACCZ(void)
+{
+	return MPURead(ACCEL_ZOUT_H)<<8|MPURead(ACCEL_ZOUT_L); 
+}
+
+inline int16_t BSP_MPU_ReadOMGX(void)
+{
+	return MPURead(GYRO_XOUT_H)<<8|MPURead(GYRO_XOUT_L); 
+}
+
+inline int16_t BSP_MPU_ReadOMGY(void)
+{
+	return MPURead(GYRO_YOUT_H)<<8|MPURead(GYRO_YOUT_L); 
+}
+
+inline int16_t BSP_MPU_ReadOMGZ(void)
+{
+	return MPURead(GYRO_ZOUT_H)<<8|MPURead(GYRO_ZOUT_L); 
+}
+
+inline int16_t BSP_MPU_ReadTEMP(void)
+{
+	return MPURead(TEMP_OUT_H)<<8|MPURead(TEMP_OUT_L); 
+}
+
 unsigned char MPUReadSendByte(unsigned char byte)
 {
-	while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET);
-	SPI_I2S_SendData(SPI3, byte);
-	while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_RXNE) == RESET);
-	return SPI_I2S_ReceiveData(SPI3); 
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	SPI_I2S_SendData(SPI1, byte);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+	return SPI_I2S_ReceiveData(SPI1); 
 }
 
 void MPUWrite(unsigned char addr,unsigned char value)

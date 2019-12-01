@@ -95,7 +95,7 @@ bool ClockDelayOpen = false;
 
 void Delay(int16_t us)
 {
-  ClockDelayOpen=true;
+  	ClockDelayOpen=true;
 	TIM_SetCounter(TIM6,65535-us);
 	TIM_Cmd(TIM6,ENABLE);
 	while(ClockDelayOpen);

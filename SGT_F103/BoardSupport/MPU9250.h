@@ -13,15 +13,22 @@
  *  PA4 NSS
  */
 
-extern float AccX,AccY,AccZ;
-extern float OmgX,OmgY,OmgZ;
-//extern float MagX,MagY,MagZ;
-extern float temp;
-
 //MPU相关资源初始化
-void MpuConfig(void);
+void BSP_MPU_Config(void);
+//MPU寄存器设置
+void BSP_MPU_RegesterConfig(void);
+//MPU9250唤醒设置
+void BSP_MPU_WakeUp(void);
 //MPU检测是否离线
-bool CheckMPUOnLine(void);
+bool BSP_MPU_CheckOnLine(void);
+
+int16_t BSP_MPU_ReadACCX(void);
+int16_t BSP_MPU_ReadACCY(void);
+int16_t BSP_MPU_ReadACCZ(void);
+int16_t BSP_MPU_ReadOMGX(void);
+int16_t BSP_MPU_ReadOMGY(void);
+int16_t BSP_MPU_ReadOMGZ(void);
+int16_t BSP_MPU_ReadTEMP(void);
 
 
 void MPUWrite(unsigned char addr,unsigned char value);
