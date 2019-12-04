@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport</IncludePath>
+              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -640,9 +640,9 @@
           <GroupName>BoardSupport</GroupName>
           <Files>
             <File>
-              <FileName>LED.c</FileName>
+              <FileName>Delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\BoardSupport\LED.c</FilePath>
+              <FilePath>..\BoardSupport\Delay.c</FilePath>
             </File>
             <File>
               <FileName>BSP.c</FileName>
@@ -650,9 +650,19 @@
               <FilePath>..\BoardSupport\BSP.c</FilePath>
             </File>
             <File>
+              <FileName>LED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\LED.c</FilePath>
+            </File>
+            <File>
               <FileName>Serial.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BoardSupport\Serial.c</FilePath>
+            </File>
+            <File>
+              <FileName>MontorDriver_3PIN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\MontorDriver_3PIN.c</FilePath>
             </File>
             <File>
               <FileName>Encoder_TIM.c</FileName>
@@ -660,24 +670,41 @@
               <FilePath>..\BoardSupport\Encoder_TIM.c</FilePath>
             </File>
             <File>
-              <FileName>Delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BoardSupport\Delay.c</FilePath>
-            </File>
-            <File>
               <FileName>MPU9250.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BoardSupport\MPU9250.c</FilePath>
-            </File>
-            <File>
-              <FileName>MontorDriver_3PIN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BoardSupport\MontorDriver_3PIN.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Application</GroupName>
+          <Files>
+            <File>
+              <FileName>Application.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Application.c</FilePath>
+            </File>
+            <File>
+              <FileName>DebugClass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DebugClass.c</FilePath>
+            </File>
+            <File>
+              <FileName>ExtenedFunctionClass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ExtenedFunctionClass.c</FilePath>
+            </File>
+            <File>
+              <FileName>MotionControlClass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\MotionControlClass.c</FilePath>
+            </File>
+            <File>
+              <FileName>OrderClass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\OrderClass.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Doc</GroupName>

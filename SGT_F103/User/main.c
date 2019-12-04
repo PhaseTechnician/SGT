@@ -44,7 +44,7 @@ void MPU_Task(void)
 	while(1)
 	{
 		vTaskDelay(100);
-		BSP_Serial_SendInt(BSP_MPU_ReadACCZ());
+		BSP_Serial_SendInt(BSP_MPU_ReadACCX());
 		BSP_Serial_SendChar('\n');
 	}
 }
@@ -60,14 +60,6 @@ int main()
 	
 	BSP_Serial_SendString("STM32 INIT FINISH");
 	
-	while(1)
-	{
-		BSP_Delay_DelayMs(1000);
-		BSP_LED_Open();
-		BSP_Delay_DelayMs(1000);
-		BSP_LED_Close();
-	}
-	
 	//创建开始任务
   xTaskCreate((TaskFunction_t )LED_Blink_Task,         //任务函数
                 (const char*    )"LED_Blink",          //任务名称
@@ -81,14 +73,13 @@ int main()
                 (void*          )NULL,      						//传递给任务函数的参数
                 (UBaseType_t    )2,         						//任务优先级
                 (TaskHandle_t*  )&Serial_HANDLE);   			//任务句柄  
-	/*
+	
 	xTaskCreate((TaskFunction_t )MPU_Task,         //任务函数
                 (const char*    )"MPU",          //任务名称
                 (uint16_t       )50,        						//任务堆栈大小
                 (void*          )NULL,      						//传递给任务函数的参数
                 (UBaseType_t    )3,         						//任务优先级
-                (TaskHandle_t*  )&MPU_HANDLE);   			//任务句柄  		
-	*/								
+                (TaskHandle_t*  )&MPU_HANDLE);   			//任务句柄  								
 	vTaskStartScheduler();
 	return 0;
 }
