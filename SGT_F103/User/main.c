@@ -13,10 +13,11 @@ int main()
 {
 	//初始化硬件设备
 	BSP_Modles_Config();
-	BSP_Serial_SendString("STM32 INIT FINISH");
-	
-	//调用任务创建
+	BSP_Serial_SendString("STM32 INIT FINISH\n");
+	//工作任务创建
 	Application_TaskCreat();
+	//通信管道建立
+	Application_PipeCreat();
 	//任务调度启动	
 	vTaskStartScheduler();
 	return 0;

@@ -3,6 +3,7 @@
 #include "MotionControlClass.h"
 #include "ExtenedFunctionClass.h"
 #include "OrderClass.h"
+#include "BSP.h"
 
 TaskHandle_t StatePrintTaskHandler;
 TaskHandle_t EncoderReadTaskHandler;
@@ -44,5 +45,20 @@ void Application_TaskCreat(void)
 	xTaskCreate((TaskFunction_t)BeepNoisyTask,(const char*)"BeepNoisyTask",
 		(uint16_t)50,(void*)NULL,(UBaseType_t)9,(TaskHandle_t*)&BeepNoisyTaskHandler);
 	
+}
+
+xQueueHandle MontorSpeedHandle;
+xQueueHandle MontorTragetSpeedHandle;
+xQueueHandle AttitudeHandle;
+xQueueHandle MotionControlOrderHandle;
+
+#define CreatNewPipe(handler,length,messageStruct,pipeName) {handler=xQueueCreate(length,sizeof(messageStruct));if(handler==NULL){BSP_Serial_SendString("Application_Pipe_Creat_Failed\n");BSP_Serial_SendString(pipeName);BSP_Serial_SendChar('\n');}}
+
+void Application_PipeCreat(void)
+{
+	CreatNewPipe(MontorSpeedHandle,1,MontorSpeed,"MontorSpeed");
+	CreatNewPipe(MontorTragetSpeedHandle,1,MontorSpeed,"MontorTragetSpeed");
+	CreatNewPipe(AttitudeHandle,1,float,"Attitude");
+	CreatNewPipe(MotionControlOrderHandle,1,MotionControlOrder,"MotionControlOrder");
 }
 

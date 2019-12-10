@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application</IncludePath>
+              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

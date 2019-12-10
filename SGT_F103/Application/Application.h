@@ -3,6 +3,7 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 
 extern TaskHandle_t StatePrintTaskHandler;
 extern TaskHandle_t EncoderReadTaskHandler;
@@ -14,5 +15,11 @@ extern TaskHandle_t OrderDistributeTaskHandler;
 extern TaskHandle_t OrderCMDTaskHandler;
 
 void Application_TaskCreat(void);
+
+extern xQueueHandle MontorSpeedHandle;
+extern xQueueHandle MontorTragetSpeedHandle;
+extern xQueueHandle AttitudeHandle;
+
+void Application_PipeCreat(void);
 
 #endif
