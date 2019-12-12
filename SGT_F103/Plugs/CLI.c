@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "CLI.h"
 
 typedef enum ParamTypeEnum
 {
@@ -22,7 +23,7 @@ typedef struct CMDStruct
 	void * FunctionPtr;
 }CMD;
 
-const CMD* CMDList = {};
+const CMD* CMDList = {0};
 //临时处理变量
 char* functionName;
 int paramsCount;
@@ -60,18 +61,4 @@ bool DealOneOrder(char* orderString)
 			}
 		}
 	}
-}
-
-char temp[1024];
-
-int mian()
-{
-	while (true)
-	{
-		if (NULL != fgets(temp,1024,stdin))
-		{
-			DealOneOrder(temp);
-		}
-	}
-	return 0;
 }

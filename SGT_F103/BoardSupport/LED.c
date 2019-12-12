@@ -12,10 +12,10 @@ void BSP_LED_Config(void)
 
 void BSP_LED_Open(void)
 {
-	GPIO_SetBits(GPIOC,GPIO_Pin_13);
+	GPIO_ResetBits(GPIOC,GPIO_Pin_13);
 }
 
 void BSP_LED_Close(void)
 {
-	GPIO_ResetBits(GPIOC,GPIO_Pin_13);
+	GPIO_SetBits(GPIOC,GPIO_Pin_13);
 }

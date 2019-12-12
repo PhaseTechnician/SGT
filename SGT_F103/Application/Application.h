@@ -5,6 +5,11 @@
 #include "task.h"
 #include "queue.h"
 
+#include "DebugClass.h"
+#include "MotionControlClass.h"
+#include "ExtenedFunctionClass.h"
+#include "OrderClass.h"
+
 extern TaskHandle_t StatePrintTaskHandler;
 extern TaskHandle_t EncoderReadTaskHandler;
 extern TaskHandle_t AttitudeSolutionTaskHandler;
@@ -19,6 +24,9 @@ void Application_TaskCreat(void);
 extern xQueueHandle MontorSpeedHandle;
 extern xQueueHandle MontorTragetSpeedHandle;
 extern xQueueHandle AttitudeHandle;
+extern xQueueHandle MotionControlOrderHandle;
+extern xQueueHandle ExtenedLEDOrderHandle;
+extern xQueueHandle ExtenedBeepOrderHandle;
 
 void Application_PipeCreat(void);
 

@@ -59,11 +59,11 @@ void USART1_IRQHandler(void)
 	{
 	  char c = USART_ReceiveData(USART1);
 		BSP_Serial_ReceiveBuffer[BSP_Serial_ReceiveBufferIndex] = c;
-		if(c!=0&&BSP_Serial_ReceiveBufferIndex<=BSP_Serial_MaxOrderLength)
+		if(c!=0&&c!=10&&c!=13&&BSP_Serial_ReceiveBufferIndex<=BSP_Serial_MaxOrderLength)
 		{
 			BSP_Serial_ReceiveBufferIndex++;
 		}
-		else
+		else if(BSP_Serial_ReceiveBufferIndex!=0)
 		{
 			BSP_Serial_ReceiveBufferIndex=0;
 			if(xQueueSendFromISR(BSP_Serial_ReceiveFIFO,BSP_Serial_ReceiveBuffer,&Receive_TaskSwitch)!=pdTRUE)
@@ -77,12 +77,12 @@ void USART1_IRQHandler(void)
 
 inline void BSP_Serial_Read(char* orderPtr)
 {
-	xQueueReceive(BSP_Serial_ReceiveFIFO,orderPtr,10);
+	xQueueReceive(BSP_Serial_ReceiveFIFO,orderPtr,portMAX_DELAY);
 }
 
 inline void BSP_Serial_Peek(char* orderPtr)
 {
-	xQueuePeek(BSP_Serial_ReceiveFIFO,orderPtr,10);
+	xQueuePeek(BSP_Serial_ReceiveFIFO,orderPtr,portMAX_DELAY);
 }
 
 

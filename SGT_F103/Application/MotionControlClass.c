@@ -13,6 +13,7 @@ PIDInstance PID1,PID2,PID3,PID4;
 void EncoderReadTask(void)
 {
 	MontorSpeed speedInformation;
+	TickType_t xLastWakeTime;
 	while(1)
 	{
 	//从编码器获取数据
@@ -24,6 +25,7 @@ void EncoderReadTask(void)
 	
 	//发送到队列
 	xQueueOverwrite(MontorSpeedHandle,&speedInformation);
+	vTaskDelayUntil(&xLastWakeTime,100);
 	}
 }
 
@@ -33,7 +35,7 @@ void AttitudeSolutionTask(void)
 	{
 	if(BSP_MPU_CheckOnLine())
 	{
-		BSP_Serial_SendString("MPU SUCCESS");
+		BSP_Serial_SendString("MPU SUCCESS\n");
 		BSP_MPU_WakeUp();
 		vTaskDelay(100);
 		BSP_MPU_RegesterConfig();
@@ -41,7 +43,8 @@ void AttitudeSolutionTask(void)
 	}
 	else
 	{
-		BSP_Serial_SendString("MPU  FAIL");
+		BSP_Serial_SendString("MPU  FAIL\n");
+		while(1);
 	}
 
 	//从IMU获取原始姿态数据
@@ -57,6 +60,7 @@ void AttitudeSolutionTask(void)
 	
 	//发送到队列
 	
+	vTaskDelay(100);//temp
 	}
 }
 
@@ -88,11 +92,12 @@ void MotorSpeedControlTask(void)
 
 void MotionControlTask(void)
 {
+	MotionControlOrder ControlOrder;
 	while(1)
 	{
 	vTaskDelay(500);
 	//从队列获取姿态修改指令【非阻塞】
-	
+	xQueueReceive(MotionControlOrderHandle,&ControlOrder,0);
 	//从队列获取IMU姿态信息
 	
 	//解算合适的四轮目标速度

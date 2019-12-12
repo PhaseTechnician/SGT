@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic</IncludePath>
+              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic;..\Plugs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -740,6 +740,9 @@
               <FilePath>..\Arthmetic\Filter.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Plug</GroupName>
         </Group>
       </Groups>
     </Target>
