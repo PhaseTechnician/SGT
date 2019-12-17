@@ -10,7 +10,7 @@ void BeepNoisyTask(void)
 	while(1)
 	{
 		//获取蜂鸣器信号控制量
-		xQueueReceive(ExtenedLEDOrderHandle,&beepOrder,portMAX_DELAY);
+		xQueueReceive(ExtenedBeepOrderHandle,&beepOrder,portMAX_DELAY);
 		//进行响应
 		if(beepOrder==ExtenedOrder_Beep_On)
 		{

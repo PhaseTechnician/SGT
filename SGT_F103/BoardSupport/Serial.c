@@ -65,6 +65,7 @@ void USART1_IRQHandler(void)
 		}
 		else if(BSP_Serial_ReceiveBufferIndex!=0)
 		{
+			BSP_Serial_ReceiveBuffer[BSP_Serial_ReceiveBufferIndex] = 0;
 			BSP_Serial_ReceiveBufferIndex=0;
 			if(xQueueSendFromISR(BSP_Serial_ReceiveFIFO,BSP_Serial_ReceiveBuffer,&Receive_TaskSwitch)!=pdTRUE)
 			{

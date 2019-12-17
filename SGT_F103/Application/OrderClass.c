@@ -2,13 +2,18 @@
 
 #include "BSP.h"
 #include "Application.h"
+#include "FunctionCMD.h"
 
+char order[BSP_Serial_MaxOrderLength+1]={0};
 
 void OrderDistributeTask(void)
 {
 	while(1)
 	{
-		char order[BSP_Serial_MaxOrderLength+1]={0};
+		for(int i=0;i<BSP_Serial_MaxOrderLength+1;i++)
+		{
+			order[i]=0;
+		}
 		//从队列获取指令
 		BSP_Serial_Read(order);
 		//分发指令到其他队列
@@ -16,6 +21,7 @@ void OrderDistributeTask(void)
 		switch(order[0])
 		{
 			case '>'://CMD命令
+				CallCMD(order+1);
 				break;
 			case 'L'://光源控制
 				switch(order[1])
@@ -62,15 +68,5 @@ void OrderDistributeTask(void)
 		{
 			BSP_Serial_SendString("ERROR ORDER\n");
 		}
-	}
-}
-
-void OrderCMDTask(void)
-{
-	while(1)
-	{
-	//从队列获取CMD命令
-	vTaskDelay(500);
-	//处理CMD命令
 	}
 }

@@ -743,6 +743,18 @@
         </Group>
         <Group>
           <GroupName>Plug</GroupName>
+          <Files>
+            <File>
+              <FileName>FreeRTOS_CLI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Plugs\FreeRTOS_CLI.c</FilePath>
+            </File>
+            <File>
+              <FileName>FunctionCMD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Plugs\FunctionCMD.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

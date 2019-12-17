@@ -17,7 +17,7 @@ extern TaskHandle_t MotorSpeedControlTaskHandler;
 extern TaskHandle_t MotionControlTaskHandler;
 extern TaskHandle_t BeepNoisyTaskHandler;
 extern TaskHandle_t OrderDistributeTaskHandler;
-extern TaskHandle_t OrderCMDTaskHandler;
+//extern TaskHandle_t OrderCMDTaskHandler;
 
 void Application_TaskCreat(void);
 

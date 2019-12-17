@@ -7,7 +7,7 @@ TaskHandle_t AttitudeSolutionTaskHandler;
 TaskHandle_t MotorSpeedControlTaskHandler;
 TaskHandle_t MotionControlTaskHandler;
 TaskHandle_t OrderDistributeTaskHandler;
-TaskHandle_t OrderCMDTaskHandler;
+//TaskHandle_t OrderCMDTaskHandler;
 TaskHandle_t LEDControlsTaskHandler;
 TaskHandle_t BeepNoisyTaskHandler;
 
@@ -32,8 +32,9 @@ void Application_TaskCreat(void)
 	xTaskCreate((TaskFunction_t)OrderDistributeTask,(const char*)"OrderDistributeTask",
 		(uint16_t)50,(void*)NULL,(UBaseType_t)6,(TaskHandle_t*)&OrderDistributeTaskHandler);
 
-	xTaskCreate((TaskFunction_t)OrderCMDTask,(const char*)"OrderCMDTask",
-		(uint16_t)50,(void*)NULL,(UBaseType_t)7,(TaskHandle_t*)&OrderCMDTaskHandler);
+//  CMD 目前只会直接调用目标函数一次
+//	xTaskCreate((TaskFunction_t)OrderCMDTask,(const char*)"OrderCMDTask",
+//		(uint16_t)50,(void*)NULL,(UBaseType_t)7,(TaskHandle_t*)&OrderCMDTaskHandler);
 
 	xTaskCreate((TaskFunction_t)LEDControlsTask,(const char*)"LEDControlsTask",
 		(uint16_t)50,(void*)NULL,(UBaseType_t)1,(TaskHandle_t*)&LEDControlsTaskHandler);
