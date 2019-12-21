@@ -6,6 +6,7 @@ void BSP_Modles_Config(void)
 	BSP_Delay_Config();
 	BSP_LED_Config();
 	BSP_Serial_Config(9600);
+	BSP_KeyBoard_Config();
 	BSP_MontorDriver_3Pin_Config();
 	BSP_Encoder_Config();
 	BSP_MPU_Config();//ƒ≥¥Œ≤‚ ‘÷–MPU”ÎEncoder≥ÂÕª

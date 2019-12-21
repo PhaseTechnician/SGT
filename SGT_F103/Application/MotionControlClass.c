@@ -21,8 +21,11 @@ void EncoderReadTask(void)
 	speedInformation.speed2 = BSP_Encoder_GetCode(TIM3);
 	speedInformation.speed3 = BSP_Encoder_GetCode(TIM4);
 	speedInformation.speed4 = BSP_Encoder_GetCode(TIM5);
-	//进行处理
-	
+	//进行处理,重新映射范围实现编码器一致性
+	speedInformation.speed1 = speedInformation.speed1*1;
+	speedInformation.speed2 = speedInformation.speed2*1;
+	speedInformation.speed3 = speedInformation.speed3*1;
+	speedInformation.speed4 = speedInformation.speed4*1;
 	//发送到队列
 	xQueueOverwrite(MontorSpeedHandle,&speedInformation);
 	vTaskDelayUntil(&xLastWakeTime,100);

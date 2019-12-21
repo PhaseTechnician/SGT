@@ -674,6 +674,11 @@
               <FileType>1</FileType>
               <FilePath>..\BoardSupport\MPU9250.c</FilePath>
             </File>
+            <File>
+              <FileName>KeyBoard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\KeyBoard.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -683,11 +688,6 @@
               <FileName>Application.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\Application.c</FilePath>
-            </File>
-            <File>
-              <FileName>DebugClass.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DebugClass.c</FilePath>
             </File>
             <File>
               <FileName>ExtenedFunctionClass.c</FileName>
