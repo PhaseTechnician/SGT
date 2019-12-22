@@ -3,6 +3,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "Application.h"
+#include "stdio.h"
+#include "string.h"
 
 void BeepNoisyTask(void)
 {
@@ -67,3 +69,42 @@ void LEDControlsTask(void)
 	}
 }
 
+void LCDDisplayTask(void)
+{
+	BSP_LCD12864_Clear();
+	int times = 0;
+	TickType_t timeDelay = 0;
+	while(1)
+	{
+		unsigned char code;
+		static char LCDBuffer[16];
+		memset(LCDBuffer, 0, sizeof(LCDBuffer));
+		xQueueReceive(KeyCodeHandler,&code,0);
+		sprintf(LCDBuffer,"Time is %d",times);
+		BSP_LCD12864_WriteAtLine_EN(LCDBuffer,0);
+		vTaskDelay(10);
+		memset(LCDBuffer, 0, sizeof(LCDBuffer));
+		sprintf(LCDBuffer,"KeyCode: %3X",code);
+		BSP_LCD12864_WriteAtLine_EN(LCDBuffer,1);
+		times++;
+		vTaskDelayUntil(&timeDelay,1000);
+	}
+}
+
+void KeyBoardScanTask(void)
+{
+	unsigned char lastCode;
+	while(1)
+	{
+		unsigned char code = BSP_KeyBoard_GetCode();
+		if(code!=lastCode)
+		{
+			lastCode = code;
+			xQueueSend(KeyCodeHandler,&code,0);
+			BSP_LED_Open();
+			vTaskDelay(200);
+			BSP_LED_Close();
+		}
+		vTaskDelay(50);
+	}
+}

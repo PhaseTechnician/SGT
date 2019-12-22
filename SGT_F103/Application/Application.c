@@ -10,6 +10,8 @@ TaskHandle_t OrderDistributeTaskHandler;
 //TaskHandle_t OrderCMDTaskHandler;
 TaskHandle_t LEDControlsTaskHandler;
 TaskHandle_t BeepNoisyTaskHandler;
+TaskHandle_t LCDDisplayTaskHandler;
+TaskHandle_t KeyBoardScanTaskHandler;
 
 void Application_TaskCreat(void)
 {
@@ -41,7 +43,12 @@ void Application_TaskCreat(void)
 
 	xTaskCreate((TaskFunction_t)BeepNoisyTask,(const char*)"BeepNoisyTask",
 		(uint16_t)50,(void*)NULL,(UBaseType_t)1,(TaskHandle_t*)&BeepNoisyTaskHandler);
-
+	
+	xTaskCreate((TaskFunction_t)LCDDisplayTask,(const char*)"LCDDisplayTask",
+		(uint16_t)50,(void*)NULL,(UBaseType_t)1,(TaskHandle_t*)&LCDDisplayTaskHandler);
+		
+	xTaskCreate((TaskFunction_t)KeyBoardScanTask,(const char*)"KeyBoardScanTask",
+		(uint16_t)50,(void*)NULL,(UBaseType_t)2,(TaskHandle_t*)&KeyBoardScanTaskHandler);
 }
 
 xQueueHandle MontorSpeedHandle;
@@ -50,6 +57,7 @@ xQueueHandle AttitudeHandle;
 xQueueHandle MotionControlOrderHandle;
 xQueueHandle ExtenedLEDOrderHandle;
 xQueueHandle ExtenedBeepOrderHandle;
+xQueueHandle KeyCodeHandler;
 
 #define CreatNewPipe(handler,length,messageStruct,pipeName) {handler=xQueueCreate(length,sizeof(messageStruct));if(handler==NULL){BSP_Serial_SendString("Application_Pipe_Creat_Failed\n");BSP_Serial_SendString(pipeName);BSP_Serial_SendChar('\n');}}
 
@@ -61,5 +69,6 @@ void Application_PipeCreat(void)
 	CreatNewPipe(MotionControlOrderHandle,1,MotionControlOrder,"MotionControlOrder");
 	CreatNewPipe(ExtenedLEDOrderHandle,3,ExtendLEDOrder,"ExtenedLEDOrder");
 	CreatNewPipe(ExtenedBeepOrderHandle,1,ExtenedBeepOrder,"ExtenedBeepOrder");
+	CreatNewPipe(KeyCodeHandler,20,unsigned char,"KeyCode");
 }
 

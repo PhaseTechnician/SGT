@@ -6,6 +6,8 @@
 #include "BSP.h"
 #include "Application.h"
 
+//256KB ROM 48KB RAM
+
 int main()
 {
 	//初始化硬件设备

@@ -679,6 +679,11 @@
               <FileType>1</FileType>
               <FilePath>..\BoardSupport\KeyBoard.c</FilePath>
             </File>
+            <File>
+              <FileName>LCD12864.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\LCD12864.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -6,6 +6,7 @@
 #include "Delay.h"
 #include "Serial.h"
 #include "KeyBoard.h"
+#include "LCD12864.h"
 #include "Encoder_TIM.h"
 #include "MontorDriver_3Pin.h"
 #include "MPU9250.h"

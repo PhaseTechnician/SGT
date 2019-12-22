@@ -27,6 +27,19 @@ void BSP_KeyBoard_Config(void)
 	SDA_H();
 }
 
+inline bool BSP_KeyBoard_IsUp(unsigned char code)
+{
+	return code&0x40;
+}
+bool BSP_KeyBoard_IsDown(unsigned char code)
+{
+	return !code&0x40;
+}
+unsigned char BSP_KeyBoard_GetCodeName(unsigned char code)
+{
+	return code&0x2f;
+}
+
 void SDA_OUT()
 {
 	GPIO_InitTypeDef GPIO_InitStructure;

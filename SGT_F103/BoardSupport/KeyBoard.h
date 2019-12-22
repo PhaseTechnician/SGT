@@ -2,6 +2,7 @@
 #define _KEYBOARD_H
 
 #include "stm32f10x.h"
+#include "stdbool.h"
 /*
  * IIC 1
  * PB9 SDA PB10 SCL
@@ -19,5 +20,8 @@
 
 void BSP_KeyBoard_Config(void);
 unsigned char BSP_KeyBoard_GetCode(void);
+bool BSP_KeyBoard_IsUp(unsigned char code);
+bool BSP_KeyBoard_IsDown(unsigned char code);
+unsigned char BSP_KeyBoard_GetCodeName(unsigned char code);
 
 #endif

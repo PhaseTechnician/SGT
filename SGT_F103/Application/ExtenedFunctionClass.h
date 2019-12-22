@@ -24,4 +24,8 @@ void BeepNoisyTask(void);
 
 void LEDControlsTask(void);
 
+void LCDDisplayTask(void);
+
+void KeyBoardScanTask(void);
+
 #endif
