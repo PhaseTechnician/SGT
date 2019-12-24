@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic;..\Plugs</IncludePath>
+              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic;..\Plugs;..\Arthmetic\MathExtern</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -743,6 +743,21 @@
               <FileName>Filter.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Arthmetic\Filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>ArrayOperation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtern\ArrayOperation.c</FilePath>
+            </File>
+            <File>
+              <FileName>Vector3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtern\Vector3.c</FilePath>
+            </File>
+            <File>
+              <FileName>RotationRelated.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtern\RotationRelated.c</FilePath>
             </File>
           </Files>
         </Group>

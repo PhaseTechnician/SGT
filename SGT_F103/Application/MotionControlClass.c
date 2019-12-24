@@ -34,11 +34,9 @@ void EncoderReadTask(void)
 
 void AttitudeSolutionTask(void)
 {
-	while(1)
-	{
 	if(BSP_MPU_CheckOnLine())
 	{
-		BSP_Serial_SendString("MPU SUCCESS\n");
+		BSP_Serial_SendString("MPU9250 Online\n");
 		BSP_MPU_WakeUp();
 		vTaskDelay(100);
 		BSP_MPU_RegesterConfig();
@@ -46,10 +44,11 @@ void AttitudeSolutionTask(void)
 	}
 	else
 	{
-		BSP_Serial_SendString("MPU  FAIL\n");
+		BSP_Serial_SendString("MPU9250 Offline,Please Check Connected\n");
 		while(1);
 	}
-
+	while(1)
+	{
 	//从IMU获取原始姿态数据
 	BSP_MPU_ReadACCX();
 	BSP_MPU_ReadACCY();
@@ -60,9 +59,10 @@ void AttitudeSolutionTask(void)
 	//..
 	
 	//解算当前姿态
+	BSP_Serial_SendInt(BSP_MPU_ReadACCX());
+	BSP_Serial_SendChar('\n');
 	
 	//发送到队列
-	
 	vTaskDelay(100);//temp
 	}
 }
@@ -89,7 +89,10 @@ void MotorSpeedControlTask(void)
 		realSpeedInformation.speed3=FinishOnePIDStep(&PID3,realSpeedInformation.speed3);
 		realSpeedInformation.speed4=FinishOnePIDStep(&PID4,realSpeedInformation.speed4);
 	//输出控制量
-	//BSP_MontorDriver_3Pin_SetOutPut();
+	BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed1,MontorFL);
+	BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed2,MontorFR);
+	BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed3,MontorBL);
+	BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed4,MontorBR);
 	}
 }
 
@@ -102,7 +105,7 @@ void MotionControlTask(void)
 	//从队列获取姿态修改指令【非阻塞】
 	xQueueReceive(MotionControlOrderHandle,&ControlOrder,0);
 	//从队列获取IMU姿态信息
-	
+	//xQueueReceive(AttitudeHandle,
 	//解算合适的四轮目标速度
 	
 	//发送到队列

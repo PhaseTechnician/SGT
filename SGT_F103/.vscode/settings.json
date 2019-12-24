@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "encoder_tim.h": "c",
+        "stm32f10x.h": "c"
+    }
+}

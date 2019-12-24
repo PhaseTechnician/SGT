@@ -2,12 +2,12 @@
 #define _APPLICATION_H
 
 #include "FreeRTOS.h"
-#include "task.h"
 #include "queue.h"
+#include "task.h"
 
 #include "DebugClass.h"
-#include "MotionControlClass.h"
 #include "ExtenedFunctionClass.h"
+#include "MotionControlClass.h"
 #include "OrderClass.h"
 
 extern TaskHandle_t StatePrintTaskHandler;

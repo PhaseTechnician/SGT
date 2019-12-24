@@ -4,14 +4,24 @@
 #include "stm32f10x.h"
 #include <stdbool.h>
 
+#define MPU9250_SPI
+
+#ifdef MPU9250_SPI
 /*
  * 姿态传感器MPU
- * SPI3
+ * SPI1
  *  PA5 SCLK
  *  PA6 MISO
  *  PA7 MOSI
  *  PA4 NSS
+ *  FSYNC GND
  */
+#endif
+#ifdef MPU9250_IIC
+/*
+	* IIC2 PB10 SCL    PB11 SDA
+	*/
+#endif	
 
 //MPU相关资源初始化
 void BSP_MPU_Config(void);
@@ -34,4 +44,6 @@ int16_t BSP_MPU_ReadTEMP(void);
 void MPUWrite(unsigned char addr,unsigned char value);
 unsigned char MPURead(unsigned char addr);
 unsigned char MPUReadSendByte(unsigned char byte);
+
+
 #endif

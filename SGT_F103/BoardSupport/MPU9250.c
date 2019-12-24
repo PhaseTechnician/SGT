@@ -1,13 +1,5 @@
 #include "MPU9250.h"
 
-#define NSS_Low()  GPIO_ResetBits(GPIOA,GPIO_Pin_4)
-#define NSS_High() GPIO_SetBits(GPIOA,GPIO_Pin_4)
-
-#define ADDR_Write(addr) (addr&0x7f)
-#define ADDR_Read(addr)  (addr|0x80)
-#define DATA(value)      value
-#define EMPTY_CODE 0xff
-
 // 定义MPU9250内部地址
 /*****************************************************************/
 #define	SMPLRT_DIV		                      0x19 //陀螺仪采样率
@@ -75,21 +67,26 @@
 #define EXT_SENS_DATA_02    0x4b  //MPU9250 IIC外挂器件读取返回寄存器02
 #define EXT_SENS_DATA_03    0x4c  //MPU9250 IIC外挂器件读取返回寄存器03
 
+#ifdef MPU9250_SPI
+
+#define NSS_Low()  GPIO_ResetBits(GPIOA,GPIO_Pin_4)
+#define NSS_High() GPIO_SetBits(GPIOA,GPIO_Pin_4)
+
+#define ADDR_Write(addr) (addr&0x7f)
+#define ADDR_Read(addr)  (addr|0x80)
+#define DATA(value)      value
+#define EMPTY_CODE 	0xff
 
 void BSP_MPU_Config(void)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1,ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
 	
-	
 	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOA, &GPIO_InitStructure); 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
@@ -101,9 +98,9 @@ void BSP_MPU_Config(void)
 	SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
 	SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
 	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;//32极限
+	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;
 	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;//高位在前
-	SPI_InitStructure.SPI_CRCPolynomial = 2;
+	SPI_InitStructure.SPI_CRCPolynomial = 7;
 	SPI_Init(SPI1, &SPI_InitStructure);
 	
 	NSS_High();
@@ -131,7 +128,7 @@ inline void BSP_MPU_WakeUp(void)
 	MPUWrite(PWR_MGMT_1,0X80);
 }
 
-inline bool BSP_MPU_CheckOnLine(void)
+bool BSP_MPU_CheckOnLine(void)
 {
 	return MPURead(WHO_AM_I)==0x71;
 }
@@ -191,7 +188,37 @@ unsigned char MPURead(unsigned char addr)
 {
 	NSS_Low();
 	MPUReadSendByte(ADDR_Read(addr));
-	unsigned char res = MPUReadSendByte(EMPTY_CODE);
+	unsigned char res = MPUReadSendByte(0xff);
 	NSS_High();
 	return res;
 }
+#endif	
+#ifdef MPU9250_IIC
+
+void BSP_MPU_Config(void)
+{
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
+	
+	GPIO_PinRemapConfig(GPIO_Remap_I2C1,ENABLE);
+	
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10|GPIO_Pin_11;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(GPIOB, &GPIO_InitStructure); 
+	
+	I2C_InitTypeDef I2CInitStructure;
+	
+	
+}
+//MPU寄存器设置
+void BSP_MPU_RegesterConfig(void);
+//MPU9250唤醒设置
+void BSP_MPU_WakeUp(void);
+//MPU检测是否离线
+bool BSP_MPU_CheckOnLine(void);
+
+#endif
+
+	
