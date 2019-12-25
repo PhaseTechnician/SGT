@@ -71,3 +71,8 @@ Vector3 V3Subtract(Vector3 const vector1, Vector3 const vector2)
     vector.z = vector1.z - vector2.z;
     return vector;
 }
+//求取夹角
+float V3GetAngleFormV1toV2(Vector3 const vector1, Vector3 const vector2)
+{
+    return V3Dot(vector1, vector2) / V3Length(vector1) / V3Length(vector2);
+}

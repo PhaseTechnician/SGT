@@ -1,6 +1,6 @@
 #include "Filter.h"
 
-#ifdef FILTER_SLIDER_USE
+
 void SliderFilter_PushOneInt(SliderIntFilter *filterInstance, int value)
 {
     filterInstance->index++;
@@ -19,4 +19,4 @@ void SliderFilter_PushOneFloat(SliderFloatFilter *filterInstance, float value)
     }
     filterInstance->valuePtr[filterInstance->index] = value;
 }
-#endif
+

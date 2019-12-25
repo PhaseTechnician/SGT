@@ -16,7 +16,7 @@ Quaternion EulerAnglesToQuaternion(EulerAngle eulerAngle)
     quaternion.x = sinRoll * cosPitch * cosYam - cosRoll * sinPitch * sinYaw;
     quaternion.y = cosRoll * sinPitch * cosYam + sinRoll * cosPitch * sinYaw;
     quaternion.z = cosRoll * cosPitch * sinYaw - sinRoll * sinPitch * cosYam;
-		return quaternion;
+	return quaternion;
 }
 
 RotationMatrix QuaternionToRotationMatrix(Quaternion quaternion)

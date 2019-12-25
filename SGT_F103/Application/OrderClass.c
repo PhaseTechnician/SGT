@@ -66,7 +66,7 @@ void OrderDistributeTask(void)
 		}
 		if(Error)
 		{
-			BSP_Serial_SendString("ERROR ORDER\n");
+			//BSP_Serial_SendString("ERROR ORDER\n");
 		}
 	}
 }

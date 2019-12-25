@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "BSP.h"
+#include "MathExtensionType.h"
 
 TaskHandle_t StatePrintTaskHandler;
 TaskHandle_t EncoderReadTaskHandler;
@@ -74,7 +75,7 @@ void Application_PipeCreat(void)
 {
 	CreatNewPipe(MontorSpeedHandle, 1, MontorSpeed, "MontorSpeed");
 	CreatNewPipe(MontorTragetSpeedHandle, 1, MontorSpeed, "MontorTragetSpeed");
-	CreatNewPipe(AttitudeHandle, 1, float, "Attitude");
+	CreatNewPipe(AttitudeHandle, 1, EulerAngle, "Attitude");
 	CreatNewPipe(MotionControlOrderHandle, 1, MotionControlOrder, "MotionControlOrder");
 	CreatNewPipe(ExtenedLEDOrderHandle, 3, ExtendLEDOrder, "ExtenedLEDOrder");
 	CreatNewPipe(ExtenedBeepOrderHandle, 1, ExtenedBeepOrder, "ExtenedBeepOrder");

@@ -43,7 +43,7 @@ void LEDControlsTask(void)
 	ExtendLEDOrder ledOrder;
 	xTaskCreate((TaskFunction_t)LED_Board_Blink,(const char*)"LED_OnBoard_Blink",
 		(uint16_t)50,(void*)NULL,(UBaseType_t)1,(TaskHandle_t*)&LED_Board_BlinkHandler);
-	vTaskSuspend(LED_Board_BlinkHandler);
+	//vTaskSuspend(LED_Board_BlinkHandler);
 	while(1)
 	{
 		//获取LED信号控制量

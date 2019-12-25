@@ -13,7 +13,6 @@ int main()
 	//初始化硬件设备
 	BSP_Modles_Config();
 	BSP_Serial_SendString("BSP Load Finish\n");
-	BSP_MPU_WakeUp();
 	//工作任务创建
 	Application_TaskCreat();
 	BSP_Serial_SendString("Application Creat Finish\n");

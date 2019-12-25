@@ -1,12 +1,7 @@
 #ifndef _VECTOR3_H
 #define _VECTOR3_H
 
-typedef struct Vector3Struct
-{
-    float x;
-    float y;
-    float z;
-} Vector3;
+#include "MathExtensionType.h"
 
 //以下基础定义基于 右手系 左右为X，前后为Y，上下为Z
 extern const Vector3 Vector3_One;
@@ -34,5 +29,7 @@ float V3Length(Vector3 const vector);
 Vector3 V3Add(Vector3 const vector1, Vector3 const vector2);
 //求差
 Vector3 V3Subtract(Vector3 const vector1, Vector3 const vector2);
+//求角度
+float V3GetAngleFormV1toV2(Vector3 const vector1, Vector3 const vector2);
 
 #endif

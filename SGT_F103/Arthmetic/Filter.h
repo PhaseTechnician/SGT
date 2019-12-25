@@ -1,8 +1,6 @@
 #ifndef _FILTER_H
 #define _FILTER_H
 
-#define FILTER_SLIDER_USE
-
 /*
  * 
  */
@@ -14,7 +12,6 @@ typedef struct FirstOrderComplementaryFilterStruct
 
 float Filter_FOC_Step(FOCFilter filter,float value1,float value2);*/
 
-#ifdef FILTER_SLIDER_USE
 /*
  * Slider 滑动滤波器
  * Capacity 滤波容量
@@ -36,6 +33,5 @@ typedef struct SliderFloatFilter
 
 void SliderFilter_PushOneInt(SliderIntFilter *filterInstance, int value);
 void SliderFilter_PushOneFloat(SliderFloatFilter *filterInstance, float value);
-#endif
 
 #endif

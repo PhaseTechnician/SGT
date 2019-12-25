@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic;..\Plugs;..\Arthmetic\MathExtern</IncludePath>
+              <IncludePath>..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\Libraries\USB\USB_Config\inc;..\Libraries\USB\STM32_USB-FS-Device_Driver\inc;..\BoardSupport;..\Application;..\Arthmetic;..\Plugs;..\Arthmetic\MathExtension</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -747,17 +747,42 @@
             <File>
               <FileName>ArrayOperation.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Arthmetic\MathExtern\ArrayOperation.c</FilePath>
-            </File>
-            <File>
-              <FileName>Vector3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Arthmetic\MathExtern\Vector3.c</FilePath>
+              <FilePath>..\Arthmetic\MathExtension\ArrayOperation.c</FilePath>
             </File>
             <File>
               <FileName>RotationRelated.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Arthmetic\MathExtern\RotationRelated.c</FilePath>
+              <FilePath>..\Arthmetic\MathExtension\RotationRelated.c</FilePath>
+            </File>
+            <File>
+              <FileName>Vector3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtension\Vector3.c</FilePath>
+            </File>
+            <File>
+              <FileName>Vector4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtension\Vector4.c</FilePath>
+            </File>
+            <File>
+              <FileName>AHRS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\AHRS.c</FilePath>
+            </File>
+            <File>
+              <FileName>MathExtensionType.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtension\MathExtensionType.c</FilePath>
+            </File>
+            <File>
+              <FileName>Vector2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MathExtension\Vector2.c</FilePath>
+            </File>
+            <File>
+              <FileName>MotionAnalysis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\MotionAnalysis.c</FilePath>
             </File>
           </Files>
         </Group>
