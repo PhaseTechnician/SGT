@@ -83,13 +83,18 @@ void BSP_MPU_Config(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
 	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_7;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	GPIO_ResetBits(GPIOA, GPIO_Pin_6);
 
 	SPI_InitTypeDef SPI_InitStructure;
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
@@ -109,18 +114,22 @@ void BSP_MPU_Config(void)
 
 void BSP_MPU_RegesterConfig(void)
 {
-	/*IIC
-	MPUWrite(INT_PIN_CFG ,0x30);// INT Pin / Bypass Enable Configuration  
-	MPUWrite(I2C_MST_CTRL,0x4d);//I2C MAster mode and Speed 400 kHz
-	MPUWrite(USER_CTRL ,0x20); // I2C_MST _EN 
-	MPUWrite(I2C_MST_DELAY_CTRL ,0x01);//延时使能I2C_SLV0 _DLY_ enable  
-	MPUWrite(I2C_SLV0_CTRL ,0x81); //enable IIC and EXT_SENS_DATA==1 Byte*/
+	MPUWrite(CONFIG, 0X07);
+	//IIC
+	MPUWrite(INT_PIN_CFG, 0x30);//30	// INT Pin / Bypass Enable Configuration
+	MPUWrite(I2C_MST_CTRL, 0x4d);		//I2C MAster mode and Speed 400 kHz
+	MPUWrite(USER_CTRL, 0x20);			// I2C_MST _EN
+	MPUWrite(I2C_MST_DELAY_CTRL, 0x01); //延时使能I2C_SLV0 _DLY_ enable
+	MPUWrite(I2C_SLV0_CTRL, 0x81);		//enable IIC and EXT_SENS_DATA==1 Byte
 
 	MPUWrite(CONFIG, 0x07);			//低通滤波频率，典型值：0x07(3600Hz)此寄存器内决定Internal_Sample_Rate==8K
 	MPUWrite(SMPLRT_DIV, 0x07);		//陀螺仪采样率，典型值：0x07(1kHz) (SAMPLE_RATE= Internal_Sample_Rate / (1 + SMPLRT_DIV) )
 	MPUWrite(GYRO_CONFIG, 0x08);	//陀螺仪自检及测量范围，典型值：0x18(不自检，2000deg/s)
 	MPUWrite(ACCEL_CONFIG_2, 0x08); //加速计高通滤波频率 典型值 ：0x08  （1.13kHz）
 	MPUWrite(ACCEL_CONFIG, 0x08);   //加速计自检、测量范围及高通滤波频率，典型值：0x00/+-2g. 0x08/+-4g. 0x10/+-8g. 0x18(不自检，16G)
+
+	MPUWriteByIIC(AK8963_CNTL2_REG, AK8963_CNTL2_SRST); //RESET
+	MPUWriteByIIC(AK8963_CNTL1_REG, 0X12);
 }
 
 inline void BSP_MPU_WakeUp(void)
@@ -136,7 +145,6 @@ bool BSP_MPU_CheckOnLine(void)
 
 void BSP_MPU_Calibrate(int times)
 {
-	
 }
 
 inline int16_t BSP_MPU_ReadACCX(void)
@@ -174,6 +182,70 @@ inline int16_t BSP_MPU_ReadTEMP(void)
 	return MPURead(TEMP_OUT_H) << 8 | MPURead(TEMP_OUT_L);
 }
 
+int16_t BSP_MPU_ReadMAGX(void)
+{
+	//unsigned char adjustX = MPUReadByIIC(AK8963_ASAX);
+	if ((MPUReadByIIC(AK8963_ST1_REG) & AK8963_ST1_DOR) == 0)
+	{
+		unsigned char XLdata = MPUReadByIIC(MAG_XOUT_L);
+		if ((MPUReadByIIC(AK8963_ST2_REG) & AK8963_ST2_HOFL) == 1)
+		{
+			XLdata = MPUReadByIIC(MAG_XOUT_L);
+		}
+		unsigned char XHdata = MPUReadByIIC(MAG_XOUT_H);
+		if ((MPUReadByIIC(AK8963_ST2_REG) & AK8963_ST2_HOFL) == 1)
+		{
+			XHdata = MPUReadByIIC(MAG_XOUT_H);
+		}
+		//unsigned char ansX = ((XHdata << 8) | XLdata) * (((adjustX - 128) >> 8) + 1);
+		return 1;
+		//return ansX;
+	}
+	return 0;
+}
+
+int16_t BSP_MPU_ReadMAGY(void)
+{
+	unsigned char adjustY = MPUReadByIIC(AK8963_ASAY);
+	if ((MPUReadByIIC(AK8963_ST1_REG) & AK8963_ST1_DOR) == 0)
+	{
+		unsigned char YLdata = MPUReadByIIC(MAG_YOUT_L);
+		if ((MPUReadByIIC(AK8963_ST2_REG) & AK8963_ST2_HOFL) == 1)
+		{
+			YLdata = MPUReadByIIC(MAG_YOUT_L);
+		}
+		unsigned char YHdata = MPUReadByIIC(MAG_YOUT_H);
+		if ((MPUReadByIIC(AK8963_ST2_REG) & AK8963_ST2_HOFL) == 1)
+		{
+			YHdata = MPUReadByIIC(MAG_YOUT_H);
+		}
+		unsigned char ansY = ((YHdata << 8) | YLdata) * (((adjustY - 128) >> 8) + 1);
+		return ansY;
+	}
+	return 0;
+}
+
+int16_t BSP_MPU_ReadMAGZ(void)
+{
+	unsigned char adjustZ = MPUReadByIIC(AK8963_ASAZ);
+	if ((MPUReadByIIC(AK8963_ST1_REG) & AK8963_ST1_DOR) == 0)
+	{
+		unsigned char ZLdata = MPUReadByIIC(MAG_ZOUT_L);
+		if ((MPUReadByIIC(AK8963_ST2_REG) & AK8963_ST2_HOFL) == 1)
+		{
+			ZLdata = MPUReadByIIC(MAG_ZOUT_L);
+		}
+		unsigned char ZHdata = MPUReadByIIC(MAG_ZOUT_H);
+		if ((MPUReadByIIC(AK8963_ST2_REG) & AK8963_ST2_HOFL) == 1)
+		{
+			ZHdata = MPUReadByIIC(MAG_ZOUT_H);
+		}
+		unsigned char ansZ = ((ZHdata << 8) | ZLdata) * (((adjustZ - 128) >> 8) + 1);
+		return ansZ;
+	}
+	return 0;
+}
+
 unsigned char MPUReadSendByte(unsigned char byte)
 {
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
@@ -200,6 +272,24 @@ unsigned char MPURead(unsigned char addr)
 	NSS_High();
 	return res;
 }
+
+void MPUWriteByIIC(unsigned char reg, unsigned char value)
+{
+	MPUWrite(I2C_SLV0_ADDR, MPU9250_AK8963_ADDR); //设置磁力计地址,mode: write
+	MPUWrite(I2C_SLV0_REG, reg);				  //set reg addrs
+	MPUWrite(I2C_SLV0_DO, value);				  //send value
+	BSP_Delay_DelayUs(1000);						  //此处因为MPU内部I2C读取速度较慢，延时等待内部写完毕
+}
+
+unsigned char MPUReadByIIC(unsigned char reg)
+{
+	MPUWrite(I2C_SLV0_ADDR, ADDR_Read(MPU9250_AK8963_ADDR)); //设置磁力计地址，mode：read
+	MPUWrite(I2C_SLV0_REG, reg);							 // set reg addr
+	MPUWrite(I2C_SLV0_DO, 0xff);							 //read
+	BSP_Delay_DelayUs(1000);									 //此处因为MPU内部I2C读取速度较慢，必须延时等待内部读取完毕
+	return MPURead(EXT_SENS_DATA_00);
+}
+
 #endif
 #ifdef MPU9250_IIC
 

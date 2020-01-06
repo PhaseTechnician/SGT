@@ -5,6 +5,8 @@
         "rotationrelated.h": "c",
         "mathextensiontype.h": "c",
         "vector2.h": "c",
-        "application.h": "c"
+        "application.h": "c",
+        "intlooptype.h": "c",
+        "floatlooptype.h": "c"
     }
 }

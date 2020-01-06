@@ -1,14 +1,15 @@
 #include "MotionControlClass.h"
 
 #include "BSP.h"
-#include "PIDController.h"
 #include "MotionAnalysis.h"
+#include "PIDController.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
 
 #include "AHRS.h"
 #include "Application.h"
+#include "FloatLoopType.h"
 
 PIDInstance PID1, PID2, PID3, PID4;
 
@@ -18,17 +19,17 @@ void EncoderReadTask(void)
 	TickType_t xLastWakeTime;
 	while (1)
 	{
-		//´Ó±àÂëÆ÷»ñÈ¡Êý¾Ý
+		//ä»Žç¼–ç å™¨èŽ·å–æ•°æ®
 		speedInformation.speed1 = BSP_Encoder_GetCode(TIM2);
 		speedInformation.speed2 = BSP_Encoder_GetCode(TIM3);
 		speedInformation.speed3 = BSP_Encoder_GetCode(TIM4);
 		speedInformation.speed4 = BSP_Encoder_GetCode(TIM5);
-		//½øÐÐ´¦Àí,ÖØÐÂÓ³Éä·¶Î§ÊµÏÖ±àÂëÆ÷Ò»ÖÂÐÔ
+		//è¿›è¡Œå¤„ç†,é‡æ–°æ˜ å°„èŒƒå›´å®žçŽ°ç¼–ç å™¨ä¸€è‡´æ€§
 		speedInformation.speed1 = speedInformation.speed1 * 1;
 		speedInformation.speed2 = speedInformation.speed2 * 1;
 		speedInformation.speed3 = speedInformation.speed3 * 1;
 		speedInformation.speed4 = speedInformation.speed4 * 1;
-		//·¢ËÍµ½¶ÓÁÐ
+		//å‘é€åˆ°é˜Ÿåˆ—
 		xQueueOverwrite(MontorSpeedHandle, &speedInformation);
 		vTaskDelayUntil(&xLastWakeTime, 100);
 	}
@@ -60,24 +61,26 @@ void AttitudeSolutionTask(void)
 	taskEXIT_CRITICAL();
 	while (1)
 	{
-		//´ÓIMU»ñÈ¡Ô­Ê¼×ËÌ¬Êý¾Ý
+		//ä»ŽIMUèŽ·å–åŽŸå§‹å§¿æ€æ•°æ®
 		taskENTER_CRITICAL();
 		Vector3 acc = {BSP_MPU_ReadACCX(), BSP_MPU_ReadACCY(), BSP_MPU_ReadACCZ()};
 		Vector3 omg = {BSP_MPU_ReadOMGX(), BSP_MPU_ReadOMGY(), BSP_MPU_ReadOMGZ()};
 		//Vector3 mag = {BSP_MPU_ReadMAGX(), BSP_MPU_ReadMAGY(), BSP_MPU_ReadMAGZ()};
 		taskEXIT_CRITICAL();
 
-		//½âËãµ±Ç°×ËÌ¬
+		//è§£ç®—å½“å‰å§¿æ€
 		EulerAngle angle = GetInitalEularAngle(acc);
 
-		BSP_Serial_SendInt((int)(angle.pitch * 57.0f));
-		BSP_Serial_SendChar(' ');
-		BSP_Serial_SendInt((int)(angle.roll * 57.0f));
-		BSP_Serial_SendChar('\n');
+		//BSP_Serial_SendInt((int)(angle.pitch * 57.0f));
+		//BSP_Serial_SendChar(' ');
+		//BSP_Serial_SendInt((int)(angle.roll * 57.0f));
+		//BSP_Serial_SendChar('-');
+		BSP_Serial_SendInt(BSP_MPU_ReadMAGX());
+		//BSP_Serial_SendChar('\n');
 
-		//·¢ËÍµ½¶ÓÁÐ
+		//å‘é€åˆ°é˜Ÿåˆ—
 		xQueueOverwrite(AttitudeHandle, &angle);
-		vTaskDelayUntil(&tick, 10);
+		vTaskDelayUntil(&tick, 100);
 	}
 }
 
@@ -91,18 +94,16 @@ void MotorSpeedControlTask(void)
 	InitOnePIDInstance(&PID4, 0, 1, 0, 0);
 	while (1)
 	{
-		vTaskDelay(500);
-		//´Ó¶ÓÁÐ¶ÁÈ¡ËÙ¶ÈÐÅÏ¢
+		//ä»Žé˜Ÿåˆ—è¯»å–é€Ÿåº¦ä¿¡æ¯
 		xQueueReceive(MontorTragetSpeedHandle, &tragetSpeedInformation, 0);
-		//´Ó¶ÓÁÐ¶ÁÈ¡Ä¿±êËÙ¶È
+		//ä»Žé˜Ÿåˆ—è¯»å–ç›®æ ‡é€Ÿåº¦
 		xQueueReceive(MontorSpeedHandle, &realSpeedInformation, portMAX_DELAY);
-		//¼ÆËãµ±Ç°¿ØÖÆÁ¿
-		//Ê¹ÓÃPID¿ØÖÆÆ÷
+		//è®¡ç®—å½“å‰æŽ§åˆ¶é‡
 		realSpeedInformation.speed1 = FinishOnePIDStep(&PID1, realSpeedInformation.speed1);
 		realSpeedInformation.speed2 = FinishOnePIDStep(&PID2, realSpeedInformation.speed2);
 		realSpeedInformation.speed3 = FinishOnePIDStep(&PID3, realSpeedInformation.speed3);
 		realSpeedInformation.speed4 = FinishOnePIDStep(&PID4, realSpeedInformation.speed4);
-		//Êä³ö¿ØÖÆÁ¿
+		//è¾“å‡ºæŽ§åˆ¶é‡
 		BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed1, MontorFL);
 		BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed2, MontorFR);
 		BSP_MontorDriver_3Pin_SetOutPut(realSpeedInformation.speed3, MontorBL);
@@ -110,46 +111,71 @@ void MotorSpeedControlTask(void)
 	}
 }
 
+static LoopFloatType eularAngleLoop = {359, 0, false};
+
 void MotionControlTask(void)
 {
 	static MotionControlOrder ControlOrder;
 	static EulerAngle angle;
 	static TickType_t tick;
+	static float TragetAngle;
 	while (1)
 	{
+		float speed[4] = {0.0f};
 		bool change = false;
-		//´Ó¶ÓÁÐ»ñÈ¡×ËÌ¬ÐÞ¸ÄÖ¸Áî¡¾·Ç×èÈû¡¿
+		//ä»Žé˜Ÿåˆ—èŽ·å–å§¿æ€ä¿®æ”¹æŒ‡ä»¤ã€éžé˜»å¡žã€‘
 		if (xQueueReceive(MotionControlOrderHandle, &ControlOrder, 0))
 		{
 			change = true;
 		}
-		//´Ó¶ÓÁÐ»ñÈ¡IMU×ËÌ¬ÐÅÏ¢
+		//ä»Žé˜Ÿåˆ—èŽ·å–IMUå§¿æ€ä¿¡æ¯
 		if (xQueueReceive(AttitudeHandle, &angle, 0))
 		{
 			change = true;
 		}
 		if (change)
 		{
-			float speed[4] = {0.0f};
-			//½âËãºÏÊÊµÄËÄÂÖÄ¿±êËÙ¶È
-			switch(ControlOrder.motion)
+			//è§£ç®—åˆé€‚çš„å››è½®ç›®æ ‡é€Ÿåº¦
+			switch (ControlOrder.motion)
 			{
-				case MotionType_Translate_Forward :
-					ApplyMaskWithFactor(speed,WHEEL_MASK_FORWARD,ControlOrder.value);
-					break;
-				case MotionType_Translate_Backward :
-					ApplyMaskWithFactor(speed,WHEEL_MASK_BACKWARD,-ControlOrder.value);
-					break;
-				default:
-					break;
+			case MotionType_Translate_Forward:
+				TragetAngle = angle.yaw;
+				ApplyMaskWithFactor(speed, WHEEL_MASK_FORWARD, ControlOrder.value);
+				break;
+			case MotionType_Translate_Backward:
+				TragetAngle = angle.yaw;
+				ApplyMaskWithFactor(speed, WHEEL_MASK_BACKWARD, ControlOrder.value);
+				break;
+			case MotionType_Translate_Left:
+				TragetAngle = angle.yaw;
+				ApplyMaskWithFactor(speed, WHEEL_MASK_LEFT, ControlOrder.value);
+				break;
+			case MotionType_Translate_Right:
+				TragetAngle = angle.yaw;
+				ApplyMaskWithFactor(speed, WHEEL_MASK_RIGHT, ControlOrder.value);
+				break;
+			case MotionType_Rotate_Clock:
+				ApplyMaskWithFactor(speed, WHEEL_MASK_CLOCK, ControlOrder.value);
+				break;
+			case MotionType_Rotate_AntiClock:
+				ApplyMaskWithFactor(speed, WHEEL_MASK_ANTICLOCK, ControlOrder.value);
+				break;
+			default:
+				break;
 			}
-			if(angle.yaw)
-			{
-				
-			}
-			//·¢ËÍµ½¶ÓÁÐ
+			//å‘é€åˆ°é˜Ÿåˆ—
 			xQueueOverwrite(MontorTragetSpeedHandle, &speed);
 		}
-		vTaskDelayUntil(&tick, 50);
+		//æŒ‡ä»¤æœªè¿›å…¥æ—¶ï¼Œè¿›è¡Œä¸€èˆ¬çš„ç»´æŠ¤
+		float difference = getMinDifference_FLOAT(eularAngleLoop, TragetAngle, angle.yaw);
+		if (difference > 0)
+		{
+			ApplyMaskWithFactor(speed, WHEEL_MASK_ANTICLOCK, difference / 1.0f);
+		}
+		else
+		{
+			ApplyMaskWithFactor(speed, WHEEL_MASK_CLOCK, difference / 1.0f);
+		}
+		vTaskDelayUntil(&tick, 100);
 	}
 }

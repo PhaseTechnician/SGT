@@ -22,7 +22,6 @@
 #define WHEEL_MASK_RIGHT_BACKWARD 0X06//0b00000110
 #define WHEEL_MASK_EMPTY          0X00//0b00000000
 
-//注意无论如何，三项之和不得超过最大电机速度
 //同时，需要留出一定的范围为PID控制提供操作余量
 
 void ApplyMaskWithFactor(float *speed,unsigned char mask,float Factor);

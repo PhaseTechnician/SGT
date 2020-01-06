@@ -7,26 +7,26 @@
 /*
  * USART1 
  * RX PA10 TX PA9
- * 0 ×÷ÎªÖÕÖ¹×Ö·û
+ * 0 ä½œä¸ºç»ˆæ­¢å­—ç¬¦
  */
 
 #define BSP_Serial_MaxOrderLength 20
 #define BSP_Serial_MaxReceiveNum 10
 
-//´®¿Ú1µÄ³õÊ¼»¯ÉèÖÃ
+//ä¸²å£1çš„åˆå§‹åŒ–è®¾ç½®
 void BSP_Serial_Config(int baud);
-//´®¿Ú¶ÁÈ¡Ò»¸öÖ¸Áî
+//ä¸²å£è¯»å–ä¸€ä¸ªæŒ‡ä»¤
 void BSP_Serial_Read(char* orderPtr);
-//´®¿ÚÔ¤¶ÁÒ»¸öÖ¸Áî
+//ä¸²å£é¢„è¯»ä¸€ä¸ªæŒ‡ä»¤
 void BSP_Serial_Peek(char* orderPtr);
 
-//´®¿Ú1·¢ËÍ×Ö·û
+//ä¸²å£1å‘é€å­—ç¬¦
 void BSP_Serial_SendChar(char c);
-//´®¿Ú1·¢ËÍÊı¾İ
+//ä¸²å£1å‘é€æ•°æ®
 void BSP_Serial_SendString(char* stringPtr);
-//´®¿Ú1·¢ËÍ¶¨³¤Êı¾İ
+//ä¸²å£1å‘é€å®šé•¿æ•°æ®
 void BSP_Serial_SendLength(char* stringPtr,int num);
-//´®¿ÚÒ»·¢ËÍÒ»¸öÊı×Ö
+//ä¸²å£ä¸€å‘é€ä¸€ä¸ªæ•°å­—
 void BSP_Serial_SendInt(int num);
 
 #endif

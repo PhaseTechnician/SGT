@@ -784,6 +784,16 @@
               <FileType>1</FileType>
               <FilePath>..\Arthmetic\MotionAnalysis.c</FilePath>
             </File>
+            <File>
+              <FileName>FloatLoopType.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\FloatLoopType.c</FilePath>
+            </File>
+            <File>
+              <FileName>IntLoopType.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arthmetic\IntLoopType.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

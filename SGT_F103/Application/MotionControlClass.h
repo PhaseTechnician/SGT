@@ -20,7 +20,11 @@ typedef enum MotionTypeEnum
 	MotionType_Rotate_AntiClock,
 	MotionType_Speed_Up,
 	MotionType_Speed_Down,
-	MotionType_Speed_Brake
+	MotionType_Speed_Brake,
+	MotionType_LookAt_East,
+	MotionType_LookAt_West,
+	MotionType_LookAt_North,
+	MotionType_LookAt_South
 }MotionType;
 
 typedef struct MotionControlOrderStruct
@@ -29,7 +33,6 @@ typedef struct MotionControlOrderStruct
 	float value;
 }MotionControlOrder;
 
-//±àÂëÆ÷¶ÁÈ¡ºÍ½âÎö
 void EncoderReadTask(void);
 
 void AttitudeSolutionTask(void);

@@ -2,12 +2,12 @@
 #define _PIDCONTROLLER_H
 
 /*
- * PID ¿ØÖÆÆ÷
- * Ö÷ÒªÓÃÓÚµç»úÏµÍ³µÄËÙ¶È¿ØÖÆ
- * Í¨¹ı½á¹¹ÌåÀ´ÊµÏÖ¿ØÖÆÆ÷µÄ¶àÊµÀıÊ¹ÓÃ
- * ¡¾¿¼ÂÇÌí¼Ó¡¿±ß½çÏŞÖÆ£¬±ÜÃâ³öÏÖ¹ıµ÷Ê±µ¼ÖÂµÄÒç³öÎÊÌâ
+ * PID æ§åˆ¶å™¨
+ * ä¸»è¦ç”¨äºç”µæœºç³»ç»Ÿçš„é€Ÿåº¦æ§åˆ¶
+ * é€šè¿‡ç»“æ„ä½“æ¥å®ç°æ§åˆ¶å™¨çš„å¤šå®ä¾‹ä½¿ç”¨
+ * ã€è€ƒè™‘æ·»åŠ ã€‘è¾¹ç•Œé™åˆ¶ï¼Œé¿å…å‡ºç°è¿‡è°ƒæ—¶å¯¼è‡´çš„æº¢å‡ºé—®é¢˜
  */
- 
+
 typedef struct PIDInstanceStructure
 {
 	int goal;
@@ -16,15 +16,25 @@ typedef struct PIDInstanceStructure
 	int lastError;
 	int presentOutput;
 	int lastOutput;
-	float KP,KI,KD;
-}PIDInstance;
- 
-//Íê³ÉÒ»´ÎPID¿ØÖÆ²Ù×÷£¬»ñµÃ±¾´ÎµÄÊä³öÖµ
-int FinishOnePIDStep(PIDInstance * instance,int feedBackValue);
-//³õÊ¼»¯Ò»¸öPIDÊµÀı
-void InitOnePIDInstance(PIDInstance * instance,int goalValue,float KP,float KI,float KD);
-//ÁÙÊ±ĞŞ¸ÄÄ¿±êÖµ
-void SetPIDGoalValue(PIDInstance * instance,int goalValue);
+	float KP, KI, KD;
+} PIDInstance;
+typedef struct LogicalEdgeStruct
+{
+	int MAXOUT;
+	int MINOUT;
+	int MAXDIFF;
+} LogicalEdge;
+static LogicalEdge edge = {1000, 0, 20};
 
+//å®Œæˆä¸€æ¬¡PIDæ§åˆ¶æ“ä½œï¼Œè·å¾—æœ¬æ¬¡çš„è¾“å‡ºå€¼
+int FinishOnePIDStep(PIDInstance *instance, int feedBackValue);
+//å®Œæˆä¸€æ¬¡PDæ§åˆ¶æ“ä½œï¼Œè·å¾—æœ¬æ¬¡çš„è¾“å‡ºå€¼
+int FinishOnePDStep(PIDInstance *instance, int feedBackValue);
+//å®Œæˆä¸€æ¬¡PDæ§åˆ¶æ“ä½œï¼Œè·å¾—æœ¬æ¬¡çš„è¾“å‡ºå€¼
+int FinishOneLogicalPDStep(PIDInstance *instance, int feedbackValue);
+//åˆå§‹åŒ–ä¸€ä¸ªPIDå®ä¾‹
+void InitOnePIDInstance(PIDInstance *instance, int goalValue, float KP, float KI, float KD);
+//ä¸´æ—¶ä¿®æ”¹ç›®æ ‡å€¼
+void SetPIDGoalValue(PIDInstance *instance, int goalValue);
 
 #endif

@@ -44,12 +44,14 @@ int16_t BSP_MPU_ReadOMGZ(void);
 int16_t BSP_MPU_ReadTEMP(void);
 int16_t BSP_MPU_ReadMAGX(void);
 int16_t BSP_MPU_ReadMAGY(void);
-int16_t BSP_MPU_READMAGZ(void);
+int16_t BSP_MPU_ReadMAGZ(void);
+void BSP_MPU_ReadMAG(int16_t* mag);
 
 
 void MPUWrite(unsigned char addr,unsigned char value);
 unsigned char MPURead(unsigned char addr);
 unsigned char MPUReadSendByte(unsigned char byte);
-
+void MPUWriteByIIC(unsigned char reg, unsigned char value);
+unsigned char MPUReadByIIC(unsigned char reg);
 
 #endif
