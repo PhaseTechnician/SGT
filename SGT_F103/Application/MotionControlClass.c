@@ -37,49 +37,72 @@ void EncoderReadTask(void)
 
 void AttitudeSolutionTask(void)
 {
+	vTaskDelay(2000);
 	static TickType_t tick;
-	taskENTER_CRITICAL();
+	LABLE_REINIT:
 	if (BSP_MPU_CheckOnLine())
 	{
 		BSP_Serial_SendString("MPU9250 Online\n");
-		BSP_MPU_WakeUp();
 		vTaskDelay(100);
 		BSP_MPU_RegesterConfig();
-		vTaskDelay(100);
+		vTaskDelay(1000);
+		if(BSP_AK8963_CheckOnLine())
+		{
+			BSP_Serial_SendString("AK8963 Online\n");
+			BSP_AK8963_RegisterConfig();
+			vTaskDelay(100);
+		}
+		else
+		{
+			while (1)
+			{
+			BSP_Serial_SendString("AK8963 Offline\n");
+			if(BSP_AK8963_CheckOnLine())
+			{
+				BSP_Serial_SendString("AK8963 Reconnected\n");
+				goto LABLE_REINIT;
+			}
+			vTaskDelay(1000);
+			}
+		}
 	}
 	else
 	{
-		taskEXIT_CRITICAL();
-		BSP_Serial_SendString("MPU9250 Offline,Please Check Connected\n");
 		while (1)
 		{
-			BSP_MPU_CheckOnLine();
-			vTaskDelay(100);
+			BSP_Serial_SendString("MPU9250 Offline,Please Check Connected\n");
+			if(BSP_MPU_CheckOnLine())
+			{
+				BSP_Serial_SendString("MPU9250 Reconnected\n");
+				goto LABLE_REINIT;
+			}
+			vTaskDelay(1000);
 		}
 		//vTaskSuspend(AttitudeSolutionTaskHandler);
 	}
-	taskEXIT_CRITICAL();
 	while (1)
 	{
 		//从IMU获取原始姿态数据
 		taskENTER_CRITICAL();
-		Vector3 acc = {BSP_MPU_ReadACCX(), BSP_MPU_ReadACCY(), BSP_MPU_ReadACCZ()};
-		Vector3 omg = {BSP_MPU_ReadOMGX(), BSP_MPU_ReadOMGY(), BSP_MPU_ReadOMGZ()};
-		//Vector3 mag = {BSP_MPU_ReadMAGX(), BSP_MPU_ReadMAGY(), BSP_MPU_ReadMAGZ()};
 		taskEXIT_CRITICAL();
 
 		//解算当前姿态
-		EulerAngle angle = GetInitalEularAngle(acc);
+		//EulerAngle angle = GetInitalEularAngle(acc);
 
 		//BSP_Serial_SendInt((int)(angle.pitch * 57.0f));
 		//BSP_Serial_SendChar(' ');
 		//BSP_Serial_SendInt((int)(angle.roll * 57.0f));
 		//BSP_Serial_SendChar('-');
-		BSP_Serial_SendInt(BSP_MPU_ReadMAGX());
+		BSP_Serial_SendInt(BSP_MPU_ReadValue(MAGX));
+		BSP_Serial_SendChar(':');
+		BSP_Serial_SendInt(BSP_MPU_ReadValue(MAGY));
+		BSP_Serial_SendChar(':');
+		BSP_Serial_SendInt(BSP_MPU_ReadValue(MAGZ));
+		BSP_Serial_SendChar('\n');
 		//BSP_Serial_SendChar('\n');
 
 		//发送到队列
-		xQueueOverwrite(AttitudeHandle, &angle);
+		//xQueueOverwrite(AttitudeHandle, &angle);
 		vTaskDelayUntil(&tick, 100);
 	}
 }

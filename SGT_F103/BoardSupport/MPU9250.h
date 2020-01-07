@@ -1,15 +1,30 @@
 #ifndef _MPU_H
 #define _MPU_H
 
+#include "BSP.h"
 #include "stm32f10x.h"
 #include <stdbool.h>
-#include "BSP.h"
+
+//æœ¬MPU9250çš„é©±åŠ¨æå¤§çš„å‚è€ƒä¸GITHUBä¸ŠSMARTIMUé¡¹ç›®
 
 #define MPU9250_SPI
+typedef enum MPUReadValueAddressEnum
+{
+	ACCX = 0x3B,
+	ACCY = 0x3D,
+	ACCZ = 0x3F,
+	GRYX = 0x43,
+	GRYY = 0x45,
+	GRYZ = 0x47,
+	MAGX = 0X4A,
+	MAGY = 0X4C,
+	MAGZ = 0X4E,
+	TEMP = 0X41
+}MPUReadValueAddress;
 
 #ifdef MPU9250_SPI
 /*
- * ×ËÌ¬´«¸ĞÆ÷MPU
+ * å§¿æ€ä¼ æ„Ÿå™¨MPU
  * SPI1
  *  PA5 SCLK
  *  PA6 MISO 
@@ -22,33 +37,23 @@
 /*
 	* IIC2 PB10 SCL    PB11 SDA
 	*/
-#endif	
+#error "DON NOT FINISHED,ONLY SPI SUPPORTED"
+#endif
 
-//MPUÏà¹Ø×ÊÔ´³õÊ¼»¯
+//MPUç›¸å…³èµ„æºåˆå§‹åŒ–
 void BSP_MPU_Config(void);
-//MPU¼Ä´æÆ÷ÉèÖÃ
+//MPUå¯„å­˜å™¨è®¾ç½®
 void BSP_MPU_RegesterConfig(void);
-//MPU9250»½ĞÑÉèÖÃ
-void BSP_MPU_WakeUp(void);
-//MPU¼ì²âÊÇ·ñÀëÏß
+void BSP_AK8963_RegisterConfig(void);
+//MPUæ£€æµ‹æ˜¯å¦ç¦»çº¿
 bool BSP_MPU_CheckOnLine(void);
-//MPUĞ£×¼
+bool BSP_AK8963_CheckOnLine(void);
+//MPUæ ¡å‡†
 void BSP_MPU_Calibrate(int times);
 
-int16_t BSP_MPU_ReadACCX(void);
-int16_t BSP_MPU_ReadACCY(void);
-int16_t BSP_MPU_ReadACCZ(void);
-int16_t BSP_MPU_ReadOMGX(void);
-int16_t BSP_MPU_ReadOMGY(void);
-int16_t BSP_MPU_ReadOMGZ(void);
-int16_t BSP_MPU_ReadTEMP(void);
-int16_t BSP_MPU_ReadMAGX(void);
-int16_t BSP_MPU_ReadMAGY(void);
-int16_t BSP_MPU_ReadMAGZ(void);
-void BSP_MPU_ReadMAG(int16_t* mag);
+int16_t BSP_MPU_ReadValue(MPUReadValueAddress value);
 
-
-void MPUWrite(unsigned char addr,unsigned char value);
+void MPUWrite(unsigned char addr, unsigned char value);
 unsigned char MPURead(unsigned char addr);
 unsigned char MPUReadSendByte(unsigned char byte);
 void MPUWriteByIIC(unsigned char reg, unsigned char value);

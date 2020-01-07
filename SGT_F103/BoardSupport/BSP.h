@@ -10,12 +10,12 @@
 #include "Encoder_TIM.h"
 #include "MontorDriver_3Pin.h"
 #include "MPU9250.h"
-#include "SerialIO.h"
+//#include "SerialIO.h"
 #include "Beep.h"
 
-//ÅäÖÃËùÓĞÍâÉè
+//é…ç½®æ‰€æœ‰å¤–è®¾
 void BSP_Modles_Config(void);
-//¼ì²âÍâÎ§Ä£¿éÁ¬½Ó
+//æ£€æµ‹å¤–å›´æ¨¡å—è¿æ¥
 bool BSP_Modles_Test(void);
 
 #endif

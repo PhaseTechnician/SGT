@@ -684,6 +684,11 @@
               <FileType>1</FileType>
               <FilePath>..\BoardSupport\LCD12864.c</FilePath>
             </File>
+            <File>
+              <FileName>Beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BoardSupport\Beep.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

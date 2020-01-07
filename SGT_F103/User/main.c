@@ -10,16 +10,16 @@
 
 int main()
 {
-	//³õÊ¼»¯Ó²¼şÉè±¸
+	//åˆå§‹åŒ–ç¡¬ä»¶è®¾å¤‡
 	BSP_Modles_Config();
 	BSP_Serial_SendString("BSP Load Finish\n");
-	//¹¤×÷ÈÎÎñ´´½¨
+	//å·¥ä½œä»»åŠ¡åˆ›å»º
 	Application_TaskCreat();
 	BSP_Serial_SendString("Application Creat Finish\n");
-	//Í¨ĞÅ¹ÜµÀ½¨Á¢
+	//é€šä¿¡ç®¡é“å»ºç«‹
 	Application_PipeCreat();
 	BSP_Serial_SendString("Pipe Creat Finish\n");
-	//ÈÎÎñµ÷¶ÈÆô¶¯	
+	//ä»»åŠ¡è°ƒåº¦å¯åŠ¨	
 	vTaskStartScheduler();
 	return 0;
 }

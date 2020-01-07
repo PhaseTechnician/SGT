@@ -5,13 +5,13 @@ void BSP_Modles_Config(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	BSP_Delay_Config();
 	BSP_LED_Config();
-	//BSP_Beep_Config();
+	BSP_Beep_Config();
 	BSP_Serial_Config(9600);
 	BSP_KeyBoard_Config();
 	BSP_LCD12864_Config();
 	BSP_MontorDriver_3Pin_Config();
 	BSP_Encoder_Config();
-	BSP_MPU_Config();//Ä³´Î²âÊÔÖĞMPUÓëEncoder³åÍ»
+	BSP_MPU_Config();//æŸæ¬¡æµ‹è¯•ä¸­MPUä¸Encoderå†²çª
 	//BSP_SerialIO_Config();
 }
 
